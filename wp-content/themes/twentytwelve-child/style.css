@@ -1,0 +1,11 @@
+/*
+Theme Name:     Twenty Twelve Child
+Theme URI:      http://noseyparka.me.uk
+Description:    A Twenty Twelve child theme
+Author:         Michael Park
+Author URI:     http://noseyparka.me.uk/about/
+Template:       twentytwelve
+Version:        0.1.0
+*/
+ 
+@import url("../twentytwelve/style.css");
