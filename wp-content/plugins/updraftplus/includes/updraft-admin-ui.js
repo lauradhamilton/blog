@@ -9,6 +9,12 @@ function updraft_delete(key, nonce, showremote) {
 	jQuery('#updraft-delete-modal').dialog('open');
 }
 
+function updraft_delete_old_dirs() {
+	//jQuery('#updraft_delete_old_dirs_pagediv').slideUp().remove();
+	//updraft_iframe_modal('delete_old_dirs', updraftlion.delete_old_dirs);
+	return true;
+}
+
 function updraft_restore_setoptions(entities) {
 	var howmany = 0;
 	jQuery('input[name="updraft_restore[]"]').each(function(x,y){
@@ -240,7 +246,7 @@ function updraftplus_downloadstage2(timestamp, type, findex) {
 function updraft_downloader(base, nonce, what, whicharea, set_contents, prettydate, async) {
 	if (typeof set_contents !== "string") set_contents=set_contents.toString();
 	var set_contents = set_contents.split(',');
-	for (var i=0;i<set_contents.length; i++) {
+	for (var i=0; i<set_contents.length; i++) {
 		// Create somewhere for the status to be found
 		var stid = base+nonce+'_'+what+'_'+set_contents[i];
 		var show_index = parseInt(set_contents[i]); show_index++;
@@ -324,6 +330,7 @@ function updraft_restorer_checkstage2(doalert) {
 			}
 			jQuery('#updraft-restore-modal-stage2a').html(report);
 		} catch(err) {
+			console.log(data);
 			console.log(err);
 			jQuery('#updraft-restore-modal-stage2a').html(updraftlion.jsonnotunderstood);
 		}
@@ -420,6 +427,13 @@ jQuery(document).ready(function($){
 
 	updraft_check_same_times();
 
+	var updraft_message_modal_buttons = {};
+	updraft_message_modal_buttons[updraftlion.close] = function() { jQuery(this).dialog("close"); };
+	jQuery( "#updraft-message-modal" ).dialog({
+		autoOpen: false, height: 200, width: 460, modal: true,
+		buttons: updraft_message_modal_buttons
+	});
+	
 	var updraft_delete_modal_buttons = {};
 	updraft_delete_modal_buttons[updraftlion.deletebutton] = function() {
 		jQuery('#updraft-delete-waitwarning').slideDown();
@@ -503,6 +517,7 @@ jQuery(document).ready(function($){
 		
 		var backupnow_nodb = jQuery('#backupnow_nodb').is(':checked') ? 1 : 0;
 		var backupnow_nofiles = jQuery('#backupnow_nofiles').is(':checked') ? 1 : 0;
+		var backupnow_nocloud = jQuery('#backupnow_nocloud').is(':checked') ? 1 : 0;
 		if (backupnow_nodb && backupnow_nofiles) {
 			alert(updraftlion.excludedeverything);
 			return;
@@ -510,7 +525,7 @@ jQuery(document).ready(function($){
 		
 		jQuery(this).dialog("close");
 		jQuery('#updraft_backup_started').html('<em>'+updraftlion.requeststart+'</em>').slideDown('');
-		jQuery.post(ajaxurl, { action: 'updraft_ajax', subaction: 'backupnow', nonce: updraft_credentialtest_nonce, backupnow_nodb: backupnow_nodb, backupnow_nofiles: backupnow_nofiles }, function(response) {
+		jQuery.post(ajaxurl, { action: 'updraft_ajax', subaction: 'backupnow', nonce: updraft_credentialtest_nonce, backupnow_nodb: backupnow_nodb, backupnow_nofiles: backupnow_nofiles, backupnow_nocloud: backupnow_nocloud }, function(response) {
 			jQuery('#updraft_backup_started').html(response);
 			// Kick off some activity to get WP to get the scheduled task moving as soon as possible
 			setTimeout(function() {jQuery.get(updraft_siteurl);}, 5100);
@@ -529,7 +544,7 @@ jQuery(document).ready(function($){
 	backupnow_modal_buttons[updraftlion.cancel] = function() { jQuery(this).dialog("close"); };
 	
 	jQuery("#updraft-backupnow-modal" ).dialog({
-		autoOpen: false, height: 295, width: 440, modal: true,
+		autoOpen: false, height: 335, width: 480, modal: true,
 		buttons: backupnow_modal_buttons
 	});
 

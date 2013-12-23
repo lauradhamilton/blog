@@ -27,7 +27,7 @@ if ( isset( $_GET['allow_tracking'] ) && check_admin_referer( 'wpseo_activate_tr
 	}
 }
 
-$wpseo_admin_pages->admin_header( __( 'General Settings', 'wordpress-seo' ), true, 'yoast_wpseo_options', 'wpseo' );
+$wpseo_admin_pages->admin_header( true, 'yoast_wpseo_options', 'wpseo' );
 
 // detect and handle robots meta here
 robots_meta_handler();
@@ -195,7 +195,7 @@ function robots_meta_handler() {
 							wpseo_set_value( 'meta-robots-nofollow', true, $post->ID );
 							break;
 						case 'follow':
-							wpseo_set_value( 'meta-robots-nofollow', 0, $post->ID );
+							// No need to store it
 							break;
 						default:
 							// do nothing

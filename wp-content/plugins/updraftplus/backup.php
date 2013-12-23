@@ -1,13 +1,9 @@
 <?php
 
-if (!defined ('ABSPATH')) die('No direct access allowed');
-
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 if (!class_exists('UpdraftPlus_PclZip')) require(UPDRAFTPLUS_DIR.'/class-zip.php');
 
 // This file contains functions that are only needed/loaded when a backup is running (reduces memory usage on other site pages)
-
-global $updraftplus_backup;
-$updraftplus_backup = new UpdraftPlus_Backup();
 
 class UpdraftPlus_Backup {
 
@@ -34,7 +30,7 @@ class UpdraftPlus_Backup {
 	private $updraft_dir;
 	private $job_file_entities = array();
 
-	public function __construct() {
+	public function __construct($backup_files) {
 
 		global $updraftplus;
 
@@ -42,6 +38,11 @@ class UpdraftPlus_Backup {
 
 		$this->debug = UpdraftPlus_Options::get_updraft_option('updraft_debug_mode');
 		$this->updraft_dir = $updraftplus->backups_dir_location();
+
+		if ('no' === $backup_files) {
+			$this->use_zip_object = 'UpdraftPlus_PclZip';
+			return;
+		}
 
 		// false means 'tried + failed'; whereas 0 means 'not yet tried'
 		// Disallow binzip on OpenVZ when we're not sure there's plenty of memory
@@ -152,7 +153,7 @@ class UpdraftPlus_Backup {
 			if ('.' == $e || '..' == $e || !is_file($this->updraft_dir.'/'.$e)) continue;
 			$ziparchive_match = preg_match("/$match([0-9]+)?\.zip\.tmp\.([A-Za-z0-9]){6}?$/i", $e);
 			$binzip_match = preg_match("/^zi([A-Za-z0-9]){6}$/", $e);
-			if ($time_now-filemtime($this->updraft_dir.'/'.$e) < 30 && ($ziparchive_match || $binzip_match)) {
+			if ($time_now-filemtime($this->updraft_dir.'/'.$e) < 30 && ($ziparchive_match || (0 != $updraftplus->current_resumption && $binzip_match))) {
 				$updraftplus->terminate_due_to_activity($this->updraft_dir.'/'.$e, $time_now, filemtime($this->updraft_dir.'/'.$e));
 			}
 		}
@@ -241,12 +242,14 @@ class UpdraftPlus_Backup {
 			if (1 == ($updraftplus->current_resumption % 2) && count($services)>2) array_push($services, array_shift($services));
 		}
 
+		$errors_before_uploads = $updraftplus->error_count();
+
 		foreach ($services as $ind => $service) {
 
 			# Used for logging by record_upload_chunk()
 			$this->current_service = $service;
 			# Used when deciding whether to delete the local file
-			$this->last_service = ($ind+1 >= count($services)) ? true : false;
+			$this->last_service = ($ind+1 >= count($services) && $errors_before_uploads == $updraftplus->error_count()) ? true : false;
 
 			$updraftplus->log("Cloud backup selection: ".$service);
 			@set_time_limit(900);
@@ -440,33 +443,27 @@ class UpdraftPlus_Backup {
 
 		$debug_mode = UpdraftPlus_Options::get_updraft_option('updraft_debug_mode');
 
-		$sendmail_to = UpdraftPlus_Options::get_updraft_option('updraft_email');
-		if (is_array($sendmail_to)) $sendmail_to = implode(',', $sendmail_to);
-
-		$admin_email= get_bloginfo('admin_email');
-		foreach (explode(',', $sendmail_to) as $sendmail_addr) {
-			if ($updraftplus->have_addons < 10 && $sendmail_addr != $admin_email) {
-				$updraftplus->log(sprintf(__("With the next release of UpdraftPlus, you will need an add-on to use a different email address to the site owner's (%s). See: %s", 'updraftplus'), $admin_email, 'http://updraftplus.com/next-updraftplus-release-ready-testing/'), 'warning', 'needpremiumforemail');
-			}
-		}
+		$sendmail_to = $updraftplus->just_one_email(UpdraftPlus_Options::get_updraft_option('updraft_email'));
+		if (is_string($sendmail_to)) $sendmail_to = array($sendmail_to);
 
 		$backup_files = $updraftplus->jobdata_get('backup_files');
 		$backup_db = $updraftplus->jobdata_get('backup_database');
 
-		if ($backup_files == 'finished' && ( $backup_db == 'finished' || $backup_db == 'encrypted' ) ) {
-			$backup_contains = "Files and database";
-		} elseif ($backup_files == 'finished') {
-			$backup_contains = ($backup_db == "begun") ? "Files (database backup has not completed)" : "Files only (database was not part of this particular schedule)";
+		if ('finished' == $backup_files && ('finished' == $backup_db || 'encrypted' == $backup_db)) {
+			$backup_contains = __("Files and database", 'updraftplus');
+		} elseif ('finished' == $backup_files) {
+			$backup_contains = ($backup_db == "begun") ? __("Files (database backup has not completed)", 'updraftplus') : __("Files only (database was not part of this particular schedule)", 'updraftplus');
 		} elseif ($backup_db == 'finished' || $backup_db == 'encrypted') {
-			$backup_contains = ($backup_files == "begun") ? "Database (files backup has not completed)" : "Database only (files were not part of this particular schedule)";
+			$backup_contains = ($backup_files == "begun") ? __("Database (files backup has not completed)", 'updraftplus') : __("Database only (files were not part of this particular schedule)", 'updraftplus');
 		} else {
-			$backup_contains = "Unknown/unexpected error - please raise a support request";
+			$backup_contains = __("Unknown/unexpected error - please raise a support request", 'updraftplus');
 		}
-
-		$updraftplus->log("Sending email ('$backup_contains') report to: ".substr($sendmail_to, 0, 5)."...");
 
 		$append_log = '';
 		$attachments = array();
+
+		$error_count = 0;
+
 		if ($updraftplus->error_count() > 0) {
 			$append_log .= __('Errors encountered:', 'updraftplus')."\r\n";
 			$attachments[0] = $updraftplus->logfile_name;
@@ -480,8 +477,9 @@ class UpdraftPlus_Backup {
 				} elseif (is_string($err)) {
 					$append_log .= "* ".rtrim($err)."\r\n";
 				}
+				$error_count++;
 			}
-			$append_log.="\n";
+			$append_log.="\r\n";
 		}
 		$warnings = $updraftplus->jobdata_get('warnings');
 		if (is_array($warnings) && count($warnings) >0) {
@@ -490,19 +488,65 @@ class UpdraftPlus_Backup {
 			foreach ($warnings as $err) {
 				$append_log .= "* ".rtrim($err)."\r\n";
 			}
-			$append_log.="\n";
+			$append_log.="\r\n";
 		}
 
-		$append_log .= ($debug_mode && $updraftplus->logfile_name != "") ? "\r\nLog contents:\r\n".file_get_contents($updraftplus->logfile_name) : "" ;
+		if ($debug_mode && '' != $updraftplus->logfile_name && !in_array($updraftplus->logfile_name, $attachments)) {
+			$append_log .= "\r\n".__('The log file has been attached to this email.', 'updraftplus');
+			$attachments[0] = $updraftplus->logfile_name;
+		}
 
 		// We have to use the action in order to set the MIME type on the attachment - by default, WordPress just puts application/octet-stream
-		if (count($attachments)>0) add_action('phpmailer_init', array($this, 'phpmailer_init'));
 
-		foreach (explode(',', $sendmail_to) as $sendmail_addr) {
+		$subject = apply_filters('updraft_report_subject', sprintf(__('Backed up: %s', 'updraftplus'), get_bloginfo('name')).' (UpdraftPlus '.$updraftplus->version.') '.get_date_from_gmt(gmdate('Y-m-d H:i:s', time()), 'Y-m-d H:i'), $error_count, count($warnings));
 
-			wp_mail(trim($sendmail_addr), __('Backed up', 'updraftplus').': '.get_bloginfo('name').' (UpdraftPlus '.$updraftplus->version.') '.get_date_from_gmt(gmdate('Y-m-d H:i:s', time()), 'Y-m-d H:i'),'Site: '.site_url()."\r\nUpdraftPlus: ".__('WordPress backup is complete','updraftplus').".\r\n".__('Backup contains','updraftplus').': '.$backup_contains."\r\n".__('Latest status', 'updraftplus').": $final_message\r\n\r\n".$updraftplus->wordshell_random_advert(0)."\r\n".$append_log);
-			if (count($attachments)>0) remove_action('phpmailer_init', array($this, 'phpmailer_init'));
+		$body = apply_filters('updraft_report_body', __('Backup of:').' '.site_url()."\r\nUpdraftPlus ".__('WordPress backup is complete','updraftplus').".\r\n".__('Backup contains:','updraftplus').' '.$backup_contains."\r\n".__('Latest status:', 'updraftplus').' '.$final_message."\r\n\r\n".$updraftplus->wordshell_random_advert(0)."\r\n".$append_log, $final_message, $backup_contains, $updraftplus->errors, $warnings);
+
+		$this->attachments = apply_filters('updraft_report_attachments', $attachments);
+
+		if (count($this->attachments)>0) add_action('phpmailer_init', array($this, 'phpmailer_init'));
+
+		$attach_size = 0;
+		$unlink_files = array();
+
+		foreach ($this->attachments as $ind => $attach) {
+			if ($attach == $updraftplus->logfile_name && filesize($attach) > 6*1048576) {
+				
+				$updraftplus->log("Log file is large (".round(filesize($attach)/1024, 1)." Kb): will compress before e-mailing");
+
+				if (!$handle = fopen($attach, "r")) {
+					$updraftplus->log("Error: Failed to open log file for reading: ".$attach);
+				} else {
+					if (!$whandle = gzopen($attach.'.gz', 'w')) {
+						$updraftplus->log("Error: Failed to open log file for reading: ".$attach.".gz");
+					} else {
+						while (false !== ($line = @stream_get_line($handle, 2048, "\n"))) {
+							@gzwrite($whandle, $line."\n");
+						}
+						fclose($handle);
+						gzclose($whandle);
+						$this->attachments[$ind] = $attach.'.gz';
+						$unlink_files[] = $attach.'.gz';
+					}
+				}
+			}
+			$attach_size += filesize($this->attachments[$ind]);
 		}
+
+		foreach ($sendmail_to as $ind => $mailto) {
+
+			if (false === apply_filters('updraft_report_sendto', true, $mailto, $error_count, count($warnings), $ind)) continue;
+
+			foreach (explode(',', $mailto) as $sendmail_addr) {
+				$updraftplus->log("Sending email ('$backup_contains') report (attachments: ".count($attachments).", size: ".round($attach_size/1024, 1)." Kb) to: ".substr($sendmail_addr, 0, 5)."...");
+				wp_mail(trim($sendmail_addr), $subject, $body);
+			}
+		}
+
+		foreach ($unlink_files as $file) @unlink($file);
+
+		do_action('updraft_report_finished');
+		if (count($this->attachments)>0) remove_action('phpmailer_init', array($this, 'phpmailer_init'));
 
 	}
 
@@ -699,7 +743,6 @@ class UpdraftPlus_Backup {
 				if (!is_array($files)) $files=array($files);
 				foreach ($files as $file) $updraftplus->check_recent_modification($this->updraft_dir.'/'.$file);
 			}
-
 		} elseif ('begun' == $bfiles_status) {
 			if ($resumption_no>0) {
 				$updraftplus->log("Creation of backups of directories: had begun; will resume");
@@ -794,6 +837,8 @@ class UpdraftPlus_Backup {
 
 		$how_many_tables = count($all_tables);
 
+		$found_options_table = false;
+
 		foreach ($all_tables as $table) {
 
 			$manyrows_warning = false;
@@ -803,6 +848,9 @@ class UpdraftPlus_Backup {
 			@set_time_limit(900);
 			// The table file may already exist if we have produced it on a previous run
 			$table_file_prefix = $file_base.'-db-table-'.$table.'.table';
+
+			if ($this->table_prefix.'options' == $table) $found_options_table = true;
+
 			if (file_exists($this->updraft_dir.'/'.$table_file_prefix.'.gz')) {
 				$updraftplus->log("Table $table: corresponding file already exists; moving on");
 				$stitch_files[] = $table_file_prefix;
@@ -854,10 +902,26 @@ class UpdraftPlus_Backup {
 					$stitch_files[] = $table_file_prefix;
 
 				} else {
+					$total_tables--;
 					$updraftplus->log("Skipping table (lacks our prefix): $table");
 				}
 				
 			}
+		}
+
+		if (!$found_options_table) {
+			$updraftplus->log(__('The database backup appears to have failed - the options table was not found', 'updraftplus'), 'warning', 'optstablenotfound');
+			$time_this_run = time()-$updraftplus->opened_log_time;
+			if ($time_this_run > 2000) {
+				# Have seen this happen; not sure how, but it was apparently deterministic; if the current process had been running for a long time, then apparently all database commands silently failed.
+				# If we have been running that long, then the resumption may be far off; bring it closer
+				$updraftplus->reschedule(60);
+				$updraftplus->log("Have been running very long, and it seems the database went away; terminating");
+				$updraftplus->record_still_alive();
+				die;
+			}
+		} else {
+			$updraftplus->log_removewarning('optstablenotfound');
 		}
 
 		// Race detection - with zip files now being resumable, these can more easily occur, with two running side-by-side
@@ -878,8 +942,9 @@ class UpdraftPlus_Backup {
 		// We delay the unlinking because if two runs go concurrently and fail to detect each other (should not happen, but there's no harm in assuming the detection failed) then that leads to files missing from the db dump
 		$unlink_files = array();
 
+		$sind = 1;
 		foreach ($stitch_files as $table_file) {
-			$updraftplus->log("{$table_file}.gz: adding to final database dump");
+			$updraftplus->log("{$table_file}.gz ($sind/$how_many_tables): adding to final database dump");
 			if (!$handle = gzopen($this->updraft_dir.'/'.$table_file.'.gz', "r")) {
 				$updraftplus->log("Error: Failed to open database file for reading: ${table_file}.gz");
 				$updraftplus->log("Failed to open database file for reading: ${table_file}.gz", 'error');
@@ -889,6 +954,7 @@ class UpdraftPlus_Backup {
 				gzclose($handle);
 				$unlink_files[] = $this->updraft_dir.'/'.$table_file.'.gz';
 			}
+			$sind++;
 		}
 
 		if (defined("DB_CHARSET")) {
@@ -1183,9 +1249,9 @@ class UpdraftPlus_Backup {
 		$this->stow("# WordPress MySQL database backup\n");
 		$this->stow("# Created by UpdraftPlus version ".$updraftplus->version." (http://updraftplus.com)\n");
 		$this->stow("# WordPress Version: $wp_version, running on PHP ".phpversion()." (".$_SERVER["SERVER_SOFTWARE"]."), MySQL $mysql_version\n");
-		$this->stow("# Backup of: ".site_url()."\n");
-		$this->stow("# Home URL: ".home_url()."\n");
-		$this->stow("# Content URL: ".content_url()."\n");
+		$this->stow("# Backup of: ".untrailingslashit(site_url())."\n");
+		$this->stow("# Home URL: ".untrailingslashit(home_url())."\n");
+		$this->stow("# Content URL: ".untrailingslashit(content_url())."\n");
 		$this->stow("# Table prefix: ".$this->table_prefix_raw."\n");
 		$this->stow("# Site info: multisite=".(is_multisite() ? '1' : '0')."\n");
 		$this->stow("# Site info: end\n");
@@ -1207,7 +1273,11 @@ class UpdraftPlus_Backup {
 
 	public function phpmailer_init($phpmailer) {
 		global $updraftplus;
-		$phpmailer->AddAttachment($updraftplus->logfile_name, '', 'base64', 'text/plain');
+		if (empty($this->attachments) || !is_array($this->attachments)) return;
+		foreach ($this->attachments as $attach) {
+			$mime_type = (preg_match('/\.gz$/', $attach)) ? 'application/x-gzip' : 'text/plain';
+			$phpmailer->AddAttachment($attach, '', 'base64', $mime_type);
+		}
 	}
 
 	// This function recursively packs the zip, dereferencing symlinks but packing into a single-parent tree for universal unpacking
@@ -1268,7 +1338,7 @@ class UpdraftPlus_Backup {
 							#@touch($zipfile);
 						} else {
 							$updraftplus->log("$fullpath/$e: unreadable file");
-							$updraftplus->log(sprintf(__("%s: unreadable file - could not be backed up", 'updraftplus'), $use_path_when_storing.'/'.$e), 'warning');
+							$updraftplus->log(sprintf(__("%s: unreadable file - could not be backed up", 'updraftplus'), $use_path_when_storing.'/'.$e), 'warning', "unrfile-$e");
 						}
 					} elseif (is_dir($fullpath.'/'.$e)) {
 						// no need to addEmptyDir here, as it gets done when we recurse
@@ -1376,7 +1446,7 @@ class UpdraftPlus_Backup {
 
 		$this->zip_basename = $this->updraft_dir.'/'.$backup_file_basename.'-'.$whichone;
 
-		$error_occured = false;
+		$error_occurred = false;
 
 		# Store this in its original form
 		$this->source = $source;
@@ -1386,7 +1456,7 @@ class UpdraftPlus_Backup {
 		if (!is_array($source)) $source=array($source);
 		foreach ($source as $element) {
 			$add_them = $this->makezip_recursive_add($element, basename($element), $element);
-			if (is_wp_error($add_them) || false === $add_them) $error_occured = true;
+			if (is_wp_error($add_them) || false === $add_them) $error_occurred = true;
 		}
 
 		// Any not yet dispatched? Under our present scheme, at this point nothing has yet been despatched. And since the enumerating of all files can take a while, we can at this point do a further modification check to reduce the chance of overlaps.
@@ -1402,10 +1472,10 @@ class UpdraftPlus_Backup {
 				foreach ($add_them->get_error_messages() as $msg) {
 					$updraftplus->log("Error returned from makezip_addfiles: ".$msg);
 				}
-				$error_occured = true;
+				$error_occurred = true;
 			} elseif (false === $add_them) {
 				$updraftplus->log("Error: makezip_addfiles returned false");
-				$error_occured = true;
+				$error_occurred = true;
 			}
 		}
 
@@ -1415,7 +1485,7 @@ class UpdraftPlus_Backup {
 		$destination_base = $backup_file_basename.'-'.$whichone.$itext.'.zip.tmp';
 		$destination = $this->updraft_dir.'/'.$destination_base;
 
-		if ($this->zipfiles_added > 0 || $error_occured == false) {
+		if ($this->zipfiles_added > 0 || $error_occurred == false) {
 			// ZipArchive::addFile sometimes fails
 			if ((file_exists($destination) || $this->index == $original_index) && @filesize($destination) < 90 && 'UpdraftPlus_ZipArchive' == $this->use_zip_object) {
 				$updraftplus->log("makezip_addfiles(ZipArchive) apparently failed (file=".basename($destination).", type=$whichone, size=".filesize($destination).") - retrying with PclZip");
