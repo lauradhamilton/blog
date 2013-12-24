@@ -7,6 +7,8 @@
 
 require( ABSPATH . WPINC . '/option.php' );
 
+function fix_links($input) { return preg_replace('!http(s)?://' . $_SERVER['SERVER_NAME'] . '/!', '/', $input);}
+
 /**
  * Converts given date string into a different format.
  *
