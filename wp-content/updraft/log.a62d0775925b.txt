@@ -1,0 +1,197 @@
+0000.000 (0) Opened log file at time: Mon, 23 Dec 2013 23:38:59 +0000
+0000.007 (0) UpdraftPlus WordPress backup plugin (http://updraftplus.com): 1.8.2 WP: 3.8 PHP: 5.4.9-4ubuntu2.4 (Linux ip-10-181-175-67 3.8.0-19-generic #30-Ubuntu SMP Wed May 1 16:35:23 UTC 2013 x86_64) MySQL: 5.5.34-0ubuntu0.13.04.1 Server: Apache/2.2.22 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 13M | 13.5M) multisite: N mcrypt: Y ZipArchive::addFile: Y W3TC/ObjectCache: N
+0000.011 (0) Free space on disk containing Updraft's temporary directory: 6374.3 Mb
+0000.017 (0) Tasks: Backup files: 1 (schedule: daily) Backup DB:  (schedule: daily)
+0000.022 (0) Processed schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.037 (0) Requesting semaphore lock (fd)
+0000.060 (0) Set semaphore last lock (fd) time to 2013-12-23 23:38:59
+0000.064 (0) Semaphore lock (fd) complete
+0000.080 (0) Backup run: resumption=0, nonce=a62d0775925b, begun at=1387841939 (0s ago), job type=backup
+0000.085 (0) Scheduling a resumption (1) after 300 seconds (1387842239) in case this run gets aborted
+0000.102 (0) Checking if we have a zip executable available
+0000.112 (0) Creation of backups of directories: beginning
+0000.137 (0) Beginning creation of dump of plugins (split every: 800 Mb)
+0000.161 (0) Total entities for the zip file: 103 directories, 622 files, 9.1 Mb
+0000.171 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip.tmp: 100 files added (on-disk size: 0 Kb)
+0000.180 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip.tmp: 200 files added (on-disk size: 0 Kb)
+0000.190 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip.tmp: 300 files added (on-disk size: 0 Kb)
+0000.201 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip.tmp: 400 files added (on-disk size: 0 Kb)
+0000.234 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip.tmp: 500 files added (on-disk size: 0 Kb)
+0000.239 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 500 files added on this batch (6.4 Mb, 622 files batched, 501 (501) added so far); re-opening (prior size: 0 Kb)
+0002.083 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip.tmp: 600 files added (on-disk size: 2395.5 Kb)
+0002.749 (0) Created plugins zip (0) - 3582.2 Kb in 2.6 s (1374.6 Kb/s) (SHA1 checksum: bda18c1fcb5e183d36eeeda45d10506068d548ed)
+0002.759 (0) Beginning creation of dump of themes (split every: 800 Mb)
+0002.769 (0) Total entities for the zip file: 25 directories, 161 files, 1.7 Mb
+0002.777 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-themes.zip.tmp: 100 files added (on-disk size: 0 Kb)
+0003.055 (0) Created themes zip (0) - 1222.3 Kb in 0.3 s (4197.4 Kb/s) (SHA1 checksum: 91feecfa8a68fea72bb7f96de008336ef8ba6a48)
+0003.065 (0) Beginning creation of dump of uploads (split every: 800 Mb)
+0003.075 (0) Total entities for the zip file: 8 directories, 160 files, 12.9 Mb
+0003.082 (0) Zip: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-uploads.zip.tmp: 100 files added (on-disk size: 0 Kb)
+0005.111 (0) Created uploads zip (0) - 12951.6 Kb in 2 s (6347.8 Kb/s) (SHA1 checksum: b217cebf32b4028ec2ec13adff7af754773fd760)
+0005.121 (0) Beginning backup of other directories found in the content directory (index: 0)
+0005.126 (0) Looking for candidates to back up in: /var/www/blog/wp-content
+0005.130 (0) finding files: uploads: skipping: this is the uploads directory
+0005.135 (0) finding files: themes: skipping: this is the themes directory
+0005.139 (0) finding files: updraft: skipping: this is the updraft directory
+0005.144 (0) finding files: index.php: adding to list
+0005.148 (0) finding files: plugins: skipping: this is the plugins directory
+0005.153 (0) finding files: upgrade: skipping: excluded by options
+0005.159 (0) Total entities for the zip file: 0 directories, 1 files, 0 Mb
+0005.174 (0) Created others zip (0) - 0.1 Kb in 0 s (9.2 Kb/s) (SHA1 checksum: dbbc71ff3bb7bc670af1b96fc9a3d91228e9dbb7)
+0005.192 (0) Saving backup status to database (elements: 8)
+0005.204 (0) Beginning creation of database dump
+0005.213 (0) Testing: /usr/bin/mysqldump
+0005.242 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0005.287 (0) Table wp_options: Total expected rows (approximate): 129
+0005.323 (0) Table wp_options: Total rows added: 257 in 0.03 seconds
+0005.329 (0) Table wp_options: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_options.table.gz - 48 Kb)
+0005.345 (0) Table wp_users: Total expected rows (approximate): 1
+0005.352 (0) Table wp_users: Total rows added: 1 in 0.00 seconds
+0005.357 (0) Table wp_users: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_users.table.gz - 0 Kb)
+0005.374 (0) Table wp_usermeta: Total expected rows (approximate): 29
+0005.380 (0) Table wp_usermeta: Total rows added: 29 in 0.00 seconds
+0005.385 (0) Table wp_usermeta: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_usermeta.table.gz - 0 Kb)
+0005.401 (0) Table wp_blog_versions: Total expected rows (approximate): 0
+0005.406 (0) Table wp_blog_versions: Total rows added: 0 in 0.00 seconds
+0005.412 (0) Table wp_blog_versions: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_blog_versions.table.gz - 0 Kb)
+0005.429 (0) Table wp_blogs: Total expected rows (approximate): 0
+0005.435 (0) Table wp_blogs: Total rows added: 0 in 0.00 seconds
+0005.440 (0) Table wp_blogs: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_blogs.table.gz - 0 Kb)
+0005.460 (0) Table wp_commentmeta: Total expected rows (approximate): 698
+0005.552 (0) Table wp_commentmeta: Total rows added: 815 in 0.09 seconds
+0005.558 (0) Table wp_commentmeta: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_commentmeta.table.gz - 96 Kb)
+0005.593 (0) Table wp_comments: Total expected rows (approximate): 333
+0005.638 (0) Table wp_comments: Total rows added: 275 in 0.04 seconds
+0005.653 (0) Table wp_comments: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_comments.table.gz - 48 Kb)
+0005.672 (0) Table wp_links: Total expected rows (approximate): 0
+0005.679 (0) Table wp_links: Total rows added: 0 in 0.00 seconds
+0005.685 (0) Table wp_links: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_links.table.gz - 0 Kb)
+0005.702 (0) Table wp_postmeta: Total expected rows (approximate): 476
+0005.720 (0) Table wp_postmeta: Total rows added: 390 in 0.01 seconds
+0005.727 (0) Table wp_postmeta: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_postmeta.table.gz - 0 Kb)
+0005.760 (0) Table wp_posts: Total expected rows (approximate): 108
+0005.801 (0) Table wp_posts: Total rows added: 143 in 0.03 seconds
+0005.832 (0) Table wp_posts: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_posts.table.gz - 24 Kb)
+0005.855 (0) Table wp_registration_log: Total expected rows (approximate): 0
+0005.862 (0) Table wp_registration_log: Total rows added: 0 in 0.00 seconds
+0005.868 (0) Table wp_registration_log: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_registration_log.table.gz - 0 Kb)
+0005.887 (0) Table wp_signups: Total expected rows (approximate): 0
+0005.893 (0) Table wp_signups: Total rows added: 0 in 0.00 seconds
+0005.898 (0) Table wp_signups: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_signups.table.gz - 0 Kb)
+0005.913 (0) Table wp_site: Total expected rows (approximate): 0
+0005.919 (0) Table wp_site: Total rows added: 0 in 0.00 seconds
+0005.924 (0) Table wp_site: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_site.table.gz - 0 Kb)
+0005.939 (0) Table wp_sitemeta: Total expected rows (approximate): 0
+0005.945 (0) Table wp_sitemeta: Total rows added: 0 in 0.00 seconds
+0005.950 (0) Table wp_sitemeta: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_sitemeta.table.gz - 0 Kb)
+0005.966 (0) Table wp_term_relationships: Total expected rows (approximate): 38
+0005.972 (0) Table wp_term_relationships: Total rows added: 38 in 0.00 seconds
+0005.978 (0) Table wp_term_relationships: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_term_relationships.table.gz - 0 Kb)
+0006.002 (0) Table wp_term_taxonomy: Total expected rows (approximate): 11
+0006.009 (0) Table wp_term_taxonomy: Total rows added: 11 in 0.00 seconds
+0006.014 (0) Table wp_term_taxonomy: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_term_taxonomy.table.gz - 0 Kb)
+0006.033 (0) Table wp_terms: Total expected rows (approximate): 11
+0006.039 (0) Table wp_terms: Total rows added: 11 in 0.00 seconds
+0006.044 (0) Table wp_terms: finishing file (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_terms.table.gz - 0 Kb)
+0006.074 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_options.table.gz (1/17): adding to final database dump
+0006.100 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_users.table.gz (2/17): adding to final database dump
+0006.105 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_usermeta.table.gz (3/17): adding to final database dump
+0006.110 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_blog_versions.table.gz (4/17): adding to final database dump
+0006.115 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_blogs.table.gz (5/17): adding to final database dump
+0006.120 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_commentmeta.table.gz (6/17): adding to final database dump
+0006.166 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_comments.table.gz (7/17): adding to final database dump
+0006.214 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_links.table.gz (8/17): adding to final database dump
+0006.219 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_postmeta.table.gz (9/17): adding to final database dump
+0006.227 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_posts.table.gz (10/17): adding to final database dump
+0006.250 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_registration_log.table.gz (11/17): adding to final database dump
+0006.279 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_signups.table.gz (12/17): adding to final database dump
+0006.283 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_site.table.gz (13/17): adding to final database dump
+0006.289 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_sitemeta.table.gz (14/17): adding to final database dump
+0006.294 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_term_relationships.table.gz (15/17): adding to final database dump
+0006.301 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_term_taxonomy.table.gz (16/17): adding to final database dump
+0006.305 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db-table-wp_terms.table.gz (17/17): adding to final database dump
+0006.312 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz: finished writing out complete database file (304 Kb)
+0006.332 (0) Total database tables backed up: 17 (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz: checksum (SHA1): 6c122024c95f6b7846d752600f499b9dfadb0671)
+0006.347 (0) Saving backup history
+0006.380 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0006.387 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0006.391 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0006.396 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-others.zip: others: This file has not yet been successfully uploaded: will queue
+0006.400 (0) backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz: db: This file has not yet been successfully uploaded: will queue
+0006.410 (0) Requesting upload of the files that have not yet been successfully uploaded (5)
+0006.423 (0) Cloud backup selection: s3
+0006.428 (0) Beginning dispatch of backup to remote (s3)
+0006.462 (0) S3 upload (US): backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip (chunks: 1) -> s3://Additive-Analytics-Blog-Wordpress-Backups/backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip
+0006.705 (0) S3 regular upload: success
+0006.725 (0) Recording as successfully uploaded: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip (2566c5eb0047d3a9edac35104e6e5886)
+0006.747 (0) Deleting local file: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-plugins.zip: OK
+0006.753 (0) S3 upload (US): backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-themes.zip (chunks: 1) -> s3://Additive-Analytics-Blog-Wordpress-Backups/backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-themes.zip
+0006.887 (0) S3 regular upload: success
+0006.898 (0) Recording as successfully uploaded: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-themes.zip (1330965931039f3b5b5e2854c9a42b7f)
+0006.912 (0) Deleting local file: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-themes.zip: OK
+0006.918 (0) S3 upload (US): backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-uploads.zip (chunks: 3) -> s3://Additive-Analytics-Blog-Wordpress-Backups/backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-uploads.zip
+0006.993 (0) S3 chunked upload: got multipart ID: J86CwF0HLR4vJSGxwArTn4UxOjmCfF5hkFmiWsY54LdEQZ.K2Iax858P19bNsRrghF7RKdvzjH2w3hVzsx4rMQ--
+0007.353 (0) S3 chunked upload: 33.3 % uploaded (1, 7becb700dd323f6e2c0a622548b544a2)
+0007.709 (0) S3 chunked upload: 66.7 % uploaded (2, 24e9028a300d209e678c741aad5f070c)
+0007.907 (0) S3 chunked upload: 100 % uploaded (3, 9e374035f3a8ee5bef499f457c79711c)
+0007.922 (0) S3 upload: all chunks uploaded; will now instruct S3 to re-assemble
+0007.973 (0) S3 upload (uploads0): re-assembly succeeded
+0007.980 (0) Recording as successfully uploaded: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-uploads.zip (716ecf18869943d74e457c4db577506c)
+0007.997 (0) Deleting local file: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-uploads.zip: OK
+0008.003 (0) S3 upload (US): backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-others.zip (chunks: 1) -> s3://Additive-Analytics-Blog-Wordpress-Backups/backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-others.zip
+0008.050 (0) S3 regular upload: success
+0008.060 (0) Recording as successfully uploaded: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-others.zip (b65bce8f898ff9617ad95651072a479d)
+0008.074 (0) Deleting local file: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-others.zip: OK
+0008.079 (0) S3 upload (US): backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz (chunks: 1) -> s3://Additive-Analytics-Blog-Wordpress-Backups/backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz
+0008.151 (0) S3 regular upload: success
+0008.160 (0) Recording as successfully uploaded: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz (fcfd986ec1c6f03e8c95a2f4e7a2cd3e)
+0008.178 (0) Deleting local file: backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz: OK
+0008.211 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=7, retain_db=7
+0008.216 (0) Number of backup sets in history: 8
+0008.221 (0) Examining backup set with datestamp: 1387841939 (Dec 23 2013 23:38:59)
+0008.225 (0) 1387841939: db: this set includes a database (backup_2013-12-23-1738_Additive_Analytics_Blog_a62d0775925b-db.gz); db count is now 1
+0008.245 (0) 1387841939: this backup set remains non-empty (1/1); will retain in history
+0008.254 (0) Examining backup set with datestamp: 1387753624 (Dec 22 2013 23:07:04)
+0008.258 (0) 1387753624: db: this set includes a database (backup_2013-12-22-1707_Additive_Analytics_Blog_c7072ec374e1-db.gz); db count is now 2
+0008.267 (0) 1387753624: this backup set remains non-empty (1/1); will retain in history
+0008.271 (0) Examining backup set with datestamp: 1387667795 (Dec 21 2013 23:16:35)
+0008.276 (0) 1387667795: db: this set includes a database (backup_2013-12-21-1716_Additive_Analytics_Blog_58da8b2f4eb5-db.gz); db count is now 3
+0008.285 (0) 1387667795: this backup set remains non-empty (1/1); will retain in history
+0008.289 (0) Examining backup set with datestamp: 1387580718 (Dec 20 2013 23:05:18)
+0008.294 (0) 1387580718: db: this set includes a database (backup_2013-12-20-1705_Additive_Analytics_Blog_7b45a1a4c31b-db.gz); db count is now 4
+0008.303 (0) 1387580718: this backup set remains non-empty (1/1); will retain in history
+0008.308 (0) Examining backup set with datestamp: 1387495047 (Dec 19 2013 23:17:27)
+0008.312 (0) 1387495047: db: this set includes a database (backup_2013-12-19-1717_Additive_Analytics_Blog_fc2ef3b92c1c-db.gz); db count is now 5
+0008.321 (0) 1387495047: this backup set remains non-empty (1/1); will retain in history
+0008.325 (0) Examining backup set with datestamp: 1387411352 (Dec 19 2013 00:02:32)
+0008.327 (0) 1387411352: db: this set includes a database (backup_2013-12-18-1802_Additive_Analytics_Blog_c3ee60b6d582-db.gz); db count is now 6
+0008.336 (0) 1387411352: this backup set remains non-empty (1/1); will retain in history
+0008.340 (0) Examining backup set with datestamp: 1387322285 (Dec 17 2013 23:18:05)
+0008.344 (0) 1387322285: db: this set includes a database (backup_2013-12-17-1718_Additive_Analytics_Blog_4da3517f3431-db.gz); db count is now 7
+0008.353 (0) 1387322285: this backup set remains non-empty (1/1); will retain in history
+0008.358 (0) Examining backup set with datestamp: 1387235922 (Dec 16 2013 23:18:42)
+0008.362 (0) 1387235922: db: this set includes a database (backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-db.gz); db count is now 8
+0008.366 (0) 1387235922: db: over retain limit (7); will delete this database
+0008.371 (0) Delete file: backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-db.gz, service=s3
+0008.375 (0) S3: Delete remote: bucket=Additive-Analytics-Blog-Wordpress-Backups, URI=backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-db.gz
+0008.401 (0) plugins: 1387235922: over retain limit (7); will delete this file (backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-plugins.zip)
+0008.403 (0) themes: 1387235922: over retain limit (7); will delete this file (backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-themes.zip)
+0008.407 (0) uploads: 1387235922: over retain limit (7); will delete this file (backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-uploads.zip)
+0008.411 (0) others: 1387235922: over retain limit (7); will delete this file (backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-others.zip)
+0008.415 (0) Delete file: backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-plugins.zip, service=s3
+0008.420 (0) Delete file: backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-themes.zip, service=s3
+0008.424 (0) Delete file: backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-uploads.zip, service=s3
+0008.428 (0) Delete file: backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-others.zip, service=s3
+0008.433 (0) S3: Delete remote: bucket=Additive-Analytics-Blog-Wordpress-Backups, URI=backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-plugins.zip
+0008.452 (0) S3: Delete remote: bucket=Additive-Analytics-Blog-Wordpress-Backups, URI=backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-themes.zip
+0008.472 (0) S3: Delete remote: bucket=Additive-Analytics-Blog-Wordpress-Backups, URI=backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-uploads.zip
+0008.515 (0) S3: Delete remote: bucket=Additive-Analytics-Blog-Wordpress-Backups, URI=backup_2013-12-16-1718_Additive_Analytics_Blog_dad765a865b5-others.zip
+0008.557 (0) 1387235922: this backup set is now empty; will remove from history
+0008.562 (0) 1387235922: deleting log file (log.dad765a865b5.txt)
+0008.566 (0) Retain: saving new backup history (sets now: 7) and finishing retain operation
+0008.577 (0) Resume backup (a62d0775925b, 0): finish run
+0008.609 (0) Decremented the semaphore (fd) by 1
+0008.615 (0) Semaphore (fd) unlocked
+0008.620 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0008.634 (0) Sending email ('Files and database') report (attachments: 0, size: 0 Kb) to: laura...
+0009.453 (0) The backup apparently succeeded and is now complete
