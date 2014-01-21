@@ -1,0 +1,130 @@
+.nrelate_default .nr_panel{
+float:left;
+background:none;
+font-size:11px;
+border:1px solid transparent !important;
+margin:1px;
+padding:1px 1px 0px;
+display:block;
+text-decoration:none;
+cursor:pointer;
+}
+.nrelate_default .nr_panel:hover{
+background:#F2F2F5;
+border:1px solid #CCC !important;
+color:black;
+margin:1px;
+padding:1px 1px 0px;
+text-decoration:none;
+}
+.nrelate_default .nr_title {
+font-size:16px;
+margin-top:0;
+margin-bottom:5px;
+}
+.nrelate_default .nr_img_div {
+display:block;
+line-height:0;
+position:relative;
+background:none repeat scroll 0 0 #000000;
+background-color:transparent;
+border:1px solid #cccccc;
+}
+.nrelate_default .nr_img  {
+border: none;
+display:block;
+margin-left:auto !important;
+margin-right:auto !important;
+padding: 2px !important;
+background:none repeat scroll 0 0 #F0F0F0;
+border-top:1px solid #FFFFFF;
+outline:1px solid #DDDDDD;
+width:auto !important;
+}
+.nrelate_default .nr_panel:hover .nr_img  {
+background:none repeat scroll 0 0 #333333;
+border:1px solid #555555 !important;
+outline:1px solid #111111;
+}
+.nrelate_default .nr_img_div img  {
+border:1px solid #FFFFFF !important;
+margin:0 !important;
+-moz-box-shadow: none !important;
+-webkit-box-shadow: none !important;
+-khtml-box-shadow: none !important;
+box-shadow: none !important;
+}
+.nrelate_default .nr_text  {
+overflow: hidden;
+word-wrap:break-word;
+clear:left;
+float:left;
+font-family:sans-serif;
+font-weight:bold;
+line-height:140%;
+padding:2px;
+margin-top:4px;
+text-align:left;
+display:block;
+width:100%;
+height: 30px;
+}
+.nrelate_default .nr_source  {
+font-size: 9px;
+font-style: italic;
+font-weight:normal;
+}
+.nrelate_default .nr_panel .nr_post_title,
+.nrelate_default .nr_panel .nr_source,
+.nrelate_default .nr_panel .nr_excerpt{
+display:block;
+}
+.nrelate_default .nr_panel .nr_excerpt{
+font-weight:normal;
+}
+.nrelate_default ul li .nr_link,
+.nrelate_default ul li .nr_link:hover,
+.nrelate_default ul li .nr_link:active,
+.nrelate_default ul li .nr_link:link{
+border:none;
+}
+.nrelate_default ul li .nr_excerpt,
+.nrelate_default ul li .nr_source{
+padding-left:5px;
+}
+/* Sponsored area on thumbnails */
+.nrelate_default .nr_sponsored_wrap{
+display:block;
+height:18px;
+position:absolute;
+left:3px;
+overflow:hidden;
+}
+.nrelate_default  a.nr_panel:hover .nr_sponsored_wrap{
+left:3px;
+}
+
+/* settings for each thumbnail size supported in plugin */
+.nrelate_default.nr_150 .nr_panel{ width : 158px; height: 200px; }
+.nrelate_default.nr_150 .nr_panel .nr_sponsored_wrap{ width : 150px; top:135px; }
+.nrelate_default.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
+
+.nrelate_default.nr_160 .nr_panel{ width : 168px; height: 210px; }
+.nrelate_default.nr_160 .nr_panel .nr_sponsored_wrap{ width : 160px; top:145px; }
+.nrelate_default.nr_160 .nr_panel .nr_sponsored{ left : 142px; }
+
+.nrelate_default.nr_170 .nr_panel{ width : 178px; height: 220px; }
+.nrelate_default.nr_170 .nr_panel .nr_sponsored_wrap{ width : 170px; top:155px; }
+.nrelate_default.nr_170 .nr_panel .nr_sponsored{ left : 152px; }
+
+.nrelate_default.nr_180 .nr_panel{ width : 188px; height: 230px;}
+.nrelate_default.nr_180 .nr_panel .nr_sponsored_wrap{ width : 180px; top:165px; }
+.nrelate_default.nr_180 .nr_panel .nr_sponsored{ left : 162px; }
+
+.nrelate_default.nr_190 .nr_panel{ width : 198px; height: 224px;}
+.nrelate_default.nr_190 .nr_panel .nr_sponsored_wrap{ width : 190px; top:175px; }
+.nrelate_default.nr_190 .nr_panel .nr_sponsored{ left : 172px; }
+
+.nrelate_default.nr_200 .nr_panel{ width : 208px; height: 234px;}
+.nrelate_default.nr_200 .nr_panel .nr_sponsored_wrap{ width : 200px; top:185px; }
+.nrelate_default.nr_200 .nr_panel .nr_sponsored{ left : 182px; }

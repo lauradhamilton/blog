@@ -1,0 +1,116 @@
+/*
+ * nRelate: Common rules for all styles
+ *
+ */
+
+
+/* = Simple Reset
+-----------------------------------------------*/
+.nrelate, .nrelate a, .nrelate img, .nrelate span, .nrelate div{
+	border: 0; margin: 0; padding: 0; outline: 0;
+	background: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-khtml-box-shadow: none;
+	box-shadow: none;
+
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	
+	-webkit-transform: none;
+	-moz-transform: none;
+	-o-transform: none;
+}
+.nrelate{
+	position: relative;
+}
+.nrelate a, .nrelate a: hover{
+	text-decoration: none;
+}
+.nr_clear{
+	clear: both;
+}
+
+
+/* = Common Rules
+-----------------------------------------------*/
+.nrelate{
+	margin: 5px 1px;
+}
+.nrelate .nr_inner{
+	clear: both;
+	width: 100%;
+	padding: 4px 0;
+}
+.nrelate .nr_inner ul{
+	margin-bottom: 0 !important;
+}
+.nrelate .nrelate_logo{
+	background: none !important;
+	float: left;
+	clear: left;
+	padding: 5px 5px 10px 5px;
+	border: none !important;
+	width: auto !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	-khtml-box-shadow: none !important;
+	box-shadow: none !important;
+}
+.nrelate a: hover .nrelate_logo{
+	-moz-opacity: .8;
+	opacity: .8;
+	-khtml-opacity: .8;
+}
+.nrelate .nr_title{
+	margin: 0;
+	padding: 0 0 5px 0;
+}
+.nrelate .nr_sponsored{
+	display: block;
+	width: 232px;
+	height: 18px;
+	position: absolute;
+	background: url(http: //imgcdn.nrelate.com/rcw_wp/0.46.0/images/sponsored.png) top left no-repeat;
+}
+.nrelate .nr_source{
+	font-size: 0.9em;
+	font-style: italic;
+	font-weight: normal;
+	text-transform: none;
+}
+.nrelate .nr_sponsored_wrap{
+	display: block;
+	height: 18px;
+	position: absolute;
+	overflow: hidden;
+}
+
+.nr_80 .nr_img{ width: 80px !important; height: 80px !important; }
+.nr_90 .nr_img{ width: 90px !important; height: 90px !important; }
+.nr_100 .nr_img{ width: 100px !important; height: 100px !important; }
+.nr_110 .nr_img{ width: 110px !important; height: 110px !important; }
+.nr_120 .nr_img{ width: 120px !important; height: 120px !important; }
+.nr_130 .nr_img{ width: 130px !important; height: 130px !important; }
+.nr_140 .nr_img{ width: 140px !important; height: 140px !important; }
+.nr_150 .nr_img{ width: 150px !important; height: 150px !important; }
+.nr_160 .nr_img{ width: 160px !important; height: 160px !important; }
+.nr_170 .nr_img{ width: 170px !important; height: 170px !important; }
+.nr_180 .nr_img{ width: 180px !important; height: 180px !important; }
+.nr_190 .nr_img{ width: 190px !important; height: 190px !important; }
+.nr_200 .nr_img{ width: 200px !important; height: 200px !important; }
+
+
+/* = Separate Style Rules
+-----------------------------------------------*/
+.nr_2col .nr_content, .nr_2col .nr_partners{
+	float: left;
+	width: 50%;
+}
+
+.nr_2row .nr_partners{
+	float: left;
+	clear: left;
+	margin-top: 10px;
+}

@@ -1,0 +1,130 @@
+/*
+ * nrelate Flyout: Centered Dark style
+ */
+ 
+
+/* === nrelate flyout === */
+.nrelate.nrelate_animate_style_centereddk{
+    text-align: center;
+    background: #000;
+    margin: 0px;
+    position:fixed !important;
+    z-index:10000000;
+    padding: 5px 15px 0;
+    -moz-box-shadow: 0 4px 10px #666;
+    -webkit-box-shadow: 0 4px 10px #666;
+    box-shadow: 0 4px 10px #666;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=7)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=7);
+    _position: absolute;
+    _top: 0;
+	
+	/*@credit: http://robertnyman.com/2010/01/11/css-background-transparency-without-affecting-child-elements-through-rgba-and-filters/ */
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(0, 0, 0);
+	/* RGBa with 0.6 opacity */
+	background: rgba(0, 0, 0, 0.6);
+	/* ie6 - ie8 */
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+
+}
+
+.nrelate_animate_style_centereddk .nrelate_logo {
+	text-align: center;
+	padding: 0 5px 5px;
+	}
+
+.nrelate_animate_style_centereddk .nr_title,
+.nrelate_animate_style_centereddk .nr_partner_title {
+	color: white !important;
+	text-align: center;
+	width: 100%;
+	float: none;
+	}
+.nrelate_animate_style_centereddk .nrelate_logo  {
+	text-align: center;
+	float: none;
+	}
+	
+.nrelate_animate_style_centereddk .nr_panel {
+	display: inline-block !important;
+	float: none !important;
+	vertical-align: top;
+	color: white;
+	}
+	.nrelate_animate_style_centereddk.nrelate_tre .nr_panel {
+	color: black; /* bring back black text for Trendland style */
+	}
+.nrelate_animate_style_centereddk .nr_inner {
+	padding: 0;
+	}
+.nrelate_animate_style_centereddk .nr_panel .nr_post_title,
+.nrelate_animate_style_centereddk .nr_panel .nr_source,
+.nrelate_animate_style_centereddk .nr_panel .nr_excerpt {
+    text-align: center;
+    color: white;
+}
+	
+/* === Styles for Text === */	
+.nrelate_animate_style_centereddk.nr_text a {
+	color: white;
+	}
+.nrelate_animate_style_centereddk.nr_text ul {
+	margin: 0;
+	}
+.nrelate_animate_style_centereddk.nr_text ul li{
+	display: inline;
+	padding: 0 15px 0 0;
+	}
+
+
+/* === Close Button === */
+.nrelate_animate_style_centereddk #nrelate_flyout_close {
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 13px;
+    height: 13px;
+    text-indent: -999em;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* === Open Arrow === */
+#nrelate_flyout_open.nrelate_animate_style_centereddk.nr_fade_left,
+#nrelate_flyout_open.nrelate_animate_style_centereddk.nr_slideout_left {
+	background-image: url('http://imgcdn.nrelate.com/common_wp/arrow-flyout-left.png');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+    background-color: transparent;
+	}
+#nrelate_flyout_open.nrelate_animate_style_centereddk.nr_fade_right,
+#nrelate_flyout_open.nrelate_animate_style_centereddk.nr_slideout_right {
+	background-image: url('http://imgcdn.nrelate.com/common_wp/arrow-flyout-right.png');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+    background-color: transparent;
+	}
+#nrelate_flyout_open.nrelate_animate_style_centereddk {
+    border: none;
+    padding: 0;
+    margin: 0px;
+    position:fixed !important;
+    width: 16px;
+    height: 80px;
+    z-index:10000000;
+    padding: 10px 20px 10px 10px;
+    border-top: 2px solid #000;
+    border-left: 1px solid #f0f0f0;
+    -moz-box-shadow: 0 4px 10px #666;
+    -webkit-box-shadow: 0 4px 10px #666;
+    box-shadow: 0 4px 10px #666;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=7)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=7);
+    _position: absolute;
+    _top: 0;
+    overflow: hidden;
+    cursor: pointer;
+}

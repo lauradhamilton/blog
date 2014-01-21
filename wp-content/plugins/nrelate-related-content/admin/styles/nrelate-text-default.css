@@ -1,0 +1,18 @@
+.nrelate_default.nr_text .nr_rc_title {
+	font-size:16px;
+	margin-top:0;
+	margin-bottom:5px;
+}
+.nrelate_default .nr_post_title {
+    font-weight: bold;
+}
+.nrelate_default.nr_text ul li .nr_rc_link,
+.nrelate_default.nr_text ul li .nr_rc_link:hover,
+.nrelate_default.nr_text ul li .nr_rc_link:active,
+.nrelate_default.nr_text ul li .nr_rc_link:link{
+	border:none;
+}
+.nrelate_default.nr_text ul li .nr_excerpt,
+.nrelate_default.nr_text ul li .nr_rc_source{
+	padding-left:5px;
+}

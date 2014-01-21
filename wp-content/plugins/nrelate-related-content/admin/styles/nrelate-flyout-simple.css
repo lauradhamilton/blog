@@ -1,0 +1,103 @@
+/*
+ * nrelate Flyout: Simple Style
+ */
+ 
+
+/* === nrelate flyout === */
+.nrelate.nrelate_animate_style_simple{
+    text-align: left;
+    background: #fff;
+    margin: 0px;
+	padding: 5px 15px 0 10px;
+    position:fixed !important;
+    z-index:10000000;
+    border: 1px solid #ccc;
+    -moz-box-shadow: 0 4px 10px #666;
+    -webkit-box-shadow: 0 4px 10px #666;
+    box-shadow: 0 4px 10px #666;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=7)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=7);
+    _position: absolute;
+    _top: 0;
+}
+
+.nrelate_animate_style_simple .nrelate_logo {
+	float: right;
+	padding: 0 5px 5px;
+	}
+
+.nrelate_animate_style_simple .nr_inner {
+	padding: 5px 20px 0 10px;
+	}
+
+/* === Round corners on left === */
+.nrelate_animate_style_simple.nr_slideout_right {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+
+/* === Round corners on right === */
+.nrelate_animate_style_simple.nr_slideout_left {
+	-webkit-border-top-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	-moz-border-radius-bottomright: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+
+/* === Close Button === */
+.nrelate_animate_style_simple #nrelate_flyout_close {
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 13px;
+    height: 13px;
+    text-indent: -999em;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* === Open Arrow === */
+#nrelate_flyout_open.nrelate_animate_style_simple.nr_fade_left,
+#nrelate_flyout_open.nrelate_animate_style_simple.nr_slideout_left {
+	background-image: url('http://imgcdn.nrelate.com/common_wp/arrow-flyout-left.png');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+    background-color: transparent;
+	}
+#nrelate_flyout_open.nrelate_animate_style_simple.nr_fade_right,
+#nrelate_flyout_open.nrelate_animate_style_simple.nr_slideout_right {
+	background-image: url('http://imgcdn.nrelate.com/common_wp/arrow-flyout-right.png');
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+    background-color: transparent;
+	}
+
+
+#nrelate_flyout_open.nrelate_animate_style_simple {
+    border: none;
+    padding: 0;
+    margin: 0px;
+    position:fixed !important;
+    width: 16px;
+    height: 80px;
+    z-index:10000000;
+    padding: 10px 20px 10px 10px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=0)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#cccccc, direction=270, strength=0);
+    _position: absolute;
+    _top: 0;
+    overflow: hidden;
+    cursor: pointer;
+}

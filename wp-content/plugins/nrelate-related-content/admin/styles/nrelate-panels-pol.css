@@ -1,0 +1,164 @@
+/*
+ * nrelate Popular: Polaroid Style
+ *
+ * @credit: http://www.zurb.com/playground/css3-polaroids
+ */
+ 
+ /* Layout ===============> */
+.nrelate_pol .nr_panel {
+	display:block;
+	float:left;
+	position:relative;
+	cursor:pointer;
+	padding:8px 6px 0 6px;
+	margin:1px 20px 20px 1px;
+}
+.nrelate_pol .nr_img_div {
+	display:block;
+	margin:auto;
+	position:relative;
+}
+.nrelate_pol .nr_img{
+	margin:0; padding:0; border: 0; outline:0; max-width:100%;
+}
+.nrelate_pol .nr_text{
+	display:block;
+	margin-top:8px;
+	word-wrap:break-word;
+}
+.nrelate_pol .nr_sponsored_wrap{
+	left:0px;
+}
+.nrelate_pol .nr_excerpt{
+	display:block;
+}
+.nrelate_pol .nr_post_title,
+.nrelate_pol .nr_source,
+.nrelate_pol .nr_excerpt{
+	display:block;
+}
+
+.nrelate_pol .nr_panel,
+.nrelate_pol .nr_panel:link,
+.nrelate_pol .nr_panel:visited,
+.nrelate_pol .nr_panel:active{
+	border: 1px solid #ddd;
+	-moz-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	box-shadow: 5px 5px 5px #888;
+}
+
+.nrelate_pol.nr_80  .nr_panel{ width : 84px; }
+.nrelate_pol.nr_80  .nr_sponsored_wrap{ width : 80px; top : 62px; }
+.nrelate_pol.nr_80  .nr_sponsored{ left : 62px; }
+.nrelate_pol.nr_80  .nr_img_div{ width:80px !important; height:80px !important; }
+
+.nrelate_pol.nr_90 .nr_panel{ width : 94px; }
+.nrelate_pol.nr_90 .nr_sponsored_wrap{ width : 90px; top : 72px; }
+.nrelate_pol.nr_90 .nr_sponsored{ left : 72px; }
+.nrelate_pol.nr_90 .nr_img_div{ width:90px !important; height:90px !important; }
+
+.nrelate_pol.nr_100  .nr_panel{ width : 104px; }
+.nrelate_pol.nr_100  .nr_sponsored_wrap{ width : 100px; top : 82px; }
+.nrelate_pol.nr_100  .nr_sponsored{ left : 82px; }
+.nrelate_pol.nr_100  .nr_img_div{ width:100px !important; height:100px !important; }
+
+.nrelate_pol.nr_110  .nr_panel,
+.nrelate_pol.nr_ .nr_panel{ width: 114px; }
+.nrelate_pol.nr_110  .nr_sponsored_wrap,
+.nrelate_pol.nr_ .nr_sponsored_wrap{ width:110px; top : 92px; }
+.nrelate_pol.nr_110  .nr_sponsored,
+.nrelate_pol.nr_ .nr_sponsored{ left : 92px; }
+.nrelate_pol.nr_110  .nr_img_div,
+.nrelate_pol.nr_ .nr_img_div{ width:110px !important; height:110px !important; }
+
+.nrelate_pol.nr_120  .nr_panel{ width : 124px; }
+.nrelate_pol.nr_120  .nr_sponsored_wrap{ width : 120px; top : 102px; }
+.nrelate_pol.nr_120  .nr_sponsored{ left : 102px; }
+.nrelate_pol.nr_120  .nr_img_div{ width:120px !important; height:120px !important; }
+
+.nrelate_pol.nr_130  .nr_panel{ width : 134px; }
+.nrelate_pol.nr_130  .nr_sponsored_wrap{ width : 130px; top : 112px; }
+.nrelate_pol.nr_130  .nr_sponsored{ left : 112px; }
+.nrelate_pol.nr_130  .nr_img_div{ width:130px !important; height:130px !important; }
+
+.nrelate_pol.nr_140 .nr_panel{ width : 144px; }
+.nrelate_pol.nr_140 .nr_sponsored_wrap{ width : 140px; top : 122px; }
+.nrelate_pol.nr_140 .nr_sponsored{ left : 122px; }
+ .nrelate_pol.nr_140 .nr_img_div{ width:140px !important; height:140px !important; }
+
+.nrelate_pol.nr_150 .nr_panel{ width : 154px; }
+.nrelate_pol.nr_150 .nr_sponsored_wrap{ width : 150px; top:132px; }
+.nrelate_pol.nr_150 .nr_sponsored{ left : 132px; }
+.nrelate_pol.nr_150 .nr_img_div{ width:150px !important; height:150px !important; }
+/* <=============== Layout  */
+
+/* Format ================> */
+.nrelate_pol .nr_panel,
+.nrelate_pol .nr_panel:link,
+.nrelate_pol .nr_panel:visited,
+.nrelate_pol .nr_panel:active{
+	text-decoration:none;
+	color:inherit;
+}
+.nrelate_pol .nr_panel {
+	cursor:pointer;
+	line-height:1.4;
+}
+.nrelate_pol .nr_img_div{
+	line-height:0;
+}
+.nrelate_pol .nr_text{
+	text-align:center;
+	font-weight:bold;
+	font-size:80%;
+}
+.nrelate_pol .nr_source{
+	font-weight:normal;
+}
+.nrelate_pol .nr_excerpt{
+	font-weight:normal;
+}
+/* <================ Format */
+
+
+/* Rotate the images ================> */
+
+/* By default, we tilt all our images -2 degrees */
+.nrelate_pol.rotate .nr_panel {
+-webkit-transform: rotate(-2deg);
+-moz-transform: rotate(-2deg);
+-webkit-transform-style:preserve-3d;
+}
+
+/* Rotate all even images 2 degrees */
+.nrelate_pol.rotate .nr_panel:nth-child(even) {
+-webkit-transform: rotate(2deg);
+-moz-transform: rotate(2deg);
+}
+ 
+/* Don't rotate every third image, but offset its position  */
+.nrelate_pol.rotate .nr_panel:nth-child(3n) {
+-webkit-transform: rotate(5deg);
+-moz-transform: rotate(5deg);
+transform: rotate(5deg);
+position: relative;
+}
+
+/* Rotate every fifth image by 5 degrees and offset it */
+.nrelate_pol.rotate .nr_panel:nth-child(5n) {
+-webkit-transform: none;
+-moz-transform: none;
+position: relative;
+}
+ 
+/* Keep default rotate for every eighth, but offset it */
+.nrelate_pol.rotate .nr_panel:nth-child(8n) {
+position: relative;
+}
+ 
+/* Keep default rotate for every eleventh, but offset it */
+.nrelate_pol.rotate .nr_panel:nth-child(11n) {
+position: relative;
+left: -5px;
+}

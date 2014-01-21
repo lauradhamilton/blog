@@ -1,0 +1,125 @@
+/*
+ * nrelate: LoudFeed Style
+ *
+ * @credit: http://www.LoudFeed.com
+ */
+ 
+ 
+.nrelate_loud .nr_panel {
+	position:relative;
+	float: left;
+	padding: 5px;
+	margin: 5px 5px 5px 0;
+	border: 1px solid #999;
+	border-r-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;-moz-box-shadow: rgba(10, 10, 10, .5) 0px 1px 1px;
+	-webkit-box-shadow: rgba(10, 10, 10, .5) 0px 1px 1px;
+	box-shadow: rgba(10, 10, 10, .5) 0px 1px 1px;
+}
+	
+.nrelate_loud .nr_img_div {
+	display:block;
+}
+
+.nrelate_loud .nr_img_div img {
+	padding: 5px;
+}
+	
+.nrelate_loud .nr_panel:hover .nr_img_div img {
+	display:none;
+}
+
+.nrelate_loud .nr_text {
+	padding: 0px;
+	display: block;
+	position: relative;
+}
+
+.nrelate_loud .nr_post_title {
+	font-size: .8em;
+	font-weight:bold;
+	display:block;
+	padding: 0 10px;
+}
+.nrelate_loud  .nr_source {
+  font-size: 0.7em;
+	padding: 0 10px;
+}
+
+.nrelate_loud .nr_showviews {
+  padding: 0 10px;
+  font-size: 0.75em;
+}
+
+.nrelate_loud .nr_excerpt {
+	color: #666;
+	line-height: 1.25em;
+	padding: 0 5px;
+	position: absolute;
+  left: 0;
+	display: none;
+	word-wrap:break-word;
+}
+	
+.nrelate_loud .nr_panel:hover .nr_excerpt {
+	display:block;
+  overflow:hidden;
+}
+
+.nrelate_loud .nr_sponsored_wrap {
+	left:15px;
+}
+
+.nrelate_loud  a.nr_panel:hover .nr_sponsored_wrap{
+	left:15px;
+}
+
+.nrelate_loud.nr_80  .nr_panel{ width : 90px; }
+.nrelate_loud.nr_80 .nr_img_div { height:100px; }
+.nrelate_loud.nr_80 .nr_excerpt {width: 80px; max-height:80px; font-size: .7em; top:-90px;}
+.nrelate_loud.nr_80 .nr_panel .nr_sponsored_wrap { width : 80px; bottom : 8px; }
+.nrelate_loud.nr_80 .nr_panel .nr_sponsored{ left : 62px; }
+
+.nrelate_loud.nr_90  .nr_panel{ width : 100px; }
+.nrelate_loud.nr_90 .nr_img_div { height:110px; }
+.nrelate_loud.nr_90 .nr_excerpt {width: 90px; max-height:90px; font-size: .7em; top:-100px;}
+.nrelate_loud.nr_90 .nr_panel .nr_sponsored_wrap { width : 90px; bottom : 8px; }
+.nrelate_loud.nr_90 .nr_panel .nr_sponsored{ left : 72px; }
+
+.nrelate_loud.nr_100 .nr_panel{ width : 110px; }
+.nrelate_loud.nr_100 .nr_img_div { height:120px; }
+.nrelate_loud.nr_100 .nr_excerpt {width: 100px; max-height:100px; font-size: .7em; top:-110px;}
+.nrelate_loud.nr_100 .nr_panel .nr_sponsored_wrap { width : 100px; bottom : 8px; }
+.nrelate_loud.nr_100 .nr_panel .nr_sponsored{ left : 82px; }
+
+
+.nrelate_loud.nr_110 .nr_panel{ width : 120px; }
+.nrelate_loud.nr_110 .nr_img_div { height:130px; }
+.nrelate_loud.nr_110 .nr_excerpt {width: 110px; max-height:110px; font-size: .8em; top:-120px;}
+.nrelate_loud.nr_110 .nr_panel .nr_sponsored_wrap { width : 110px; bottom : 8px; }
+.nrelate_loud.nr_110 .nr_panel .nr_sponsored{ left : 92px; }
+
+.nrelate_loud.nr_120 .nr_panel{ width : 130px; }
+.nrelate_loud.nr_120 .nr_img_div { height:140px; }
+.nrelate_loud.nr_120 .nr_excerpt {width: 120px; max-height:120px; font-size: .8em; top:-130px;}
+.nrelate_loud.nr_120 .nr_panel .nr_sponsored_wrap { width : 120px; bottom : 8px; }
+.nrelate_loud.nr_120 .nr_panel .nr_sponsored{ left : 102px; }
+
+.nrelate_loud.nr_130 .nr_panel{ width : 140px; }
+.nrelate_loud.nr_130 .nr_img_div { height:150px; }
+.nrelate_loud.nr_130 .nr_excerpt {width: 130px; max-height:130px; font-size: .8em; top:-140px;}
+.nrelate_loud.nr_130 .nr_panel .nr_sponsored_wrap { width : 130px; bottom : 8px; }
+.nrelate_loud.nr_130 .nr_panel .nr_sponsored{ left : 112px; }
+
+.nrelate_loud.nr_140 .nr_panel{ width : 150px; }
+.nrelate_loud.nr_140 .nr_img_div { height:160px; }
+.nrelate_loud.nr_140 .nr_excerpt {width: 140px; max-height:140px; font-size: .8em; top:-150px;}
+.nrelate_loud.nr_140 .nr_panel .nr_sponsored_wrap { width : 140px; bottom : 8px; }
+.nrelate_loud.nr_140 .nr_panel .nr_sponsored{ left : 122px; }
+
+.nrelate_loud.nr_150 .nr_panel{ width : 160px; }
+.nrelate_loud.nr_150 .nr_img_div { height:170px; }
+.nrelate_loud.nr_150 .nr_excerpt {width: 150px; max-height:150px; font-size: .8em; top:-160px;}
+.nrelate_loud.nr_150 .nr_panel .nr_sponsored_wrap { width : 150px; bottom : 8px; }
+.nrelate_loud.nr_150 .nr_panel .nr_sponsored{ left : 132px; }

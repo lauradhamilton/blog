@@ -1,0 +1,195 @@
+/* nSquared Tile (til) STYLE 
+created by Jane Kim for nRelate 2012
+*/
+
+.nrelate_til a{
+  color: #fff;
+  text-decoration: none !important;
+}
+
+.nrelate_til img{
+  max-width: 100%;
+}
+
+.nrelate_til .nr_inner{
+  clear: both;
+  padding: 4px 0;
+  width: 100%;
+}
+
+.nrelate_til .nr_inner ul{
+  margin: 0;
+}
+
+.nrelate_til .nr_panel .nr_text{
+  color: #fff;
+  line-height: 130%;
+  padding: 4px;
+}
+
+.nrelate_til .nr_panel{
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: block;
+  float:left;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+}
+
+.nrelate_til .nr_panel:hover{
+  background: transparent;
+  border: 0;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  text-decoration:none;
+}
+
+.nrelate_til .nr_title{
+  float: left;
+  margin: 0 0 5px 0;
+  font-size: 20px;
+}
+
+.nrelate_til .nr_img_div{
+  /*background: transparent;*/
+  background-color: transparent;
+  border: 0;
+  display: block;
+  line-height: 0;
+  position: absolute;
+}
+
+.nrelate_til .nr_img{
+  background: transparent;
+  border: 0;
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  outline: 0;
+  padding: 0;
+  visibility:visible !important;
+  width: auto !important;
+  z-index: auto !important;
+}
+
+.nrelate_til .nr_img_div img{
+  border: 0;
+  margin: 0 !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -khtml-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.nrelate_til .nr_panel:hover .nr_img{
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.nr_excerpt{
+  font-size: 11px;
+  line-height: 108%;
+  font-weight: normal;
+}
+
+.nrelate_til .nr_text{
+  display: none;
+}
+
+.nrelate_til .nr_post_title,
+.nrelate_til .nr_source,
+.nrelate_til .nr_excerpt{
+  display: block;
+}
+
+.nrelate_til .nr_panel:hover .nr_text{
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgb(0, 0, 0) transparent;
+  /* RGBa */
+  background: rgba(0, 0, 0, 0.75);
+  /* For IE 5.5 - 7*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000);
+  /* For IE 8*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000)";
+  clear: left;
+  color: #fff;
+  display: block;
+  float: left;
+  font-family:sans-serif;
+  font-weight:bold;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+/* Sponsored posts */
+.nrelate_til .nr_sponsored_wrap{
+  display:block;
+  height:18px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+}
+.nrelate_til  a.nr_panel:hover .nr_sponsored_wrap{
+  left: 0;
+}
+
+.nr_source{
+  font-size: 11px !important;
+  font-style: italic;
+}
+
+/* settings for each thumbnail size supported in plugin */
+.nrelate_til.nr_150 .nr_inner a{ height: 150px !important; }
+.nrelate_til.nr_150 .nr_panel{ width: 150px; }
+.nrelate_til.nr_150 .nr_panel .nr_sponsored_wrap{ top:132px; width: 150px; }
+.nrelate_til.nr_150 .nr_panel .nr_sponsored{ left: 132px; }
+.nrelate_til.nr_150 .nr_text{ height: 142px; width: 142px; top: 0px;}
+.nrelate_til.nr_150 .nr_panel:hover .nr_text{ height:142px; width:142px;}
+.nrelate_til.nr_150 .nr_panel:hover .nr_post_title{ font-size: 21px; line-height: 24px; }
+
+.nrelate_til.nr_160 .nr_inner a{ height: 160px !important; }
+.nrelate_til.nr_160 .nr_panel{ width: 160px; }
+.nrelate_til.nr_160 .nr_panel .nr_sponsored_wrap{ top:142px; width: 160px; }
+.nrelate_til.nr_160 .nr_panel .nr_sponsored{ left: 142px; }
+.nrelate_til.nr_160 .nr_text{ height: 152px; width: 152px; top: 0px;}
+.nrelate_til.nr_160 .nr_panel:hover .nr_text{ height:152px; width:152px;}
+.nrelate_til.nr_160 .nr_panel:hover .nr_post_title{ font-size: 23px; line-height: 26px; }
+
+.nrelate_til.nr_170 .nr_inner a{ height: 170px !important; }
+.nrelate_til.nr_170 .nr_panel{ width: 170px; }
+.nrelate_til.nr_170 .nr_panel .nr_sponsored_wrap{ top:152px; width: 170px; }
+.nrelate_til.nr_170 .nr_panel .nr_sponsored{ left: 152px; }
+.nrelate_til.nr_170 .nr_text{ height: 162px; width: 162px; top: 0px;}
+.nrelate_til.nr_170 .nr_panel:hover .nr_text{ height:162px; width:162px;}
+.nrelate_til.nr_170 .nr_panel:hover .nr_post_title{ font-size: 24px; line-height: 27px; }
+
+.nrelate_til.nr_180 .nr_inner a{ height: 180px !important; }
+.nrelate_til.nr_180 .nr_panel{ width: 180px; }
+.nrelate_til.nr_180 .nr_panel .nr_sponsored_wrap{ top:162px; width: 180px; }
+.nrelate_til.nr_180 .nr_panel .nr_sponsored{ left: 162px; }
+.nrelate_til.nr_180 .nr_text{ height: 172px; width: 172px; top: 0px;}
+.nrelate_til.nr_180 .nr_panel:hover .nr_text{ height:172px; width:172px;}
+.nrelate_til.nr_180 .nr_panel:hover .nr_post_title{ font-size: 26px; line-height: 29px; }
+
+.nrelate_til.nr_190 .nr_inner a{ height: 190px !important; }
+.nrelate_til.nr_190 .nr_panel{ width: 190px; }
+.nrelate_til.nr_190 .nr_panel .nr_sponsored_wrap{ top:172px; width: 190px; }
+.nrelate_til.nr_190 .nr_panel .nr_sponsored{ left: 172px; }
+.nrelate_til.nr_190 .nr_text{ height: 182px; width: 182px; top: 0px;}
+.nrelate_til.nr_190 .nr_panel:hover .nr_text{ height:182px; width:182px;}
+.nrelate_til.nr_190 .nr_panel:hover .nr_post_title{ font-size: 26px; line-height: 30px; }
+
+.nrelate_til.nr_200 .nr_inner a{ height: 200px !important; }
+.nrelate_til.nr_200 .nr_panel{ width: 200px; }
+.nrelate_til.nr_200 .nr_panel .nr_sponsored_wrap{ top:182px; width: 200px; }
+.nrelate_til.nr_200 .nr_panel .nr_sponsored{ left: 182px; }
+.nrelate_til.nr_200 .nr_text{ height: 192px; width: 192px; top: 0px;}
+.nrelate_til.nr_200 .nr_panel:hover .nr_text{ height:192px; width:192px;}
+.nrelate_til.nr_200 .nr_panel:hover .nr_post_title{ font-size: 28px; line-height: 32px; }

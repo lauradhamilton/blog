@@ -1,0 +1,156 @@
+/*
+ * nRelate Text: Engadget Style
+ *
+ * This layout is only for TEN items
+ * You can easily add more by adjusting the
+ * row items below.
+ */
+ 
+ 
+/* = Change nRelate defaults
+-----------------------------------------------*/
+.nrelate_engadget .nr_post_title {
+	font-weight: bold;
+	display: block;
+}
+.nrelate_engadget .nr_excerpt {
+	display: block;
+}
+
+/* Remove all bullets */
+.nrelate_engadget ul li {
+	list-style-type: none !important;
+	background: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 98%;
+}
+
+/* Move rows as far left as possible */
+.nrelate_engadget .nr_inner ul {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+
+/* Text styles */
+.nrelate_engadget ul li a {
+	display: block;
+	color: black !important;
+	font-size: 110%;
+	font-weight: normal;
+	line-height: 110%;
+	height: 100% !important;
+}
+	.nrelate_engadget ul li a:hover {
+		color: white !important;
+	}
+
+/* Advertising */	
+.nrelate_engadget .nr_source {
+	display: block;
+	padding: 1% 0 0 0;
+	}	
+
+/* = Rows
+-----------------------------------------------
+ * background: set to rgba for transparency
+ * width: different for each row
+ */
+
+/* Set padding for rows */
+.nrelate_engadget li a {
+	padding: 3% 2% 3% 4%;
+}
+	/* Widget padding should be different */
+	.nrelate-popular-widget .nrelate_engadget li a {
+		padding: 5% 2% 5% 4%;
+	}
+
+.nrelate_engadget li a.nr_row_1 {
+	background: rgb(238, 83, 28); /* ie6 & ie7 */
+	background: rgba(238, 83, 28, 0.8);
+	margin: 7px 0 0;
+	width: 96%;
+}
+.nrelate_engadget li a.nr_row_2 {
+	background: rgb(238, 107, 29); /* ie6 & ie7 */
+	background: rgba(238, 107, 29, 0.7);
+	margin: -5px 0 0;
+	width: 90%;
+}
+.nrelate_engadget li a.nr_row_3 {
+	background: rgb(247, 188, 9); /* ie6 & ie7 */
+	background: rgba(247, 188, 9, 0.7);
+	margin: -5px 0 0;
+	width: 85%;
+}
+.nrelate_engadget li a.nr_row_4 {
+	background: rgb(239, 227, 26); /* ie6 & ie7 */
+	background: rgba(239, 227, 26, 0.8);
+	margin: -5px 0 0;
+	width: 80%;
+}
+.nrelate_engadget li a.nr_row_5 {
+	background: rgb(131, 211, 17); /* ie6 & ie7 */
+	background: rgba(131, 211, 17, 0.8);
+	margin: -5px 0 0;
+	width: 75%;
+}
+.nrelate_engadget li a.nr_row_6 {
+	background: rgb(18, 237, 186); /* ie6 & ie7 */
+	background: rgba(18, 237, 186, 0.8);
+	margin: -5px 0 0;
+	width: 70%;
+}
+.nrelate_engadget li a.nr_row_7 {
+	background: rgb(137, 158, 235); /* ie6 & ie7 */
+	background: rgba(137, 158, 235, 0.8);
+	margin: -5px 0 0;
+	width: 65%;
+}
+.nrelate_engadget li a.nr_row_8 {
+	background: rgb(135,206,235); /* ie6 & ie7 */
+	background: rgba(135,206,235, 0.9);
+	margin: -5px 0 0;
+	width: 60%;
+}
+.nrelate_engadget li a.nr_row_9 {
+	background: rgb(203,75,241); /* ie6 & ie7 */
+	background: rgba(203,75,241, 0.4);
+	margin: -5px 0 0;
+	width: 55%;
+}
+.nrelate_engadget li a.nr_row_10 {
+	background: rgb(203,75,241); /* ie6 & ie7 */
+	background: rgba(203,75,241, 0.2);
+	margin: -5px 0 0;
+	width: 50%;
+}
+
+
+/* = Most Popular plugin - "Views" area
+-----------------------------------------------
+ * http://wordpress.org/extend/plugins/nrelate-most-popular/
+ */
+.nrelate_popular.nrelate_engadget .nr_post_title,
+.nrelate_popular.nrelate_engadget .nr_excerpt {
+	width: 80%;
+	font-size: 110%;
+	line-height: 120%;
+}
+.nrelate_popular.nrelate_engadget .nr_showviews {
+	font-style: italic;
+	background: black;
+	color: white;
+	float: right;
+	font-size: 110%;
+	font-weight: bold;
+	margin-top: -7%;
+	margin-right: -5%;
+	padding: 2%;
+	line-height: 100% !important;
+}
+
+.nrelate_popular.nrelate_engadget .nr_showviews_txt {
+	display: none !important;
+	}

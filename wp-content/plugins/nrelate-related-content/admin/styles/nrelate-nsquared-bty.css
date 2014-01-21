@@ -1,0 +1,100 @@
+/* Layout ===============> */
+.nrelate_bty .nr_panel {
+	display: block;
+	float: left;
+	position: relative;
+	cursor: pointer;
+	padding: 4px 2px;
+	margin: 1px 3px 1px 3px;
+}
+.nrelate_bty .nr_img_div {
+	display: block;
+	margin: auto;
+	position: relative;
+}
+.nrelate_bty .nr_img{
+	margin: 0; padding: 0; border: 0; outline: 0; max-width: 100%;
+}
+.nrelate_bty .nr_text{
+	display: block;
+	margin-top: 8px;
+	word-wrap: break-word;
+}
+.nrelate_bty .nr_sponsored_wrap{
+	left: 0px;
+}
+.nrelate_bty .nr_excerpt{
+	display: block;
+}
+.nrelate_bty .nr_post_title,
+.nrelate_bty .nr_source,
+.nrelate_bty .nr_excerpt{
+	display: block;
+}
+
+.nrelate_bty .nr_panel,
+.nrelate_bty .nr_panel: link,
+.nrelate_bty .nr_panel: visited,
+.nrelate_bty .nr_panel: active{
+	border: none;
+}
+
+.nrelate_bty.nr_150 .nr_panel{ width: 154px; height: 186px; }
+.nrelate_bty.nr_150 .nr_sponsored_wrap{ width: 150px; top: 132px; }
+.nrelate_bty.nr_150 .nr_sponsored{ left: 132px; }
+.nrelate_bty.nr_150 .nr_img_div{ width: 150px !important; height: 150px !important; }
+
+.nrelate_bty.nr_160 .nr_panel{ width: 164px; height: 196px; }
+.nrelate_bty.nr_160 .nr_sponsored_wrap{ width: 160px; top: 142px; }
+.nrelate_bty.nr_160 .nr_sponsored{ left: 142px; }
+.nrelate_bty.nr_160 .nr_img_div{ width: 160px !important; height: 160px !important; }
+
+.nrelate_bty.nr_170 .nr_panel{ width: 174px; height: 206px; }
+.nrelate_bty.nr_170 .nr_sponsored_wrap{ width: 170px; top: 152px; }
+.nrelate_bty.nr_170 .nr_sponsored{ left: 152px; }
+.nrelate_bty.nr_170 .nr_img_div{ width: 170px !important; height: 170px !important; }
+
+.nrelate_bty.nr_180 .nr_panel{ width: 184px; height: 216px; }
+.nrelate_bty.nr_180 .nr_sponsored_wrap{ width: 180px; top: 162px; }
+.nrelate_bty.nr_180 .nr_sponsored{ left: 162px; }
+.nrelate_bty.nr_180 .nr_img_div{ width: 180px !important; height: 180px !important; }
+
+.nrelate_bty.nr_190 .nr_panel{ width: 194px; height: 226px; }
+.nrelate_bty.nr_190 .nr_sponsored_wrap{ width: 190px; top: 172px; }
+.nrelate_bty.nr_190 .nr_sponsored{ left: 172px; }
+.nrelate_bty.nr_190 .nr_img_div{ width: 190px !important; height: 190px !important; }
+
+.nrelate_bty.nr_200 .nr_panel{ width: 204px; height: 236px; }
+.nrelate_bty.nr_200 .nr_sponsored_wrap{ width: 200px; top: 182px; }
+.nrelate_bty.nr_200 .nr_sponsored{ left: 182px; }
+.nrelate_bty.nr_200 .nr_img_div{ width: 200px !important; height: 200px !important; }
+
+/* <=============== Layout  */
+
+/* Format ================> */
+.nrelate_bty .nr_panel,
+.nrelate_bty .nr_panel: link,
+.nrelate_bty .nr_panel: visited,
+.nrelate_bty .nr_panel: active{
+	text-decoration: none;
+	color: inherit;
+}
+.nrelate_bty .nr_panel {
+	cursor: pointer;
+	line-height: 1.4;
+}
+.nrelate_bty .nr_img_div{
+	line-height: 0;
+}
+.nrelate_bty .nr_text{
+	text-align: center;
+	font-weight: bold;
+	font-size: 80%;
+}
+.nrelate_bty .nr_source{
+	font-weight: normal;
+}
+.nrelate_bty .nr_excerpt{
+	font-weight: normal;
+}
+/* <================ Format */

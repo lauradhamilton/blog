@@ -14,7 +14,7 @@
 	<footer id="colophon" role="contentinfo">
 		<div class="site-info">
 			<?php do_action( 'twentytwelve_credits' ); ?>
-			©2013 Additive Analytics, LLC. All rights reserved.
+			©2013-<?php echo date("Y"); ?> Additive Analytics, LLC. All rights reserved.
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
