@@ -22,4 +22,6 @@
  * @since Twenty Twelve 1.0
  */
 
+date_default_timezone_set('America/Chicago');
+
 add_filter('is_multi_author','__return_true');
