@@ -1,6 +1,8 @@
 <?php
 
-// Post Options
+/**
+ * Post options
+ */
 function A2A_SHARE_SAVE_add_meta_box() {
 	// get_post_types() only included in WP 2.9/3.0
 	$post_types = ( function_exists( 'get_post_types' ) ) ? get_post_types( array( 'public' => true ) ) : array( 'post', 'page' ) ;
@@ -52,7 +54,9 @@ function A2A_SHARE_SAVE_meta_box_save( $post_id ) {
 add_action( 'admin_init', 'A2A_SHARE_SAVE_add_meta_box' );
 add_action( 'save_post', 'A2A_SHARE_SAVE_meta_box_save' );
 
-
+/**
+ * Migrate old AddToAny options
+ */
 function A2A_SHARE_SAVE_migrate_options() {
 	
 	$options = array(
@@ -101,6 +105,72 @@ function A2A_SHARE_SAVE_migrate_options() {
 		delete_option($namespace . $option_name);
 	}
 	
+}
+
+/**
+ * Adds a WordPress pointer to Settings menu, so user knows where to configure AddToAny
+ */
+function A2A_SHARE_SAVE_enqueue_pointer_script_style( $hook_suffix ) {
+	
+	// Requires WP 3.3
+	if ( get_bloginfo( 'version' ) < '3.3' ) {
+		return;
+	}
+	
+	// Assume pointer shouldn't be shown
+	$enqueue_pointer_script_style = false;
+
+	// Get array list of dismissed pointers for current user and convert it to array
+	$dismissed_pointers = explode( ',', get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+
+	// Check if our pointer is not among dismissed ones
+	if ( !in_array( 'addtoany_settings_pointer', $dismissed_pointers ) ) {
+		$enqueue_pointer_script_style = true;
+		
+		// Add footer scripts using callback function
+		add_action( 'admin_print_footer_scripts', 'A2A_SHARE_SAVE_pointer_print_scripts' );
+	}
+
+	// Enqueue pointer CSS and JS files, if needed
+	if ( $enqueue_pointer_script_style ) {
+		wp_enqueue_style( 'wp-pointer' );
+		wp_enqueue_script( 'wp-pointer' );
+	}
+	
+}
+if ( !$A2A_SHARE_SAVE_options ) {
+	// Only show the pointer when no AddToAny options have been set
+	add_action( 'admin_enqueue_scripts', 'A2A_SHARE_SAVE_enqueue_pointer_script_style' );
+}
+
+function A2A_SHARE_SAVE_pointer_print_scripts() {
+
+	$pointer_content  = '<h3>AddToAny Sharing Settings</h3>';
+	$pointer_content .= '<p>To customize your AddToAny share buttons, click &quot;AddToAny&quot; in the Settings menu.</p>';
+?>
+	
+	<script type="text/javascript">
+	//<![CDATA[
+	jQuery(document).ready( function($) {
+		$('#menu-settings').pointer({
+			content:		'<?php echo $pointer_content; ?>',
+			position:		{
+								edge:	'left', // arrow direction
+								align:	'center' // vertical alignment
+							},
+			pointerWidth:	350,
+			close:			function() {
+								$.post( ajaxurl, {
+										pointer: 'addtoany_settings_pointer', // pointer ID
+										action: 'dismiss-wp-pointer'
+								});
+							}
+		}).pointer('open');
+	});
+	//]]>
+	</script>
+
+<?php
 }
 
 function A2A_SHARE_SAVE_options_page() {
@@ -450,7 +520,7 @@ function A2A_SHARE_SAVE_options_page() {
 				</p>
 				<label for="A2A_SHARE_SAVE_additional_js_variables">
 					<p><?php _e('Below you can set special JavaScript variables to apply to each Share/Save menu.', 'add-to-any'); ?>
-					<?php _e("Advanced users might want to explore AddToAny's <a href=\"http://www.addtoany.com/buttons/customize/\" target=\"_blank\">additional options</a>.", "add-to-any"); ?></p>
+					<?php _e("Advanced users might want to explore AddToAny's <a href=\"http://www.addtoany.com/buttons/customize/wordpress\" target=\"_blank\">additional options</a>.", "add-to-any"); ?></p>
 				</label>
 				<p>
 					<textarea name="A2A_SHARE_SAVE_additional_js_variables" id="A2A_SHARE_SAVE_additional_js_variables" class="code" style="width: 98%; font-size: 12px;" rows="6" cols="50"><?php echo stripslashes($options['additional_js_variables']); ?></textarea>

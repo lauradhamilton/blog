@@ -164,10 +164,6 @@ $A2A_SHARE_SAVE_services = Array(
 		"name" => "Fark",
 		"icon" => "fark",
 	),
-	"favoriten" => Array(
-		"name" => "Favoriten",
-		"icon" => "favoriten",
-	),
 	"flipboard" => Array(
 		"name" => "Flipboard",
 		"icon" => "flipboard",
@@ -192,17 +188,9 @@ $A2A_SHARE_SAVE_services = Array(
 		"name" => "Google Gmail",
 		"icon" => "gmail",
 	),
-	"grono" => Array(
-		"name" => "Grono",
-		"icon" => "grono",
-	),
 	"hatena" => Array(
 		"name" => "Hatena",
 		"icon" => "hatena",
-	),
-	"hyves" => Array(
-		"name" => "Hyves",
-		"icon" => "hyves",
 	),
 	"iwiw" => Array(
 		"name" => "IWIW",
@@ -401,9 +389,17 @@ $A2A_SHARE_SAVE_services = Array(
 		"name" => "Viadeo",
 		"icon" => "viadeo",
 	),
+	"wanelo" => Array(
+		"name" => "Wanelo",
+		"icon" => "wanelo",
+	),
 	"webnews" => Array(
 		"name" => "Webnews",
 		"icon" => "webnews",
+	),
+	"whatsapp" => Array(
+		"name" => "WhatsApp",
+		"icon" => "whatsapp",
 	),
 	"wists" => Array(
 		"name" => "Wists",

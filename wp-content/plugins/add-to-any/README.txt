@@ -1,9 +1,9 @@
 === Share Buttons by AddToAny ===
 Contributors: micropat
-Tags: sharing, share, sharethis, bookmarking, social, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, sidebar, widget, email, e-mail, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook like, like, myspace, twitter, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, messenger, stumbleupon, technorati, lockerz, addthis, sexybookmarks, sociable, sharedaddy, shareaholic, icon, icons, vector, SVG, wpmu, Add to Any, AddToAny
+Tags: sharing, share, sharethis, bookmarking, social, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, email, e-mail, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook like, like, twitter, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, buffer, stumbleupon, technorati, lockerz, addthis, sociable, sharedaddy, shareaholic, icon, icons, vector, SVG, wpmu, Add to Any, AddToAny
 Requires at least: 2.8
-Tested up to: 3.8
-Stable tag: 1.2.7.9
+Tested up to: 3.9
+Stable tag: 1.2.8.6
 
 Share buttons for WordPress including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.
 
@@ -24,11 +24,11 @@ This sharing plugin lets you customize the AddToAny universal Smart Menu, which 
 * Google Analytics integration (<a href="http://www.addtoany.com/ext/google_analytics/">access guide</a>)
 * WordPress optimized with asynchronous script loading
 * Localized in English, Chinese, Spanish, Arabic, French, Portuguese, Japanese, Italian, Dutch, Danish, Catalan, Persian, Russian, Turkish, Albanian, Romanian, Belarusian, Greek, Irish
-* Easily customizable for beginners or advanced users, and highly extensible for developers and designers
+* Easily <a href="http://www.addtoany.com/buttons/customize/wordpress">customizable</a> for beginners or advanced users, and <a href="/plugins/add-to-any/faq/" title="See 'How can I add both the universal button and the individual icons to another area of my theme?'">highly extensible</a> for developers and designers
 * Supports theme features such as HTML5 & XHTML, widgets, infinite scroll, post formats
 * Many more publisher and user features
 
-With **years of active development**, over **2.7 million downloads**, and **ongoing support from the community**, this plugin still strives to be the best WordPress plugin for sharing. Thanks for your feedback!
+With **years of active development**, over **2.9 million downloads**, and **ongoing support from the community**, this plugin still strives to be the best WordPress plugin for sharing. Thanks for your feedback!
 
 <a href="http://www.addtoany.com/share_save" title="Share">Share this</a> plugin
 
@@ -43,14 +43,17 @@ See also:
 
 1. Upload the `add-to-any` directory (including all files within) to the `/wp-content/plugins/` directory
 1. Activate the plugin through the `Plugins` menu in WordPress
+1. Optional settings are available in `Settings` > `AddToAny`
 
 == Frequently Asked Questions ==
 
-= Where are the options? =
+= Where are the options, and how can I customize the sharing plugin? =
 
 In your Admin panel, go to `Settings` > `AddToAny`.  Among other options, you can choose individual sharing icons, a universal sharing button, and official 3rd party sharing buttons (Facebook Like Button, Twitter Tweet Button, Pinterest Pin It Button, Google+ Share Button, Google +1 Button) to display, and where and how to display them.
 
 To place the buttons as a "widget" in your theme (if your theme supports WordPress Widgets), go to `Appearance` > `Widgets`, then drag AddToAny to an available Widget Area and click `Save`.
+
+To further customize AddToAny, see the <a href="http://www.addtoany.com/buttons/customize/wordpress">WordPress sharing documentation</a> for the AddToAny plugin. Many customizations will have you copy & paste one (or just a few) lines of JavaScript code into "Additional Options" box. The Additional Options box is in `Settings` > `AddToAny`.
 
 = Something is wrong. What should I try first? =
 
@@ -236,6 +239,31 @@ Upload the plugin directory (including all files and directories within) to the 
 
 == Changelog ==
 
+= 1.2.8.6 =
+* Fix advanced caching option (most sites should not use this option)
+
+= 1.2.8.5 =
+* For CSS customization, delineate between top and bottom in default sharing placement
+* Add .addtoany_content_top and .addtoany_content_top class names to .addtoany_share_save_container
+
+= 1.2.8.4 =
+* Add Wanelo
+* Add WhatsApp
+
+= 1.2.8.3 =
+* Set border to none on images for small icons and custom icons
+
+= 1.2.8.2 =
+* Add pointer to settings in admin
+
+= 1.2.8.1 =
+* Remove Favoriten
+* Remove Grono
+* Remove Hyves
+
+= 1.2.8.0 =
+* Update Customize documentation links
+
 = 1.2.7.9 =
 * Fix Print icon
 
@@ -298,7 +326,7 @@ Upload the plugin directory (including all files and directories within) to the 
 
 = 1.2.3 =
 * Adjust CSS to improve icon and text alignment
-* Add <a href="http://wordpress.org/extend/plugins/add-to-any/faq/">FAQ</a> for removing sharing button(s) from Archive pages (including Category, Tag, Author, Date, and Search pages)
+* Add <a href="http://wordpress.org/plugins/add-to-any/faq/">FAQ</a> for removing sharing button(s) from Archive pages (including Category, Tag, Author, Date, and Search pages)
 
 = 1.2.2 =
 * Fix code formatting (indents, newlines)
@@ -379,7 +407,7 @@ Upload the plugin directory (including all files and directories within) to the 
 
 = 1.0.2 =
 * Add new Google+ Share button
-* Update <a href="http://wordpress.org/extend/plugins/add-to-any/faq/">FAQ</a> for resizing advanced 3rd party buttons
+* Update <a href="http://wordpress.org/plugins/add-to-any/faq/">FAQ</a> for resizing advanced 3rd party buttons
 
 = 1.0.1 =
 * Fix markup output for advanced 3rd party buttons when displayed as WordPress widget
@@ -654,7 +682,7 @@ Upload the plugin directory (including all files and directories within) to the 
 
 = .9.9.6 =
 * Require WordPress 2.8
- * For WordPress versions 2.0 through 2.7.1 use version .9.9.5.9 (<a href="http://downloads.wordpress.org/plugin/add-to-any.0.9.9.5.9.zip">download .zip</a>) or <a href="http://wordpress.org/extend/plugins/add-to-any/download/">earlier</a>
+ * For WordPress versions 2.0 through 2.7.1 use version .9.9.5.9 (<a href="http://downloads.wordpress.org/plugin/add-to-any.0.9.9.5.9.zip">download .zip</a>) or <a href="http://wordpress.org/plugins/add-to-any/download/">earlier</a>
 * Fix validation problem caused by WordPress' lack of support for CDATA sections in posts
  * http://core.trac.wordpress.org/ticket/3670 - WordPress fix slated for 3.1, then @todo reevaluate 
 * Replace deprecated functions
