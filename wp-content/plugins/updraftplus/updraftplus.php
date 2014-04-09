@@ -4,7 +4,7 @@ Plugin Name: UpdraftPlus - Backup/Restore
 Plugin URI: http://updraftplus.com
 Description: Backup and restore: take backups locally, or backup to Amazon S3, Dropbox, Google Drive, Rackspace, (S)FTP, WebDAV & email, on automatic schedules.
 Author: UpdraftPlus.Com, DavidAnderson
-Version: 1.8.12
+Version: 1.9.0
 Donate link: http://david.dw-perspective.org.uk/donate
 License: GPLv3 or later
 Text Domain: updraftplus
@@ -16,15 +16,17 @@ Author URI: http://updraftplus.com
 TODO - some of these are out of date/done, needs pruning
 // On plugins restore, don't let UD over-write itself - because this usually means a down-grade. Since upgrades are db-compatible, there's no reason to downgrade.
 // Schedule a task to report on failure
+// Copy.Com, Box
+// Check the timestamps used in filenames - they should be UTC
 // Get user to confirm if they check both the search/replace and wp-config boxes
-// Apparently Google's console has changed again...
-// Auto-split. Helps on one.com. Check the log sent by #6292
 // Tweak the display so that users seeing resumption messages don't think it's stuck
 // Store/show current Dropbox account
+// A search/replace console without needing to restore
 // On restore, check for some 'standard' PHP modules (prevents support requests related to them) -e.g. GD, Curl
 // Recognise known huge non-core tables on restore, and postpone them to the end (AJAX method?)
 // Add a cart notice if people have DBSF=quantity1
 // Pre-restore actually unpack the zips if they are not insanely big (to prevent the restore crashing at this stage if there's a problem)
+// Include in email report the list of "more" directories: http://updraftplus.com/forums/support-forum-group1/paid-support-forum-forum2/wordpress-multi-sites-thread121/
 // Integrate jstree for a nice files-chooser; use https://wordpress.org/plugins/dropbox-photo-sideloader/ to see how it's done
 // Verify that attempting to bring back a MS backup on a non-MS install warns the user
 // Pre-schedule resumptions that we know will be scheduled later
@@ -171,7 +173,7 @@ Encrypt filesystem, if memory allows (and have option for abort if not)
 */
 
 /*
-Portions copyright 2011-13 David Anderson
+Portions copyright 2011-14 David Anderson
 Portions copyright 2010 Paul Kehrer
 Other portions copyright as indicated authors in the relevant files
 
@@ -251,17 +253,17 @@ class UpdraftPlus {
 	public $plugin_title = 'UpdraftPlus Backup/Restore';
 
 	// Choices will be shown in the admin menu in the order used here
-	public $backup_methods = array (
-		"s3" => "Amazon S3",
-		"dropbox" => "Dropbox",
+	public $backup_methods = array(
+		's3' => 'Amazon S3',
+		'dropbox' => 'Dropbox',
 		'cloudfiles' => 'Rackspace Cloud Files',
-		"googledrive" => "Google Drive",
-		"ftp" => "FTP",
+		'googledrive' => 'Google Drive',
+		'ftp' => 'FTP',
 		'sftp' => 'SFTP / SCP',
 		'webdav' => 'WebDAV',
 		's3generic' => 'S3-Compatible (Generic)',
 		'dreamobjects' => 'DreamObjects',
-		"email" => "Email"
+		'email' => 'Email'
 	);
 
 	public $errors = array();
@@ -283,7 +285,7 @@ class UpdraftPlus {
 	public $current_resumption;
 	public $newresumption_scheduled = false;
 
-	function __construct() {
+	public function __construct() {
 
 		// Initialisation actions - takes place on plugin load
 
@@ -366,7 +368,7 @@ class UpdraftPlus {
 			$log_file = '';
 			$mod_time = 0;
 
-			if ($handle = opendir($updraft_dir)) {
+			if ($handle = @opendir($updraft_dir)) {
 				while (false !== ($entry = readdir($handle))) {
 					// The latter match is for files created internally by zipArchive::addFile
 					if (preg_match('/^log\.[a-z0-9]+\.txt$/i', $entry)) {
@@ -468,7 +470,7 @@ class UpdraftPlus {
 		$updraftplus_admin->show_admin_warning('<strong>'.__('UpdraftPlus notice:','updraftplus').'</strong> '.__('The given file could not be read.','updraftplus'));
 	}
 
-	function load_translations() {
+	public function load_translations() {
 		// Tell WordPress where to find the translations
 		load_plugin_textdomain('updraftplus', false, basename(dirname(__FILE__)).'/languages');
 	}
@@ -765,9 +767,8 @@ class UpdraftPlus {
 
 		// Log it
 		global $updraftplus_backup;
-		$log = ucfirst($updraftplus_backup->current_service)." chunked upload: $percent % uploaded";
-		if ($extra) $log .= " ($extra)";
-		$this->log($log);
+		$log = (!empty($updraftplus_backup->current_service)) ? ucfirst($updraftplus_backup->current_service)." chunked upload: $percent % uploaded" : '';
+		if ($log) $this->log($log.(($extra) ? " ($extra)" : ''));
 		// If we are on an 'overtime' resumption run, and we are still meaningfully uploading, then schedule a new resumption
 		// Our definition of meaningful is that we must maintain an overall average of at least 0.7% per run, after allowing 9 runs for everything else to get going
 		// i.e. Max 100/.7 + 9 = 150 runs = 760 minutes = 12 hrs 40, if spaced at 5 minute intervals. However, our algorithm now decreases the intervals if it can, so this should not really come into play
@@ -2034,8 +2035,21 @@ class UpdraftPlus {
 		$exclude = UpdraftPlus_Options::get_updraft_option('updraft_include_others_exclude', UPDRAFT_DEFAULT_OTHERS_EXCLUDE);
 		if ($logit) $this->log("Exclusion option setting (others): ".$exclude);
 		$skip = array_flip(preg_split("/,/", $exclude));
-		$possible_backups_dirs = array_flip($this->get_backupable_file_entities(false));
-		return $this->compile_folder_list_for_backup(WP_CONTENT_DIR, $possible_backups_dirs, $skip);
+		$file_entities = $this->get_backupable_file_entities(false);
+
+		# Keys = directory names to avoid; values = the label for that directory (used only in log files)
+		#$avoid_these_dirs = array_flip($file_entities);
+		$avoid_these_dirs = array();
+		foreach ($file_entities as $type => $dirs) {
+			if (is_string($dirs)) {
+				$avoid_these_dirs[$dirs] = $type;
+			} elseif (is_array($dirs)) {
+				foreach ($dirs as $dir) {
+					$avoid_these_dirs[$dir] = $type;
+				}
+			}
+		}
+		return $this->compile_folder_list_for_backup(WP_CONTENT_DIR, $avoid_these_dirs, $skip);
 	}
 
 	// Add backquotes to tables and db-names in SQL queries. Taken from phpMyAdmin.
@@ -2045,10 +2059,10 @@ class UpdraftPlus {
 				$result = array();
 				reset($a_name);
 				while(list($key, $val) = each($a_name)) 
-					$result[$key] = '`' . $val . '`';
+					$result[$key] = '`'.$val.'`';
 				return $result;
 			} else {
-				return '`' . $a_name . '`';
+				return '`'.$a_name.'`';
 			}
 		} else {
 			return $a_name;
@@ -2179,27 +2193,41 @@ class UpdraftPlus {
 	}
 
 	/*
-	this function is both the backup scheduler and ostensibly a filter callback for saving the option.
+	This function is both the backup scheduler and ostensibly a filter callback for saving the option.
 	it is called in the register_setting for the updraft_interval, which means when the admin settings 
-	are saved it is called.  it returns the actual result from wp_filter_nohtml_kses (a sanitization filter) 
-	so the option can be properly saved.
+	are saved it is called.
 	*/
 	public function schedule_backup($interval) {
-		//clear schedule and add new so we don't stack up scheduled backups
+
+		// Clear schedule so that we don't stack up scheduled backups
 		wp_clear_scheduled_hook('updraft_backup');
-		switch($interval) {
-			case 'every4hours':
-			case 'every8hours':
-			case 'twicedaily':
-			case 'daily':
-			case 'weekly':
-			case 'fortnightly':
-			case 'monthly':
-				$first_time = apply_filters('updraftplus_schedule_firsttime_files', time()+30);
-				wp_schedule_event($first_time, $interval, 'updraft_backup');
-			break;
-		}
-		return wp_filter_nohtml_kses($interval);
+		
+		if ('manual' == $interval) return 'manual';
+
+		$valid_schedules = wp_get_schedules();
+		if (empty($valid_schedules[$interval])) $interval = 'daily';
+
+		$first_time = apply_filters('updraftplus_schedule_firsttime_files', time()+30);
+		wp_schedule_event($first_time, $interval, 'updraft_backup');
+
+		return $interval;
+	}
+
+	public function schedule_backup_database($interval) {
+
+		// Clear schedule so that we don't stack up scheduled backups
+		wp_clear_scheduled_hook('updraft_backup_database');
+
+		if ('manual' == $interval) return 'manual';
+
+		$valid_schedules = wp_get_schedules();
+		if (empty($valid_schedules[$interval])) $interval = 'daily';
+
+		$first_time = apply_filters('updraftplus_schedule_firsttime_db', time()+30);
+		wp_schedule_event($first_time, $interval, 'updraft_backup_database');
+
+		return $interval;
+
 	}
 
 	public function deactivation () {
@@ -2213,27 +2241,8 @@ class UpdraftPlus {
 			add_action('http_api_curl', array($this, 'add_curl_capath'));
 			UpdraftPlus_BackupModule_googledrive::gdrive_auth_revoke(true);
 			remove_action('http_api_curl', array($this, 'add_curl_capath'));
-
 		}
 		return $client_id;
-	}
-
-	public function schedule_backup_database($interval) {
-		//clear schedule and add new so we don't stack up scheduled backups
-		wp_clear_scheduled_hook('updraft_backup_database');
-		switch($interval) {
-			case 'every4hours':
-			case 'every8hours':
-			case 'twicedaily':
-			case 'daily':
-			case 'weekly':
-			case 'fortnightly':
-			case 'monthly':
-				$first_time = apply_filters('updraftplus_schedule_firsttime_db', time()+30);
-				wp_schedule_event($first_time, $interval, 'updraft_backup_database');
-			break;
-		}
-		return wp_filter_nohtml_kses($interval);
 	}
 
 	//wp-cron only has hourly, daily and twicedaily, so we need to add some of our own
@@ -2246,7 +2255,7 @@ class UpdraftPlus {
 		return $schedules;
 	}
 
-	public function remove_local_directory($dir) {
+	public function remove_local_directory($dir, $contents_only = false) {
 		// PHP 5.3+ only
 		//foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
 		//	$path->isFile() ? unlink($path->getPathname()) : rmdir($path->getPathname());
@@ -2434,7 +2443,7 @@ class UpdraftPlus {
 			break;
 		case 1:
 			if (defined('WPLANG') && strlen(WPLANG)>0 && !is_file(UPDRAFTPLUS_DIR.'/languages/updraftplus-'.WPLANG.
-'.mo')) return __('Can you translate? Want to improve UpdraftPlus for speakers of your language?','updraftplus').$this->url_start($urls,'updraftplus.com/translate/')."Please go here for instructions - it is easy.".$this->url_end($urls,'updraftplus.com/translate/');
+'.mo')) return __('Can you translate? Want to improve UpdraftPlus for speakers of your language?','updraftplus').' '.$this->url_start($urls,'updraftplus.com/translate/')."Please go here for instructions - it is easy.".$this->url_end($urls,'updraftplus.com/translate/');
 
 			return __('Like UpdraftPlus and can spare one minute?','updraftplus').$this->url_start($urls,'wordpress.org/support/view/plugin-reviews/updraftplus#postform').' '.__('Please help UpdraftPlus by giving a positive review at wordpress.org','updraftplus').$this->url_end($urls,'wordpress.org/support/view/plugin-reviews/updraftplus#postform');
 			break;

@@ -1,9 +1,13 @@
 <?php
 
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
+
 class UpdraftPlus_BackupModule_ftp {
 
 	// Get FTP object with parameters set
 	private function getFTP($server, $user, $pass, $disable_ssl = false, $disable_verify = true, $use_server_certs = false, $passive = true) {
+
+		if ('' == $server || '' == $user || '' == $pass) return new WP_Error('no_settings', sprintf(__('No %s settings were found','updraftplus'), 'FTP'));
 
 		if( !class_exists('UpdraftPlus_ftp_wrapper')) require_once(UPDRAFTPLUS_DIR.'/includes/ftp.class.php');
 
@@ -38,6 +42,7 @@ class UpdraftPlus_BackupModule_ftp {
 			$updraftplus->get_job_option('updraft_ssl_disableverify'),
 			$updraftplus->get_job_option('updraft_ssl_useservercerts')
 		);
+		if (is_wp_error($ftp)) return $ftp;
 
 		if (!$ftp->connect()) {
 			$updraftplus->log("FTP Failure: we did not successfully log in with those credentials.");
@@ -75,6 +80,58 @@ class UpdraftPlus_BackupModule_ftp {
 		return array('ftp_object' => $ftp, 'ftp_remote_path' => $ftp_remote_path);
 	}
 
+	public function listfiles($match = 'backup_') {
+		global $updraftplus;
+
+		$ftp = $this->getFTP(
+			$updraftplus->get_job_option('updraft_server_address'),
+			$updraftplus->get_job_option('updraft_ftp_login'),
+			$updraftplus->get_job_option('updraft_ftp_pass'), $updraftplus->get_job_option('updraft_ssl_nossl'),
+			$updraftplus->get_job_option('updraft_ssl_disableverify'),
+			$updraftplus->get_job_option('updraft_ssl_useservercerts')
+		);
+		if (is_wp_error($ftp)) return $ftp;
+
+		if (!$ftp->connect()) return new WP_Error('ftp_login_failed', sprintf(__("%s login failure",'updraftplus'), 'FTP'));
+
+		$ftp_remote_path = $updraftplus->get_job_option('updraft_ftp_remote_path');
+		if ($ftp_remote_path) $ftp_remote_path = trailingslashit($ftp_remove_path);
+
+		$dirlist = $ftp->dir_list($ftp_remote_path);
+
+		if (!is_array($dirlist)) return array();
+
+		$results = array();
+
+		foreach ($dirlist as $k => $path) {
+
+			if ($ftp_remote_path) {
+				if (0 !== strpos($path, $ftp_remote_path)) continue;
+				$path = substr($path, strlen($ftp_remote_path));
+				if (0 === strpos($path, $match)) $results[]['name'] = $path;
+			} else {
+				if ('/' == substr($path, 0, 1)) $path = substr($path, 1);
+				if (false !== strpos($path, '/')) continue;
+				if (0 === strpos($path, $match)) $results[]['name'] = $path;
+			}
+
+			unset($dirlist[$k]);
+		}
+
+		# ftp_nlist() doesn't return file sizes. rawlist() does, but is tricky to parse. So, we get the sizes manually.
+		foreach ($results as $ind => $name) {
+			$size = $ftp->size($ftp_remote_path.$name['name']);
+			if (0 === $size) {
+				unset($results[$ind]);
+			} elseif ($size>0) {
+				$results[$ind]['size'] = $size;
+			}
+		}
+
+		return $results;
+
+	}
+
 	public function delete($files, $ftparr = array()) {
 
 		global $updraftplus;
@@ -94,6 +151,7 @@ class UpdraftPlus_BackupModule_ftp {
 				$updraftplus->get_job_option('updraft_ssl_disableverify'),
 				$updraftplus->get_job_option('updraft_ssl_useservercerts')
 			);
+			if (is_wp_error($ftp)) return $ftp;
 
 			if (!$ftp->connect()) {
 				$updraftplus->log("FTP Failure: we did not successfully log in with those credentials.");
@@ -118,7 +176,6 @@ class UpdraftPlus_BackupModule_ftp {
 	}
 
 	public function download($file) {
-		if( !class_exists('UpdraftPlus_ftp_wrapper')) require_once(UPDRAFTPLUS_DIR.'/includes/ftp.class.php');
 
 		global $updraftplus;
 
@@ -129,6 +186,7 @@ class UpdraftPlus_BackupModule_ftp {
 			$updraftplus->get_job_option('updraft_ssl_disableverify'),
 			$updraftplus->get_job_option('updraft_ssl_useservercerts')
 		);
+		if (is_wp_error($ftp)) return $ftp;
 
 		if (!$ftp->connect()) {
 			$updraftplus->log("FTP Failure: we did not successfully log in with those credentials.");

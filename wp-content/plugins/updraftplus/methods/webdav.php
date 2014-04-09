@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
+
 class UpdraftPlus_BackupModule_webdav {
 
 	// backup method: takes an array, and shovels them off to the cloud storage
@@ -37,6 +39,10 @@ class UpdraftPlus_BackupModule_webdav {
 
 		return apply_filters('updraft_webdav_delete_files', false, $files, $method_obj);
 
+	}
+
+	public function listfiles($match = 'backup_') {
+		return apply_filters('updraft_webdav_listfiles', new WP_Error('no_addon', sprintf(__('You do not have the UpdraftPlus %s add-on installed - get it from %s','updraftplus'),'WebDAV','http://updraftplus.com/shop/')), $match);
 	}
 
 	// download method: takes a file name (base name), and removes it from the cloud storage

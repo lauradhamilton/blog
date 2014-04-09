@@ -1,9 +1,9 @@
 === Share Buttons by AddToAny ===
 Contributors: micropat
-Tags: sharing, share, sharethis, bookmarking, social, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, email, e-mail, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook like, like, twitter, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, buffer, stumbleupon, technorati, lockerz, addthis, sociable, sharedaddy, shareaholic, icon, icons, vector, SVG, wpmu, Add to Any, AddToAny
+Tags: sharing, share, share this, bookmarking, social, share button, share buttons, share links, social share, social sharing, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, email, e-mail, print, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook share, facebook like, like, twitter, twitter button, twitter share, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, buffer, stumbleupon, bitly, technorati, lockerz, addthis, sociable, sharedaddy, sharethis, shareaholic, icon, icons, vector, SVG, wpmu, Add to Any, AddToAny
 Requires at least: 2.8
 Tested up to: 3.9
-Stable tag: 1.2.8.6
+Stable tag: 1.2.9.2
 
 Share buttons for WordPress including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.
 
@@ -11,24 +11,52 @@ Share buttons for WordPress including AddToAny's universal sharing button, Faceb
 
 The WordPress sharing plugin to help people share, bookmark, and email your posts and pages using any service, such as Facebook, Twitter, Pinterest, Google, Reddit, Tumblr, StumbleUpon, LinkedIn, and well over 100 more sharing and social bookmarking sites.
 
-<a href="http://www.addtoany.com/" title="Sharing buttons">Share Buttons</a> (demo)
+AddToAny's customizable platform and social share icons let you optimize your site's blog posts & pages for the best social sharing engagement.
 
-Social share icons let you optimize your blog posts & pages for specific social sites.  Choose from over 100 individual services. Additional 3rd party buttons include the Facebook Like Button, Twitter Tweet Button, Pinterest Pin It Button, Google+ Share Button and Google +1 Button.
+= Share Buttons =
 
-This sharing plugin lets you customize the AddToAny universal Smart Menu, which places the services visitors use at the top of the menu based on each visitor's usage. The Email tab makes it easy to share via Google Gmail, Yahoo! Mail, Outlook.com (Hotmail), AOL Mail, and any other web-based emailer or desktop program.
+* **New**: Vector sharing buttons (SVG sharing icons)
+* Universal Share Button and Smart Menu
+* Sharing Kit for individual share links
+* **New**: Custom sharing icons
+* Choose from over 100 individual services
+* 3rd party buttons include the Facebook Like Button, Twitter Tweet Button, Pinterest Pin It Button, Google+ Share Button and Google +1 Button
+* Universal email sharing makes it easy to share via Gmail, Yahoo! Mail, Outlook.com (Hotmail), AOL Mail, and any other web and native apps
 
-* **New**: Vector sharing buttons
-* SVG sharing icons for the most popular services (and more to come)
-* Smart Menu & Kit with individual share links
-* Choose exactly where you want AddToAny to appear
-* Google Analytics integration (<a href="http://www.addtoany.com/ext/google_analytics/">access guide</a>)
-* WordPress optimized with asynchronous script loading
-* Localized in English, Chinese, Spanish, Arabic, French, Portuguese, Japanese, Italian, Dutch, Danish, Catalan, Persian, Russian, Turkish, Albanian, Romanian, Belarusian, Greek, Irish
-* Easily <a href="http://www.addtoany.com/buttons/customize/wordpress">customizable</a> for beginners or advanced users, and <a href="/plugins/add-to-any/faq/" title="See 'How can I add both the universal button and the individual icons to another area of my theme?'">highly extensible</a> for developers and designers
+<a href="http://www.addtoany.com/" title="Sharing buttons">Share Buttons</a> demo
+
+= Analytics Integration =
+
+* Automatic Google Analytics integration (<a href="http://www.addtoany.com/ext/google_analytics/">access guide</a>) for sharing analytics
+* Track shared links with bit.ly, awe.sm, goo.gl, and custom URL shorteners
+
+= WordPress Optimized =
+
+* Loads asynchronously so your content always loads before or in parallel with AddToAny
 * Supports theme features such as HTML5 & XHTML, widgets, infinite scroll, post formats
+
+= Mobile Optimized & Retina Ready =
+
+* AddToAny gives users the choice in sharing from a service's native app or from a web app
+* For example, choose between Twitter's native app or Twitter's mobile web app
+* AddToAny's SVG icons are lightweight and pixel-perfect at any size
+
+= Customizable & Extensible =
+
+* Choose exactly where you want AddToAny to appear
+* Easily <a href="http://www.addtoany.com/buttons/customize/wordpress">customize sharing</a> on your WordPress site
+* <a href="/plugins/add-to-any/faq/">Highly extensible</a> for developers and designers
+* Custom icons let you use any icons at any location (media uploads directory, CDN, etc.)
 * Many more publisher and user features
 
-With **years of active development**, over **2.9 million downloads**, and **ongoing support from the community**, this plugin still strives to be the best WordPress plugin for sharing. Thanks for your feedback!
+= Wide Support =
+
+* Over 8 years of active development 
+* Over 2.9 million downloads
+* Translated into dozens of languages
+* Ongoing support from the community
+
+This plugin always strives to be the best WordPress plugin for sharing. Development is fueled by your praise and feedback.
 
 <a href="http://www.addtoany.com/share_save" title="Share">Share this</a> plugin
 
@@ -49,7 +77,7 @@ See also:
 
 = Where are the options, and how can I customize the sharing plugin? =
 
-In your Admin panel, go to `Settings` > `AddToAny`.  Among other options, you can choose individual sharing icons, a universal sharing button, and official 3rd party sharing buttons (Facebook Like Button, Twitter Tweet Button, Pinterest Pin It Button, Google+ Share Button, Google +1 Button) to display, and where and how to display them.
+In your Admin panel, go to `Settings` > `AddToAny`. Among other options, you can choose individual sharing icons, a universal share button, and official 3rd party sharing buttons (Facebook Like Button, Twitter Tweet Button, Pinterest Pin It Button, Google+ Share Button, Google +1 Button) to display, and where and how to display them.
 
 To place the buttons as a "widget" in your theme (if your theme supports WordPress Widgets), go to `Appearance` > `Widgets`, then drag AddToAny to an available Widget Area and click `Save`.
 
@@ -89,38 +117,42 @@ To change the title, description and/or image on Facebook, your theme's header f
 
 For more technical information on setting your pages up for Facebook sharing, see "Facebook Sharing Checklist" in <a href="https://developers.facebook.com/docs/plugins/checklist/">Facebook's documentation</a>.
 
+= How can I use custom icons? =
+
+Upload sharing icons in a single directory to a public location, and make sure the icon filenames match the icon filenames packaged in the AddToAny plugin. In your Admin panel, go to `Settings` > `AddToAny` > `Advanced Options` > check the "Use custom icons" checkbox and specify the URL to your custom icons directory (including the trailing `/`). For AddToAny's universal button, go to Universal Button, select `Image URL` and specify the exact location of your AddToAny universal share icon (including the filename).
+
 = How can I add both the universal button and the individual icons to another area of my theme? =
 
 In the Theme Editor, place this code block where you want the button and individual icons to appear in your theme:
 
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_KIT') ) { ADDTOANY_SHARE_SAVE_KIT(); } ?>`
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { ADDTOANY_SHARE_SAVE_KIT(); } ?>`
 
 If you want to customize the shared URL and title for the universal button and standalone services, use the following code as a template:
 
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_KIT') ) { 
-	ADDTOANY_SHARE_SAVE_KIT( array("linkname" => "Example Page", "linkurl" => "http://example.com/page.html") );
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
+	ADDTOANY_SHARE_SAVE_KIT( array( 'linkname' => 'Example Page', 'linkurl' => 'http://example.com/page.html' ) );
 } ?>`
 
 If you want to share the current URL and title (detected on the client-side), use the following code:
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_KIT') ) { 
-	ADDTOANY_SHARE_SAVE_KIT( array("use_current_page" => TRUE) );
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
+	ADDTOANY_SHARE_SAVE_KIT( array( 'use_current_page' => true ) );
 } ?>`
 
 If you want to hardcode the shared current URL and modify the title (server-side), use the following code as a template:
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_KIT') ) { 
-	ADDTOANY_SHARE_SAVE_KIT( array("linkname" => (is_home() ? get_bloginfo('description') : wp_title('', FALSE)), "linkurl" => (is_ssl() ? 'https://' : 'http://') . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI']) );
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_KIT' ) ) { 
+	ADDTOANY_SHARE_SAVE_KIT( array( 'linkname' => ( is_home() ? get_bloginfo( 'description' ) : wp_title( '', false ) ), 'linkurl' => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'] ) );
 } ?>`
 
 = How can I add just the universal button to another area of my theme? =
 
 In the Theme Editor, you will place this line of code where you want the button to appear in your theme:
 
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_BUTTON') ) { ADDTOANY_SHARE_SAVE_BUTTON(); } ?>`
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_BUTTON' ) ) { ADDTOANY_SHARE_SAVE_BUTTON(); } ?>`
 
 If you want to customize the shared URL and title for this button, use the following code as a template:
 
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_BUTTON') ) { 
-	ADDTOANY_SHARE_SAVE_BUTTON( array("linkname" => "Example Page", "linkurl" => "http://example.com/page.html") );
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_BUTTON' ) ) { 
+	ADDTOANY_SHARE_SAVE_BUTTON( array( 'linkname' => 'Example Page', 'linkurl' => 'http://example.com/page.html' ) );
 } ?>`
 
 = How can I add just the individual icons to another area of my theme? =
@@ -128,17 +160,17 @@ If you want to customize the shared URL and title for this button, use the follo
 In the Theme Editor, place this line of code where you want the individual icons to appear in your theme (within an HTML list):
 
 `<?php echo '<div class="a2a_kit a2a_kit_size_32 addtoany_list">';
-if( function_exists('ADDTOANY_SHARE_SAVE_ICONS') ) { ADDTOANY_SHARE_SAVE_ICONS(); }
+if ( function_exists( 'ADDTOANY_SHARE_SAVE_ICONS' ) ) { ADDTOANY_SHARE_SAVE_ICONS(); }
 echo '</div>'; ?>`
 
 If you want to customize the shared URL and title for these icons, use the following code as a template:
 
 `<?php
-if( function_exists('ADDTOANY_SHARE_SAVE_ICONS') ) {
+if ( function_exists( 'ADDTOANY_SHARE_SAVE_ICONS' ) ) {
 	echo '<div class="a2a_kit a2a_kit_size_32 addtoany_list">';
 	ADDTOANY_SHARE_SAVE_ICONS( array(
-		"linkname" => "Example Page", "linkurl" => "http://example.com/page.html"
-	));
+		'linkname' => 'Example Page', 'linkurl' => 'http://example.com/page.html'
+	) );
 	echo '</div>';
 } ?>`
 
@@ -146,28 +178,28 @@ if( function_exists('ADDTOANY_SHARE_SAVE_ICONS') ) {
 
 Or you can place the icons as individual links without styling:
 
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_ICONS') ) { ADDTOANY_SHARE_SAVE_ICONS(); } ?>`
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_ICONS' ) ) { ADDTOANY_SHARE_SAVE_ICONS(); } ?>`
 
 If you want to customize the shared URL and title for these icons, use the following code as a template:
 
-`<?php if( function_exists('ADDTOANY_SHARE_SAVE_ICONS') ) {
-	ADDTOANY_SHARE_SAVE_ICONS( array("linkname" => "Example Page", "linkurl" => "http://example.com/page.html") );
+`<?php if ( function_exists( 'ADDTOANY_SHARE_SAVE_ICONS' ) ) {
+	ADDTOANY_SHARE_SAVE_ICONS( array( 'linkname' => 'Example Page', 'linkurl' => 'http://example.com/page.html' ) );
 } ?>`
 
 = How can I add a new custom standalone service? =
 You can create a plugin or customize the following PHP sample code to add to your theme's function.php file:
 
 `function addtoany_add_services( $services ) {
-  $services['google_example'] = array(
-    'name' => 'Google Example',
-    'icon_url' => 'http://www.google.com/favicon.ico',
-	'icon_width' => 16,
-	'icon_height' => 16,
-    'href' => 'http://www.example.com/add?linkurl=A2A_LINKURL&amp;linkname=A2A_LINKNAME'
-  );
-  return $services;
+	$services['google_example'] = array(
+		'name'        => 'Google Example',
+		'icon_url'    => 'http://www.google.com/favicon.ico',
+		'icon_width'  => 16,
+		'icon_height' => 16,
+		'href'        => 'http://www.example.com/add?linkurl=A2A_LINKURL&amp;linkname=A2A_LINKNAME'
+	);
+	return $services;
 }
-add_filter('A2A_SHARE_SAVE_services', 'addtoany_add_services', 10, 1);`
+add_filter( 'A2A_SHARE_SAVE_services', 'addtoany_add_services', 10, 1 );`
 
 = How can I align the sharing button(s) to the center or to the right side of posts? =
 It depends on your theme, but you can try adding the following CSS code to your main stylesheet.
@@ -210,7 +242,7 @@ The Google+ Share Button width can be changed using CSS code, for instance: `.a2
 
 = Does the plugin output W3C valid code? =
 
-Yes, this plugin outputs 100% W3C valid XHTML & HTML5 and W3C valid CSS 3 by default.
+Yes, this plugin outputs 100% W3C valid HTML5 & XHTML and W3C valid CSS 3 by default.
 
 If you use the Facebook Like, Twitter Tweet or Google +1 buttons in an HTML5 theme, note that the button iframes use the `scrolling` attribute, which is valid XHTML but the attribute has been deprecated in HTML5. It's needed to prevent scrollbars from appearing over the Like, Tweet, and +1 buttons inside of the iframes.
 
@@ -231,13 +263,32 @@ Upload the plugin directory (including all files and directories within) to the 
 == Screenshots ==
 
 1. Large vector sharing buttons (SVG icons) are pixel-perfect on Retina and high-DPI dispays
-2. Share/Save sharing button features Facebook, Twitter, and a universal sharing icon
-3. Drop-down universal sharing menu that appears instantly when visitors use the share button
+2. Share/Save sharing button features Facebook, Twitter, and a universal share icon
+3. Drop-down universal share menu that appears instantly when visitors use the share button
 4. Email tab, with direct links to the most popular web-based emailers' auto-filled Compose page, a web-based sender for use with any email address, and a link for desktop email applications
 5. Settings panel
-6. Color chooser for your universal sharing menu
+6. Color chooser for your universal share menu
 
 == Changelog ==
+
+= 1.2.9.2 =
+* Fix transparency on AddToAny's universal share icon
+* Add addtoany_sharing_disabled hook to programmatically disable sharing
+* Update Menu Options
+
+= 1.2.9.1 =
+* Update template code
+* Update Advanced Options description
+* Fix button return notice for certain use cases
+
+= 1.2.9 =
+* New Custom Icons option in the Advanced Options section
+ * Use any icons at any location (media uploads directory, CDN, etc.)
+ * This new method for using custom icons permits plugin updates that do not overwrite custom icons
+* Improve descriptions in settings
+
+= 1.2.8.7 =
+* Fix code styling
 
 = 1.2.8.6 =
 * Fix advanced caching option (most sites should not use this option)
