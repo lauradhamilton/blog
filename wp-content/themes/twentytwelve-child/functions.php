@@ -25,3 +25,5 @@
 date_default_timezone_set('America/Chicago');
 
 add_filter('is_multi_author','__return_true');
+
+function fix_links($input) { return preg_replace('!http(s)?://' . $_SERVER['SERVER_NAME'] . '/!', '/', $input);}
