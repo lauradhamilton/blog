@@ -15,9 +15,8 @@ function wp_rp_dashboard_setup() {
 
 	if ($options['ctr_dashboard_enabled'] && $meta['blog_id'] && $meta['auth_key']) {
 		wp_add_dashboard_widget('wp_rp_dashboard_widget', 'Related Posts', 'wp_rp_display_dashboard_widget');
-		add_action('admin_enqueue_scripts', 'wp_rp_dashboard_scripts');
+		add_action('admin_enqueue_scripts', 'wp_rp_dashboard_scripts');}
 	}
-}
 
 function wp_rp_display_dashboard_widget() {
 	$options = wp_rp_get_options();
@@ -41,6 +40,6 @@ function wp_rp_display_dashboard_widget() {
 function wp_rp_dashboard_scripts($hook) {
 	if($hook === 'index.php') {
 		wp_enqueue_script('wp_rp_dashboard_script', plugins_url('static/js/dashboard.js', __FILE__), array('jquery'));
-		wp_enqueue_style('wp_rp_dashaboard_style', plugins_url('static/css/dashboard.css', __FILE__));
+	  //wp_enqueue_style('wp_rp_dashaboard_style', plugins_url('static/css/dashboard.css', __FILE__));
 	}
 }

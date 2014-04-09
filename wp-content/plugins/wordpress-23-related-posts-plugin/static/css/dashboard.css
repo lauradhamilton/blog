@@ -10,12 +10,14 @@
 #wp_rp_settings_form th,
 #wp_rp_settings_form td {padding-left: 0;}
 
+#wp_rp_wrap #wp_rp_about_collapsible ul {list-style-type: disc; padding-left: 20px;}
 #wp_rp_wrap div#wp_rp_statistics_wrap {position: relative; overflow: hidden;}
 #wp_rp_wrap div#wp_rp_statistics_holder {overflow: hidden;}
 
-#wp_rp_wrap div#wp_rp_statistics_collapsible {float: left; min-width: 600px;}
-#wp_rp_wrap div#wp_rp_statistics_collapsible.collapsed {border-bottom: 1px solid #ddd;}
-#wp_rp_wrap div#wp_rp_statistics_collapsible.collapsed {border-bottom: 1px solid #ddd;}
+
+.settings_block {width: 700px; clear:both; }
+.settings_block.collapsed {border-bottom: 1px solid #ddd;}
+.settings_block.collapsed {border-bottom: 1px solid #ddd;}
 
 #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics {margin: 0; float: left; width: 600px;}
 #wp_rp_wrap.wp_rp_dashboard div#wp_rp_statistics_wrap ul.statistics {float: none; width: auto;}
@@ -26,7 +28,7 @@
 #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li {position: relative; overflow: hidden; border-bottom: 1px solid #ddd; margin: 0; height: 60px;}
 #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li h5 {text-transform: uppercase; text-align: center; font-weight: normal; padding: 5px 0; margin: 20px auto 0 auto; font-size: 13px;}
 #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li h5 span {text-transform: lowercase; font-size: 11px; color: #999; margin-left: 10px;}
-#wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li p.num {position: absolute; right: 0; font-size: 40px; line-height: 40px; color: #82c1cb; font-weight: bold; margin: 10px 0;}
+#wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li p.num {position: absolute; right: 0; font-size: 26px; line-height: 40px; color: #82c1cb; font-weight: bold; margin: 10px 0;}
 #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li p.num.mobile {position: absolute; left: 0;}
 
 #wp_rp_dashboard_widget #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics li.clicks {border-bottom: 0;}
@@ -136,14 +138,20 @@ form.wp_rp_message_form a.dismiss {float: right;}
 #wp_rp_theme_options_wrap .theme-extra-options {clear: left;}
 #wp_rp_theme_options_wrap .custom-theme {clear: both;}
 
-#wp_rp_theme_options_wrap .wp_rp_settings_table {padding: 15px;border: 1px solid #CCC;width: 630px;margin-bottom: 30px;border-top: 5px solid #CCC;}
-#wp_rp_theme_options_wrap .wp_rp_settings_table tbody tr td {padding: 8px 10px;}
-#wp_rp_theme_options_wrap .wp_rp_settings_table tbody tr td h4 {font-size: 1.5em;font-weight: normal;}
-#wp_rp_theme_options_wrap .wp_rp_settings_table tbody tr td div .theme-extra-options label {}
-#wp_rp_theme_options_wrap .wp_rp_settings_table tbody tr td div .theme-extra-options label.selected {}
-#wp_rp_theme_options_wrap .wp_rp_settings_table tbody tr td div .theme-extra-options label input {display: none;}
+.custom-css-container {margin-top: 5px;}
+#wp_rp_wrap form p.end-block { clear: both;   margin: 30px 0 0 0; }
+
 
 #wp_rp_theme_custom_css_wrap td {margin: 0; padding-top: 0;}
 #wp_rp_theme_custom_css_wrap .notice {margin: 0; padding: 0 0 3px 0; color: #666;}
 
 #wp_rp_tos {margin-top: 30px;}
+
+#wpwrap #wpcontent .wp_rp-updated {position: relative; margin: 5px 0 15px; padding: 1px 12px; background-color: #fff; border-left: 4px solid #f58520; -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1); box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);}
+#wpwrap #wpcontent .wp_rp-updated p {font-size: 1.3em;}
+#wpwrap #wpcontent .wp_rp-updated p a {color: inherit; text-decoration: underline;}
+#wpwrap #wpcontent .wp_rp-updated .wp_rp-logo {position: absolute; bottom: 15px; right: 12px;}
+#wpwrap #wpcontent .wp_rp-updated .wp_rp-dismiss {position: absolute;top: 15px;right: 14px;}
+#wpwrap #wpcontent .wp_rp-updated .wp_rp-logo img {width: 90px;}
+#wpwrap #wpcontent .wp_rp-updated .wp_rp-dismiss a:before {content: '\f153'; display: inline-block; font: 400 16px/1 dashicons; speak: none; height: 20px; margin: 2px 0; text-align: center; vertical-align: middle; width: 20px; -webkit-font-smoothing: antialiased!important;}
+#wpwrap h2.title span {font-size:0.5em;}

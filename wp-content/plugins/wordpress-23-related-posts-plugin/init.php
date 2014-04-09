@@ -1,5 +1,5 @@
 <?php
-define('WP_RP_VERSION', '3.3.3');
+define('WP_RP_VERSION', '3.4');
 
 define('WP_RP_PLUGIN_FILE', plugin_basename(__FILE__));
 
@@ -13,7 +13,7 @@ include_once(dirname(__FILE__) . '/widget.php');
 include_once(dirname(__FILE__) . '/thumbnailer.php');
 include_once(dirname(__FILE__) . '/settings.php');
 include_once(dirname(__FILE__) . '/recommendations.php');
-include_once(dirname(__FILE__) . '/dashboard_widget.php');
+  //include_once(dirname(__FILE__) . '/dashboard_widget.php');
 include_once(dirname(__FILE__) . '/edit_related_posts.php');
 include_once(dirname(__FILE__) . '/compatibility.php');
 
@@ -21,7 +21,6 @@ register_activation_hook(__FILE__, 'wp_rp_activate_hook');
 register_deactivation_hook(__FILE__, 'wp_rp_deactivate_hook');
 
 add_action('wp_head', 'wp_rp_head_resources');
-add_action('wp_before_admin_bar_render', 'wp_rp_extend_adminbar');
 
 add_action('plugins_loaded', 'wp_rp_init_zemanta');
 
@@ -33,6 +32,34 @@ function wp_rp_init_zemanta() {
 	}
 }
 
+
+function wp_rp_get_template($file) {
+	return dirname(__FILE__) . "/views/$file.php";
+}
+
+function wp_rp_admin_style() {
+	wp_enqueue_style('wp_rp_admin_style', plugins_url('static/css/dashboard.css', __FILE__));
+}
+add_action( 'admin_enqueue_scripts', 'wp_rp_admin_style');
+  
+function wp_rp_global_notice() {
+	global $pagenow, $wp_rp_global_notice_pages;
+	if (!current_user_can('delete_users')) {
+		return;
+	}
+	
+	$meta = wp_rp_get_meta();
+	$close_url = add_query_arg( array(
+		'page' => 'wordpress-related-posts',
+		'wprp_global_notice' => 0,
+	), admin_url( 'admin.php' ));
+	$notice = $meta['global_notice'];
+	if ($notice && in_array($pagenow, $wp_rp_global_notice_pages)) {
+		include(wp_rp_get_template('global_notice'));
+	}
+}
+add_action('all_admin_notices', 'wp_rp_global_notice' );
+  
 function wp_rp_extend_adminbar() {
 	global $wp_admin_bar;
 
@@ -86,9 +113,6 @@ function wp_rp_get_platform_options() {
 		$thumb_options['custom_size_thumbnail_enabled'] = $options['custom_size_thumbnail_enabled'];
 		$thumb_options['custom_thumbnail_width'] = $options['custom_thumbnail_width'];
 		$thumb_options['custom_thumbnail_height'] = $options['custom_thumbnail_height'];
-	}
-	if (wp_rp_is_phone()) {
-		return $options['mobile'];
 	}
 	return $options['desktop'] + $thumb_options;
 }

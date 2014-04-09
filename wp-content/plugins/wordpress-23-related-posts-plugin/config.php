@@ -1,8 +1,9 @@
 <?php
 
-define('WP_RP_STATIC_BASE_URL', 'http://wprp.zemanta.com/static/');
-
+define('WP_RP_STATIC_BASE_URL', 'https://wprpp.s3.amazonaws.com/static/');
 define('WP_RP_STATIC_THEMES_PATH', 'static/themes/');
+define('WP_RP_STATIC_JSON_PATH', 'json/');
+define('WP_RP_CONTENT_BASE_URL', 'https://wprpp.s3.amazonaws.com/static/');
 
 define("WP_RP_DEFAULT_CUSTOM_CSS",
 ".related_post_title {
@@ -43,9 +44,10 @@ define("WP_RP_RECOMMENDATIONS_NUM_PREGENERATED_POSTS", 50);
 
 define("WP_RP_THUMBNAILS_NUM_PREGENERATED_POSTS", 50);
 
-global $wp_rp_options, $wp_rp_meta;
+global $wp_rp_options, $wp_rp_meta, $wp_rp_global_notice_pages;
 $wp_rp_options = false;
 $wp_rp_meta = false;
+$wp_rp_global_notice_pages = array('plugins.php', 'index.php', 'update-core.php');
 
 function wp_rp_get_options() {
 	global $wp_rp_options, $wp_rp_meta;
@@ -103,6 +105,16 @@ function wp_rp_update_options($new_options) {
 
 	return $r;
 }
+
+function wp_rp_set_global_notice() {
+	$wp_rp_meta = get_option('wp_rp_meta');
+	$wp_rp_meta['global_notice'] = array(
+		'title' => 'I\'ve installed Wordpress Related Posts plugin. Now what?',
+		'message' => 'Checkout how you can <a target="_blank" href="http://zem.si/1kGo9V6">create awesome content</a>. Hint: it\'s not all about YOU ;-)'
+	);
+	update_option('wp_rp_meta', $wp_rp_meta);
+}
+
 
 function wp_rp_activate_hook() {
 	wp_rp_get_options();
@@ -187,6 +199,7 @@ function wp_rp_install() {
 		'name' => '',
 		'email' => '',
 		'remote_notifications' => array(),
+		'global_notice' => null,
 		'turn_on_button_pressed' => false,
 		'show_statistics' => false,
 		'show_traffic_exchange' => false,
@@ -213,17 +226,6 @@ function wp_rp_install() {
 		'thumbnail_custom_field'		=> false,
 		'display_zemanta_linky'			=> false,
 		'only_admins_can_edit_related_posts' => false,
-
-		'mobile' => array(
-			'display_comment_count'			=> false,
-			'display_publish_date'			=> false,
-			'display_excerpt'			=> false,
-			'display_thumbnail'			=> false,
-			'excerpt_max_length'			=> 200,
-			'theme_name' 				=> 'm-modern.css',
-			'theme_custom_css'			=> WP_RP_DEFAULT_CUSTOM_CSS,
-			'custom_theme_enabled' => false,
-		),
 		'desktop' => array(
 			'display_comment_count'			=> false,
 			'display_publish_date'			=> false,
@@ -238,7 +240,7 @@ function wp_rp_install() {
 
 	update_option('wp_rp_meta', $wp_rp_meta);
 	update_option('wp_rp_options', $wp_rp_options);
-
+	wp_rp_set_global_notice();
 	wp_rp_related_posts_db_table_install();
 }
 
@@ -248,6 +250,15 @@ function wp_rp_is_classic() {
 		return true;
 	}
 	return false;
+}
+
+function wp_rp_migrate_3_3_3() {
+	$wp_rp_meta = get_option('wp_rp_meta');
+	$wp_rp_meta['version'] = '3.4';
+	$wp_rp_meta['new_user'] = false;
+	update_option('wp_rp_meta', $wp_rp_meta);
+
+	wp_rp_set_global_notice();
 }
 
 function wp_rp_migrate_3_3_2() {
