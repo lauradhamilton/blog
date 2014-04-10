@@ -490,15 +490,6 @@ function A2A_SHARE_SAVE_options_page() {
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
-			<th scope="row"><?php _e('Menu Style', 'add-to-any'); ?></th>
-			<td><fieldset>
-					<p><?php _e("Using AddToAny's Menu Styler, you can customize the colors of your Share/Save menu! When you're done, be sure to paste the generated code in the <a href=\"#\" onclick=\"document.getElementById('A2A_SHARE_SAVE_additional_js_variables').focus();return false\">Additional Options</a> box below.", "add-to-any"); ?></p>
-					<p>
-						<a href="http://www.addtoany.com/buttons/share_save/menu_style/wordpress" class="button-secondary" title="<?php _e("Open the AddToAny Menu Styler in a new window", "add-to-any"); ?>" target="_blank" onclick="document.getElementById('A2A_SHARE_SAVE_additional_js_variables').focus(); document.getElementById('A2A_SHARE_SAVE_menu_styler_note').style.display='';"><?php _e("Open Menu Styler", "add-to-any"); ?></a>
-					</p>
-			</fieldset></td>
-			</tr>
-			<tr valign="top">
 			<th scope="row"><?php _e('Menu Options', 'add-to-any'); ?></th>
 			<td><fieldset>
 				<label>
@@ -510,6 +501,12 @@ function A2A_SHARE_SAVE_options_page() {
 					<input name="A2A_SHARE_SAVE_show_title" type="checkbox"<?php if($options['show_title']=='1') echo ' checked="checked"'; ?> value="1"/>
 					<?php _e('Show the title of the page within the universal share menu', 'add-to-any'); ?>
 				</label>
+				<label>
+					<p><?php _e("Using AddToAny's Menu Styler, you can customize the colors of your Share/Save menu! When you're done, be sure to paste the generated code in the <a href=\"#\" onclick=\"document.getElementById('A2A_SHARE_SAVE_additional_js_variables').focus();return false\">Additional Options</a> box below.", "add-to-any"); ?></p>
+				</label>
+				<p>
+					<a href="http://www.addtoany.com/buttons/share_save/menu_style/wordpress" class="button-secondary" title="<?php _e("Open the AddToAny Menu Styler in a new window", "add-to-any"); ?>" target="_blank" onclick="document.getElementById('A2A_SHARE_SAVE_additional_js_variables').focus(); document.getElementById('A2A_SHARE_SAVE_menu_styler_note').style.display='';"><?php _e("Open Menu Styler", "add-to-any"); ?></a>
+				</p>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">

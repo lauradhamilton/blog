@@ -3,21 +3,13 @@
 Plugin Name: Share Buttons by AddToAny
 Plugin URI: http://www.addtoany.com/
 Description: Share buttons for your pages including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.  [<a href="options-general.php?page=add-to-any.php">Settings</a>]
-Version: 1.2.9.2
-Author: micropat
+Version: 1.2.9.3
+Author: AddToAny
 Author URI: http://www.addtoany.com/
 */
 
 if ( ! isset( $A2A_locale ) ) {
 	$A2A_locale = '';
-}
-	
-// Pre-2.6 compatibility
-if ( ! defined( 'WP_CONTENT_URL' ) ) {
-	define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content');
-}
-if ( ! defined( 'WP_PLUGIN_URL' ) ) {
-	define( 'WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins' );
 }
 	
 $A2A_SHARE_SAVE_plugin_basename = plugin_basename( dirname( __FILE__ ) );
@@ -347,7 +339,7 @@ function ADDTOANY_SHARE_SAVE_BUTTON( $args = array() ) {
 		$style = '';
 		
 		if ( isset( $button_fname ) && ( $button_fname == 'favicon.png' || $button_fname == 'share_16_16.png' ) ) {
-			if ( ! $is_feed) {
+			if ( ! $is_feed ) {
 				$style_bg	= 'background:url(' . $A2A_SHARE_SAVE_plugin_url_path . '/' . $button_fname . ') no-repeat scroll 4px 0px !important;';
 				$style		= ' style="' . $style_bg . 'padding:0 0 0 25px;display:inline-block;height:16px;vertical-align:middle"'; // padding-left:21+4 (4=other icons padding)
 			}
@@ -507,7 +499,7 @@ if ( ! function_exists( 'A2A_menu_locale' ) ) {
 
 
 function A2A_SHARE_SAVE_head_script() {
-	if ( is_admin() )
+	if ( is_admin() || is_feed() )
 		return;
 		
 	$options = get_option( 'addtoany_options' );
@@ -583,7 +575,7 @@ add_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
 function A2A_SHARE_SAVE_footer_script() {
 	global $_addtoany_targets;
 	
-	if ( is_admin() )
+	if ( is_admin() || is_feed() )
 		return;
 		
 	$_addtoany_targets = ( isset( $_addtoany_targets ) ) ? $_addtoany_targets : array();

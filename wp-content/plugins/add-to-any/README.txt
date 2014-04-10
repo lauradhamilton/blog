@@ -1,9 +1,9 @@
 === Share Buttons by AddToAny ===
-Contributors: micropat
+Contributors: micropat, addtoany
 Tags: sharing, share, share this, bookmarking, social, share button, share buttons, share links, social share, social sharing, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, email, e-mail, print, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook share, facebook like, like, twitter, twitter button, twitter share, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, buffer, stumbleupon, bitly, technorati, lockerz, addthis, sociable, sharedaddy, sharethis, shareaholic, icon, icons, vector, SVG, wpmu, Add to Any, AddToAny
 Requires at least: 2.8
-Tested up to: 3.9
-Stable tag: 1.2.9.2
+Tested up to: 3.9.1
+Stable tag: 1.2.9.3
 
 Share buttons for WordPress including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.
 
@@ -85,7 +85,7 @@ To further customize AddToAny, see the <a href="http://www.addtoany.com/buttons/
 
 = Something is wrong. What should I try first? =
 
-Try temporarily switching themes and disabling other plugins to identify a potential conflict. If you find a conflict, try contacting that theme or plugin author. If an issue persists on a default theme with all other plugins disabled, perform a google search across the WordPress forums using a query such as: <a href="https://www.google.com/#q=site:wordpress.org%2Fsupport+addtoany+">site:wordpress.org/support addtoany [your issue issue here]</a>
+Try temporarily switching themes and disabling other plugins to identify a potential conflict. If you find a conflict, try contacting that theme or plugin author. If an issue persists on a default theme with all other plugins disabled, perform a google search across the WordPress forums using a query such as: <a href="https://www.google.com/#q=site:wordpress.org%2Fsupport+-reviews+addtoany+">site:wordpress.org/support -reviews addtoany [your issue issue here]</a>
 
 Feel free to <a href="http://wordpress.org/support/plugin/add-to-any">post here</a>, where the community can hopefully help you. Describe the issue, what troubleshooting you have already done, and provide a link to your site, and any other potentially relevant information.
 
@@ -270,6 +270,10 @@ Upload the plugin directory (including all files and directories within) to the 
 6. Color chooser for your universal share menu
 
 == Changelog ==
+
+= 1.2.9.3 =
+* Prevent script output in feeds on some sites
+* Remove constants for old WP versions (below 2.6)
 
 = 1.2.9.2 =
 * Fix transparency on AddToAny's universal share icon
