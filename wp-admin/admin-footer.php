@@ -82,8 +82,6 @@ if ( function_exists('get_site_option') ) {
 		compression_test();
 }
 
-  ob_flush();
-
 ?>
 
 <div class="clear"></div></div><!-- wpwrap -->
