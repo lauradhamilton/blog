@@ -141,7 +141,8 @@ class UpdraftPlus_Backup {
 		$time_mod = (int)@filemtime($zip_name);
 		if (file_exists($zip_name) && $time_mod>100 && ($time_now-$time_mod)<30) {
 			$updraftplus->terminate_due_to_activity($zip_name, $time_now, $time_mod);
-		} elseif (file_exists($zip_name)) {
+		}
+		if (file_exists($zip_name)) {
 			$updraftplus->log("File exists ($zip_name), but was apparently not modified within the last 30 seconds, so we assume that any previous run has now terminated (time_mod=$time_mod, time_now=$time_now, diff=".($time_now-$time_mod).")");
 		}
 
@@ -259,7 +260,7 @@ class UpdraftPlus_Backup {
 			$method_include = UPDRAFTPLUS_DIR.'/methods/'.$service.'.php';
 			if (file_exists($method_include)) require_once($method_include);
 
-			if ($service == "none" || $service == "") {
+			if ($service == "none" || '' == $service) {
 				$updraftplus->log("No remote despatch: user chose no remote backup service");
 				$this->prune_retained_backups(array("none" => array(null, null)));
 			} else {
@@ -841,6 +842,16 @@ class UpdraftPlus_Backup {
 
 		$total_tables = 0;
 
+		# WP 3.9 onwards - https://core.trac.wordpress.org/browser/trunk/src/wp-includes/wp-db.php?rev=27925 - check_connection() allows us to get the database connection back if it had dropped
+		if (method_exists($wpdb, 'check_connection')) {
+			if (!$wpdb->check_connection(false)) {
+				$updraftplus->reschedule(60);
+				$updraftplus->log("It seems the database went away; scheduling a resumption and terminating for now");
+				$updraftplus->record_still_alive();
+				die;
+			}
+		}
+
 		$all_tables = $wpdb->get_results("SHOW TABLES", ARRAY_N);
 		$all_tables = array_map(create_function('$a', 'return $a[0];'), $all_tables);
 
@@ -860,11 +871,22 @@ class UpdraftPlus_Backup {
 			# Why not just fail now? We saw a bizarre case when the results of really_is_writable() changed during the run.
 		}
 
+		# This check doesn't strictly get all possible duplicates; it's only designed for the case that can happen when moving between deprecated Windows setups and Linux
+		$duplicate_tables_exist = false;
+		foreach ($all_tables as $table) {
+			if (strtolower($table) != $table && in_array(strtolower($table), $all_tables)) {
+				$duplicate_tables_exist = true;
+				$updraftplus->log("Tables with names differing only based on case-sensitivity exist in the MySQL database: $table / ".strtolower($table));
+			}
+		}
+
 		$stitch_files = array();
 
 		$how_many_tables = count($all_tables);
 
 		$found_options_table = false;
+
+		$is_multisite = is_multisite();
 
 		foreach ($all_tables as $table) {
 
@@ -876,14 +898,14 @@ class UpdraftPlus_Backup {
 			// The table file may already exist if we have produced it on a previous run
 			$table_file_prefix = $file_base.'-db-table-'.$table.'.table';
 
-			if ($this->table_prefix_raw.'options' == $table) $found_options_table = true;
+			if (strtolower($this->table_prefix_raw.'options') == strtolower($table) || ($is_multisite && strtolower($this->table_prefix_raw.'1_options') == strtolower($table))) $found_options_table = true;
 
 			if (file_exists($this->updraft_dir.'/'.$table_file_prefix.'.gz')) {
 				$updraftplus->log("Table $table: corresponding file already exists; moving on");
 				$stitch_files[] = $table_file_prefix;
 			} else {
 				# === is needed, otherwise 'false' matches (i.e. prefix does not match)
-				if (empty($this->table_prefix) || strpos($table, $this->table_prefix) === 0 ) {
+				if (empty($this->table_prefix) || ($duplicate_tables_exist == false && stripos($table, $this->table_prefix) === 0 ) || ($duplicate_tables_exist == true && strpos($table, $this->table_prefix) === 0 )) {
 
 					// Open file, store the handle
 					$opened = $this->backup_db_open($this->updraft_dir.'/'.$table_file_prefix.'.tmp.gz', true);
@@ -905,9 +927,9 @@ class UpdraftPlus_Backup {
 					}
 
 					# Don't include the job data for any backups - so that when the database is restored, it doesn't continue an apparently incomplete backup
-					if  (!empty($this->table_prefix) && $this->table_prefix.'sitemeta' == $table) {
+					if  (!empty($this->table_prefix) && strtolower($this->table_prefix.'sitemeta') == strtolower($table)) {
 						$where = 'meta_key NOT LIKE "updraft_jobdata_%"';
-					} elseif (!empty($this->table_prefix) && $this->table_prefix.'options' == $table) {
+					} elseif (!empty($this->table_prefix) && strtolower($this->table_prefix.'options') == strtolower($table)) {
 						$where = 'option_name NOT LIKE "updraft_jobdata_%"';
 					} else {
 						$where = '';
@@ -943,7 +965,7 @@ class UpdraftPlus_Backup {
 				# Have seen this happen; not sure how, but it was apparently deterministic; if the current process had been running for a long time, then apparently all database commands silently failed.
 				# If we have been running that long, then the resumption may be far off; bring it closer
 				$updraftplus->reschedule(60);
-				$updraftplus->log("Have been running very long, and it seems the database went away; terminating");
+				$updraftplus->log("Have been running very long, and it seems the database went away; scheduling a resumption and terminating for now");
 				$updraftplus->record_still_alive();
 				die;
 			}
@@ -957,11 +979,17 @@ class UpdraftPlus_Backup {
 		$time_mod = (int)@filemtime($backup_final_file_name);
 		if (file_exists($backup_final_file_name) && $time_mod>100 && ($time_now-$time_mod)<30) {
 			$updraftplus->terminate_due_to_activity($backup_final_file_name, $time_now, $time_mod);
-		} elseif (file_exists($backup_final_file_name)) {
+		}
+		if (file_exists($backup_final_file_name)) {
 			$updraftplus->log("The final database file ($backup_final_file_name) exists, but was apparently not modified within the last 30 seconds (time_mod=$time_mod, time_now=$time_now, diff=".($time_now-$time_mod)."). Thus we assume that another UpdraftPlus terminated; thus we will continue.");
 		}
 
 		// Finally, stitch the files together
+
+		if (!function_exists('gzopen')) {
+			$updraftplus->log("PHP function is disabled; abort expected: gzopen");
+		}
+
 		$opendb = $this->backup_db_open($backup_final_file_name, true);
 		if (false === $opendb) return false;
 		$this->backup_db_header();
@@ -1140,12 +1168,18 @@ class UpdraftPlus_Backup {
 			}
 
 			// Experimentation here shows that on large tables (we tested with 180,000 rows) on MyISAM, 1000 makes the table dump out 3x faster than the previous value of 100. After that, the benefit diminishes (increasing to 4000 only saved another 12%)
+
+			$increment = 1000;
+			if (!$updraftplus->something_useful_happened && !empty($updraftplus->current_resumption) && ($updraftplus->current_resumption - $updraftplus->last_successful_resumption > 1)) {
+				$increment = 500;
+			}
+
 			if($segment == 'none') {
 				$row_start = 0;
-				$row_inc = 1000;
+				$row_inc = $increment;
 			} else {
-				$row_start = $segment * 1000;
-				$row_inc = 1000;
+				$row_start = $segment * $increment;
+				$row_inc = $increment;
 			}
 
 			$search = array("\x00", "\x0a", "\x0d", "\x1a");
@@ -1311,7 +1345,11 @@ class UpdraftPlus_Backup {
 		if (empty($this->attachments) || !is_array($this->attachments)) return;
 		foreach ($this->attachments as $attach) {
 			$mime_type = (preg_match('/\.gz$/', $attach)) ? 'application/x-gzip' : 'text/plain';
-			$phpmailer->AddAttachment($attach, '', 'base64', $mime_type);
+			try {
+				$phpmailer->AddAttachment($attach, '', 'base64', $mime_type);
+			} catch (Exception $e) {
+				$updraftplus->log("Exception occurred when adding attachment (".get_class($e)."): ".$e->getMessage());
+			}
 		}
 	}
 
@@ -1691,15 +1729,16 @@ class UpdraftPlus_Backup {
 				# Since we don't test before the file has been created (so that zip_last_ratio has meaningful data), we rely on max_zip_batch being less than zip_split_every - which should always be the case
 				$reaching_split_limit = ( $this->zip_last_ratio > 0 && $original_size>0 && ($original_size + 1.1*$data_added_since_reopen*$this->zip_last_ratio) > $this->zip_split_every) ? true : false;
 
-				if ($zipfiles_added_thisbatch > 500 || $reaching_split_limit || $data_added_since_reopen > $maxzipbatch || (time() - $this->zipfiles_lastwritetime) > 1.5) {
+				if ($zipfiles_added_thisbatch > UPDRAFTPLUS_MAXBATCHFILES || $reaching_split_limit || $data_added_since_reopen > $maxzipbatch || (time() - $this->zipfiles_lastwritetime) > 1.5) {
 
+					@set_time_limit(900);
 					$something_useful_sizetest = false;
 
 					if ($data_added_since_reopen > $maxzipbatch) {
 						$something_useful_sizetest = true;
 						$updraftplus->log("Adding batch to zip file (".$this->use_zip_object."): over ".round($maxzipbatch/1048576,1)." Mb added on this batch (".round($data_added_since_reopen/1048576,1)." Mb, ".count($this->zipfiles_batched)." files batched, $zipfiles_added_thisbatch (".$this->zipfiles_added_thisrun.") added so far); re-opening (prior size: ".round($original_size/1024,1).' Kb)');
-					} elseif ($zipfiles_added_thisbatch >500) {
-						$updraftplus->log("Adding batch to zip file (".$this->use_zip_object."): over 500 files added on this batch (".round($data_added_since_reopen/1048576,1)." Mb, ".count($this->zipfiles_batched)." files batched, $zipfiles_added_thisbatch (".$this->zipfiles_added_thisrun.") added so far); re-opening (prior size: ".round($original_size/1024,1).' Kb)');
+					} elseif ($zipfiles_added_thisbatch > UPDRAFTPLUS_MAXBATCHFILES) {
+						$updraftplus->log("Adding batch to zip file (".$this->use_zip_object."): over ".UPDRAFTPLUS_MAXBATCHFILES." files added on this batch (".round($data_added_since_reopen/1048576,1)." Mb, ".count($this->zipfiles_batched)." files batched, $zipfiles_added_thisbatch (".$this->zipfiles_added_thisrun.") added so far); re-opening (prior size: ".round($original_size/1024,1).' Kb)');
 					} elseif (!$reaching_split_limit) {
 						$updraftplus->log("Adding batch to zip file (".$this->use_zip_object."): over 1.5 seconds have passed since the last write (".round($data_added_since_reopen/1048576,1)." Mb, $zipfiles_added_thisbatch (".$this->zipfiles_added_thisrun.") files added so far); re-opening (prior size: ".round($original_size/1024,1).' Kb)');
 					} else {
@@ -1713,7 +1752,7 @@ class UpdraftPlus_Backup {
 						}
 					}
 					$zipfiles_added_thisbatch = 0;
-					
+
 					# This triggers a re-open, later
 					unset($zip);
 					$files_zipadded_since_open = array();

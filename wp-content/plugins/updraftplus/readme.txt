@@ -1,9 +1,9 @@
 === UpdraftPlus - WordPress Backup and Restoration ===
 Contributors: Backup with UpdraftPlus, DavidAnderson
-Tags: backup, backups, restore, database, rackspace, amazon, s3, amazon s3, s3 compatible, dropbox, google drive, rackspace cloud files, rackspace, cloud files, dreamhost, dreamobjects, ftp, ftp backup, webdav, google cloud storage, cloudian, cloudn, connectria, constant cloud, eucalyptus, nifty, nimbula, back up, multisite, restoration, sftp, ftps, scp, migrate, duplicate, copy, updraft, schedule, mysql backup, database backup, db backup, website backup, wordpress backup, full backup
+Tags: backup, backups, restore, database, rackspace, amazon, s3, amazon s3, s3 compatible, dropbox, google drive, rackspace cloud files, rackspace, cloud files, dreamhost, dreamobjects, ftp, ftp backup, webdav, google cloud storage, cloudian, cloudn, connectria, constant cloud, eucalyptus, nifty, nimbula, bitcasa, back up, multisite, restoration, sftp, ftps, scp, migrate, duplicate, copy, updraft, schedule, mysql backup, database backup, db backup, website backup, wordpress backup, full backup, openstack, swift
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.9.0
+Stable tag: 1.9.5
 Author URI: http://updraftplus.com
 Donate link: http://david.dw-perspective.org.uk/donate
 License: GPLv3 or later
@@ -12,17 +12,17 @@ Easy and complete backups + restoration. Manual or automated backups (backup to 
 
 == Description ==
 
-<a href="http://updraftplus.com">UpdraftPlus</a> simplifies backups (and restoration). Backup into the cloud (Amazon S3 (or compatible), Dropbox, Google Drive, Rackspace Cloud, DreamObjects, FTP, SFTP, SCP, WebDAV and email) and restore with a single click. Backups of files and database can have separate schedules.
+<a href="http://updraftplus.com">UpdraftPlus</a> simplifies backups (and restoration). Backup into the cloud (Amazon S3 (or compatible), Dropbox, Google Drive, Rackspace Cloud, DreamObjects, FTP, SFTP, SCP, WebDAV, OpenStack Swift, Bitcasa and email) and restore with a single click. Backups of files and database can have separate schedules.
 
 <strong>Top-quality:</strong> UpdraftPlus is the <a href="http://rankwp.com/plugins/updraftplus">highest-ranking backup plugin on rankwp.com</a> (ranks in the top 50 out of 30,000 WordPress plugins for quality on rankwp.com - last checked 8th January 2014).
 
-<strong>Tens of thousands of users:</strong> widely tested and reliable (over 700,000 downloads). Ranks in the top 100 most used of all WordPress plugins on rankwp.com. Millions of backups completed!
+<strong>Tens of thousands of users:</strong> widely tested and reliable (over 780,000 downloads). Ranks in the top 100 most used of all WordPress plugins on rankwp.com. Millions of backups completed!
 
-* Supports WordPress backups to Amazon S3 (or compatible), Dropbox, Rackspace Cloud Files, Google Drive, Google Cloud Storage, DreamHost DreamObjects, FTP and email. Also (via an add-on) FTP over SSL, SFTP, SCP and WebDAV (and compatible services, e.g. Yandex). (Note: Microsoft forbid OneDrive/SkyDrive to be used by backup software). Some examples of S3-compatible providers: Cloudian, Connectria, Constant, Eucalyptus, Nifty, Nimbula, Cloudn.
+* Supports WordPress backups to Amazon S3 (or compatible), Dropbox, Rackspace Cloud Files, Google Drive, Google Cloud Storage, DreamHost DreamObjects, FTP, OpenStack (Swift) and email. Also (via an add-on) FTP over SSL, SFTP, SCP, WebDAV (and compatible services, e.g. Yandex) and Bitcasa. (Note: Microsoft forbid OneDrive/SkyDrive to be used by backup software). Some examples of S3-compatible providers: Cloudian, Connectria, Constant, Eucalyptus, Nifty, Nimbula, Cloudn.
 * Quick restore (both file and database backups)
 * Backup automatically on a repeating schedule
 * Site duplicator/migrator: can copy sites, and (with add-on) move them to new locations
-* Restores backup sets from other backup plugins (Premium) (currently supported: BackupWordPress, Simple Backup)
+* Restores backup sets from other backup plugins (Premium) (currently supported: BackWPUp, BackupWordPress, Simple Backup)
 * Files and database backups can have separate schedules
 * Failed uploads are automatically resumed/retried
 * Large sites can be split into multiple archives
@@ -60,17 +60,18 @@ Are you able to translate UpdraftPlus into another language? Are you ready to he
 Many thanks to the existing translators:
 
 * Arabic (ar): Omar Amassine (me at omar.ma), Ahmed Fahmy and Riyadh Altayib
+* Chinese (zh_CN): K L Wang - http://klwang.info
+* Deutsch / German (de_DE): Marcel Herrguth - mherrguth at mrgeneration.de
+* Czech (cs_CZ) : Martin Křížek - krizekmartin at gmail.com
+* Ελληνική  / Greek translation (el): Κώστας Θερμογιάννης (Kostas Thermoyiannis) - http://tovivlio.net
+* Español / Spanish (es_ES): Pablo Laguna - laguna.sanchez at gmail.com and Fernando Villasmil - villasmil.fernando at gmail.com
+* Français / French translation (fr_FR): ufo3D - http://ufo-3d.fr and Thomas Jacobsen - http://123informatique.ch - with help from Françoise Lhermitte - http://www.ajwan.net
+* Italiano / Italian (it_IT): Francesco Carpana - f.carpana at gmail.com
+* Nederlands / Dutch (nl_NL):  Dennis Hunink - dennishunink at me.com and Hans van der Vlist - hansvandervlist at gmail.com
+* Polski / Polish (pl_PL): Bartosz Kaczmarek - barth.kaczmarek at gmail.com
 * Português / Portuguese (Brazilian) (pt_BR): Lucien Raven (lucienraven at yahoo.com.br) and Tom Fonseca (tomfonseca at gmail.com)
 * русский / Russian (ru_RU): Илья Худолей (Ilya Khudoley) - ironman_c at icloud.com and Igor Ocheretny (http://wpsells.com) - also see Igor's free training videos at: http://goodbackup.wpsells.com/
-* Ελληνική  / Greek translation (el): Κώστας Θερμογιάννης (Kostas Thermoyiannis) - http://tovivlio.net
-* Français / French translation (fr_FR): ufo3D - http://ufo-3d.fr and Thomas Jacobsen - http://123informatique.ch - with help from Françoise Lhermitte - http://www.ajwan.net
 * Swedish / Svensk (sv_SE): Steve Sandström - http://www.brandicon.se
-* Polski / Polish (pl_PL): Bartosz Kaczmarek - barth.kaczmarek at gmail.com
-* Chinese (zh_CN): K L Wang - http://klwang.info
-* Italiano / Italian (it_IT): Francesco Carpana - f.carpana at gmail.com
-* Deutsch / German (de_DE): Marcel Herrguth - mherrguth at mrgeneration.de
-* Español / Spanish (es_ES): Pablo Laguna - laguna.sanchez at gmail.com and Fernando Villasmil - villasmil.fernando at gmail.com
-* Nederlands / Dutch (nl_NL):  Dennis Hunink - dennishunink at me.com and Hans van der Vlist - hansvandervlist at gmail.com
 
 And to these (need updating or new translators; now less than 50% translated):
 
@@ -123,7 +124,7 @@ No. Microsoft forbid the use of OneDrive/SkyDrive by backup utilities - see http
 
 = Any known bugs ? =
 
-Not a bug, but one issue to be aware of is that backups of very large sites (lots of uploaded media) are quite complex matters, given the limits of running inside WordPress on a huge variety of different web hosting setups. With large sites, you need to use S3 (Amazon or compatible), Google Drive, Dropbox, WebDAV, Rackspace Cloud Files, DreamObjects (since 1.6.6) or FTP (since 1.5.9) because these support chunked, resumable uploads. Other backup methods have code (since 0.9.0) to retry failed uploads of an archive, but the upload cannot be chunked, so if an archive is enormous (i.e. cannot be completely uploaded in the time that PHP is allowed for running on your web host) it cannot work. (Though as far as we're aware, no other cloud backup plugins support chunking, so you're still no worse off than with the alternatives).
+Not a bug, but one issue to be aware of is that backups of very large sites (lots of uploaded media) are quite complex matters, given the limits of running inside WordPress on a huge variety of different web hosting setups. With large sites, you need to use S3 (Amazon or compatible), Google Drive, Dropbox, WebDAV, Rackspace Cloud Files, OpenStack (Swift), DreamObjects or FTP because these support chunked, resumable uploads. Other backup methods have code (since 0.9.0) to retry failed uploads of an archive, but the upload cannot be chunked, so if an archive is enormous (i.e. cannot be completely uploaded in the time that PHP is allowed for running on your web host) it cannot work. (Though as far as we're aware, no other cloud backup plugins support chunking, so you're still no worse off than with the alternatives).
 
 = My site was hacked, and I have no backups! I thought UpdraftPlus was working! Can I kill you? =
 
@@ -142,6 +143,36 @@ Thanks for asking - yes, I have. Check out my profile page - http://profiles.wor
 
 The <a href="http://updraftplus.com/news/">UpdraftPlus backup blog</a> is the best place to learn in more detail about any important changes.
 
+= 1.9.5 - 2014/04/25 =
+* FIX: Backups were not uploaded successfully if you were using both an encrypted database and Google Drive storage
+
+= 1.9.4 - 2014/04/23 =
+
+* FEATURE: New remote storage back-end for OpenStack Swift
+* FEATURE: New remote storage back-end for Bitcasa (Premium - http://updraftplus.com/shop/updraftplus-premium/)
+* FEATURE: New Google Drive back-end now uses new SDK; resulting new capabilities include ability to rescan remote storage, and chunked downloading for huge files; also requires a shorter list of permissions
+* FEATURE: Restore backups that were created by the plugin BackWPup (Premium - http://updraftplus.com/shop/updraftplus-premium/)
+* FIX: WebDAV storage: remove requirement for PEAR to be pre-installed on server
+* FIX: Fix restoration on sites where WP did not have direct filesystem access
+* FIX: Fix regex which prevented download progress of mu-plugins zip displaying correctly
+* FIX: Fix issue preventing some useful information about URL changes being included in the migration log file
+* FIX: Restore compatibility with WordPress 3.2 (if you're using that, you're overdue an upgrade by some years!)
+* TWEAK: Enable new locations for plupload Flash/Silverlight widgets (for non-HTML5 browsers) in WP3.9+ (later reverted by core devs, but is harmless in case they re-introduce)
+* TWEAK: Take advantage of WP 3.9+'s new method (if available) for maintaining DB connectivity on very long runs
+* TWEAK: Add filter so that programmers can allow the options page to be shown to non-admins
+* TWEAK: Add filter allowing programmers to forbid a backup
+* TWEAK: Detect and adapt to cases where the site is moved to a system with different case-sensitivity and the database record of the theme is now wrong
+* TWEAK: Prevent erroneous warning about a missing table in the database backup on some WPMU installs that began life as a very old WP version
+* TWEAK: Introduce constant allowing users of pre-release WP installs to disable notices about using a version of WP that UpdraftPlus has not been tested on.
+* TWEAK: Make Dropbox uploads at least 25% faster (in our testing) by increasing the chunk size
+* TWEAK: Reduce number of rows fetched from MySQL if no activity took place on the previous resumption
+* TWEAK: AWS image in settings page will now use https if dashboard access is https - prevents non-https warnings in recent browsers
+* TWEAK: Hook into Better WP Security so that it doesn't tell the user that they have no backup plugin
+* TWEAK: New debugging tool to test remote HTTP connectivity
+* TWEAK: Tweak the MySQL version detection in the 'debug' section of the admin page to prevent a PHP message being thrown on PHP 5.5+/WP3.9+
+* TRANSLATION: New Czech (cs_CZ) translation; thanks to Martin Křížek
+* TRANSLATION: Updated Russian, Swedish, Dutch and Portuguese translations
+
 = 1.9.0 - 2014/03/26 =
 
 * COMPATIBILITY: Tested on and updated for forthcoming WordPress 3.9
@@ -155,6 +186,7 @@ The <a href="http://updraftplus.com/news/">UpdraftPlus backup blog</a> is the be
 * TWEAK: When backup is sent by email attachment, the email now indicates the originating site more clearly
 * TWEAK: Display a dashboard warning if you are using a version of UpdraftPlus that has not been tested on your current WordPress version
 * TWEAK: Add work-around for bad hard-coded data in Elegant Themes Theme Builder when restoring
+* TWEAK: Log a message when Dropbox authentication completes (prevent user confusion if the most recent message is pre-success)
 * TRANSLATIONS: New Arabic translation (thanks to Omar Amassine - me at omar.ma, Ahmed Fahmy and Riyadh Altayib)
 * TRANSLATIONS: Updated Spanish translation (thanks to Pablo Laguna - laguna.sanchez at gmail.com)
 * TRANSLATIONS: Updated Nederlands / Dutch translation (thanks to Dennis Hunink - dennishunink at me.com)
@@ -753,14 +785,14 @@ The <a href="http://updraftplus.com/news/">UpdraftPlus backup blog</a> is the be
 We recognise and thank the following for code and/or libraries used and/or modified under the terms of their open source licences:
 
 * UpdraftPlus is derived from the original Updraft WordPress plugin by Paul Kehrer (Twitter: http://twitter.com/reaperhulk, Blog: http://langui.sh)
-* Sorin Iclanzan, http://profiles.wordpress.org/hel.io/
+* The Google PHP SDK developers, https://github.com/google/google-api-php-client
 * Ben Tadiar, https://github.com/BenTheDesigner/Dropbox
 * Beau Brownlee, http://www.solutionbot.com/2009/01/02/php-ftp-class/
 * Donovan Schonknecht, http://undesigned.org.za/2007/10/22/amazon-s3-php-class
 * Rackspace US, Inc., https://github.com/rackerlabs/php-cloudfiles
 * Jim Wigginton, http://phpseclib.sourceforge.net
 * Dave Coveney, https://github.com/interconnectit/Search-Replace-DB/
-
+* No longer used: Sorin Iclanzan, http://profiles.wordpress.org/hel.io/
 
 == License ==
 
@@ -783,4 +815,4 @@ We recognise and thank the following for code and/or libraries used and/or modif
 Furthermore, reliance upon any non-English translation is at your own risk. UpdraftPlus can give no guarantees that translations from the original English are accurate.
 
 == Upgrade Notice ==
-* 1.9.0 : WordPress 3.9 compatibility; ability to re-scan remote storage; updated translations; new Importer add-on for restoring backups made by other plugins
+* 1.9.4 : New back-ends for GoogleDrive, Bitcasa and OpenStack. Restore BackWPup backups. Various tweaks + bugfixes. Translations updated. Recommended update for all. 1.9.5: Essential fix for uploading your backup to Google Drive if your database was encrypted.

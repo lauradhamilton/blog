@@ -1,0 +1,9 @@
+0000.000 (0) Opened log file at time: Sun, 27 Apr 2014 18:05:33 -0500 on http://blog.additiveanalytics.com/blog
+0000.013 (0) UpdraftPlus WordPress backup plugin (http://updraftplus.com): 1.9.5 WP: 3.9 PHP: 5.4.9-4ubuntu2.4 (Linux ip-10-181-175-67 3.8.0-35-generic #50-Ubuntu SMP Tue Dec 3 01:24:59 UTC 2013 x86_64) MySQL: 5.5.34-0ubuntu0.13.04.1 Server: Apache/2.2.22 (Ubuntu) safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 18.2M | 19M) multisite: N mcrypt: Y ZipArchive::addFile: Y W3TC/ObjectCache: N
+0000.024 (0) Free space on disk containing Updraft's temporary directory: 6016.9 Mb
+0000.040 (0) Tasks: Backup files:  (schedule: daily) Backup DB: 1 (schedule: daily)
+0000.052 (0) Processed schedules. Tasks now: Backup files:  Backup DB: 
+0000.065 (0) Decremented the semaphore (fd) by 1
+0000.074 (0) Semaphore (fd) still locked
+0000.082 (0) No email will be sent - this backup set was empty.
+0000.104 (0) The backup apparently succeeded and is now complete

@@ -3,7 +3,7 @@ Contributors: micropat, addtoany
 Tags: sharing, share, share this, bookmarking, social, share button, share buttons, share links, social share, social sharing, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, email, e-mail, print, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook share, facebook like, like, twitter, twitter button, twitter share, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, wanelo, buffer, stumbleupon, bitly, technorati, lockerz, addthis, sociable, sharedaddy, sharethis, shareaholic, icon, icons, vector, SVG, floating, floating buttons, wpmu, Add to Any, AddToAny
 Requires at least: 2.8
 Tested up to: 3.9.1
-Stable tag: 1.3
+Stable tag: 1.3.0.1
 
 Share buttons for WordPress including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.
 
@@ -29,7 +29,7 @@ AddToAny's customizable platform and social share icons let you optimize your si
 = Custom Placement =
 * Before content, after content, or before & after content
 * Vertical Floating Share Bar, and Horizontal Floating Share Bar
-* As a widget within a theme
+* As a widget within a theme, and programmatically
 
 = Analytics Integration =
 
@@ -276,6 +276,9 @@ Upload the plugin directory (including all files and directories within) to the 
 6. Color chooser for your universal share menu
 
 == Changelog ==
+
+= 1.3.0.1 =
+* Apply universal sharing button toggle to floating buttons
 
 = 1.3 =
 * Floating share buttons (major new feature!)
