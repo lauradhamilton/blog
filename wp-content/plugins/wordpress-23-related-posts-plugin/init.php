@@ -1,5 +1,5 @@
 <?php
-define('WP_RP_VERSION', '3.4');
+define('WP_RP_VERSION', '3.4.1');
 
 define('WP_RP_PLUGIN_FILE', plugin_basename(__FILE__));
 
@@ -199,7 +199,10 @@ function wp_rp_fetch_posts_and_title() {
 	$options = wp_rp_get_options();
 
 	$limit = $options['max_related_posts'];
-	$title = $options["related_posts_title"];
+
+	// quirky stuff due to WPML compatibility
+	$title_option = get_option('wp_rp_options', false);
+	$title = __($title_option['related_posts_title'],'wp_related_posts');
 
 	$related_posts = array();
 
@@ -454,17 +457,16 @@ function wp_rp_head_resources() {
 		$output .= '<script type="text/javascript" src="' . WP_RP_STATIC_BASE_URL . WP_RP_STATIC_LOADER_FILE . '?version=' . WP_RP_VERSION . '" async></script>' . "\n";
 	}
 
-	if ($options['enable_themes']) {
-		$static_url = plugins_url('static/', __FILE__);
-		$theme_url = plugins_url(WP_RP_STATIC_THEMES_PATH, __FILE__);
-		
+	$static_url = plugins_url('static/', __FILE__);
+	$theme_url = plugins_url(WP_RP_STATIC_THEMES_PATH, __FILE__);
 
+	if ($platform_options['custom_theme_enabled']) {
+		$output .= '<style type="text/css">' . "\n" . $platform_options['theme_custom_css'] . "</style>\n";
+	}
+	
+	if ($options['enable_themes']) {
 		if ($platform_options['theme_name'] !== 'plain.css' && $platform_options['theme_name'] !== 'm-plain.css') {
 			$output .= '<link rel="stylesheet" href="' . $theme_url . $platform_options['theme_name'] . '?version=' . WP_RP_VERSION . '" />' . "\n";
-		}
-
-		if ($platform_options['custom_theme_enabled']) {
-			$output .= '<style type="text/css">' . "\n" . $platform_options['theme_custom_css'] . "</style>\n";
 		}
 
 		if ($platform_options['theme_name'] === 'm-stream.css') {

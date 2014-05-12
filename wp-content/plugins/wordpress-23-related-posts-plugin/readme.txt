@@ -3,24 +3,27 @@ Contributors: zemanta
 Tags: related,posts,post,related posts,plugin,seo
 License: GPLv2
 Requires at least: 3.3
-Tested up to: 3.8.2
-Stable tag: 3.4
+Tested up to: 3.9
+Stable tag: 3.4.1
 
 WordPress Related Posts generates a list of related posts with thumbnails and gives you click-through statistics.
 
 == Description ==
 
 Quickly increase your readers' engagement with your posts by adding Related Posts in the footer of your content. Automatically added Related Posts can increase your internal traffic up to 10%. Just install and activate. To attract attention and improve SEO, link out to Related Posts across the web from your compose screen. Search for posts and hand-pick them with ease. Recommendations are provided by Zemanta's world-class semantic service, including advanced analytics.
-
 The plugin also delivers statistics about Pageviews and Clicks*. It supports different styles, thumbnails and is fully customizable.
 
 After installation, go to Settings -> Related Posts in your plugins list and Turn on Advanced Features!
 
+
+[Click here to read more about this plugin.](http://zem.si/1kc5j9Z)
+
+
 **Share the Link Love**
 
-[vimeo http://vimeo.com/46745200]
+[vimeo http://vimeo.com/91619827]
 
-Note: Real time traffic analytics are provided via third party service.
+  *  Note: Real time traffic analytics are provided via third party service.
 
 
 == Frequently Asked Questions ==
@@ -86,6 +89,10 @@ New thumbnailer might break backwards compatibility for blogs with custom thumbn
 Fix for security vulnerability. Upgrade immediately.
 
 == Changelog ==
+
+= 3.4.1 =
+* Fixed theme bug
+* Fixed link to Terms of Service
 
 = 3.4 =
 * Added support for HTTPS dashboard
@@ -251,3 +258,4 @@ Fix for security vulnerability. Upgrade immediately.
 
 = 1.0 =
 * first version
+

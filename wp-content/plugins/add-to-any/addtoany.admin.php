@@ -216,6 +216,16 @@ function A2A_SHARE_SAVE_options_page() {
 				is_numeric( $_POST['A2A_SHARE_SAVE_floating_vertical_offset'] ) 
 			) ? $_POST['A2A_SHARE_SAVE_floating_vertical_offset'] : '0';
 			
+			$new_options['floating_vertical_responsive'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_responsive'] ) && 
+				'1' == $_POST['A2A_SHARE_SAVE_floating_vertical_responsive']
+			) ? '1' : '-1';
+			
+			$new_options['floating_vertical_responsive_max_width'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_vertical_responsive_max_width'] ) && 
+				is_numeric( $_POST['A2A_SHARE_SAVE_floating_vertical_responsive_max_width'] ) 
+			) ? $_POST['A2A_SHARE_SAVE_floating_vertical_responsive_max_width'] : '980';
+			
 			$new_options['floating_horizontal_position'] = ( 
 				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_position'] ) && 
 				is_numeric( $_POST['A2A_SHARE_SAVE_floating_horizontal_position'] ) 
@@ -225,6 +235,17 @@ function A2A_SHARE_SAVE_options_page() {
 				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_offset'] ) && 
 				is_numeric( $_POST['A2A_SHARE_SAVE_floating_horizontal_offset'] ) 
 			) ? $_POST['A2A_SHARE_SAVE_floating_horizontal_offset'] : '0';
+			
+			
+			$new_options['floating_horizontal_responsive'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive'] ) && 
+				'1' == $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive']
+			) ? '1' : '-1';
+			
+			$new_options['floating_horizontal_responsive_min_width'] = ( 
+				isset( $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive_min_width'] ) && 
+				is_numeric( $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive_min_width'] ) 
+			) ? $_POST['A2A_SHARE_SAVE_floating_horizontal_responsive_min_width'] : '981';
 			
 		} else {
 			// Standard options screen
@@ -631,6 +652,16 @@ function A2A_SHARE_SAVE_options_page() {
 			</fieldset></td>
 			</tr>
 			<tr valign="top">
+			<th scope="row"><?php _e("Responsiveness", "add-to-any"); ?></th>
+			<td><fieldset>
+				<label>
+					<input id="A2A_SHARE_SAVE_floating_vertical_responsive" name="A2A_SHARE_SAVE_floating_vertical_responsive" type="checkbox"<?php 
+						if ( ! isset( $options['floating_vertical_responsive'] ) || $options['floating_vertical_responsive'] != '-1' ) echo ' checked="checked"'; ?> value="1" />
+					Only display when screen is larger than <input name="A2A_SHARE_SAVE_floating_vertical_responsive_max_width" type="number" step="1" value="<?php if ( isset( $options['floating_vertical_responsive_max_width'] ) ) echo $options['floating_vertical_responsive_max_width']; else echo '980'; ?>" class="small-text" /> pixels wide
+				</label>
+			</fieldset></td>
+			</tr>
+			<tr valign="top">
 			<th scope="row"><?php _e("Position", "add-to-any"); ?></th>
 			<td><fieldset>
 				<label><input name="A2A_SHARE_SAVE_floating_vertical_position" type="number" step="1" value="<?php if ( isset( $options['floating_vertical_position'] ) ) echo $options['floating_vertical_position']; else echo '100'; ?>" class="small-text" /> pixels from top</label>
@@ -654,6 +685,16 @@ function A2A_SHARE_SAVE_options_page() {
 				<label><input type="radio" name="A2A_SHARE_SAVE_floating_horizontal" value="right_docked"<?php if ( isset( $options['floating_horizontal'] ) && 'right_docked' == $options['floating_horizontal'] ) echo ' checked="checked"'; ?>> <?php _e('Right docked', 'add-to-any'); ?></label>
 				<br>
 				<label><input type="radio" name="A2A_SHARE_SAVE_floating_horizontal" value="none"<?php if ( ! isset( $options['floating_horizontal'] ) || 'none' == $options['floating_horizontal'] ) echo ' checked="checked"'; ?>> <?php _e('None', 'add-to-any'); ?></label>
+			</fieldset></td>
+			</tr>
+			<tr valign="top">
+			<th scope="row"><?php _e("Responsiveness", "add-to-any"); ?></th>
+			<td><fieldset>
+				<label>
+					<input id="A2A_SHARE_SAVE_floating_horizontal_responsive" name="A2A_SHARE_SAVE_floating_horizontal_responsive" type="checkbox"<?php 
+						if ( ! isset( $options['floating_horizontal_responsive'] ) || $options['floating_horizontal_responsive'] != '-1' ) echo ' checked="checked"'; ?> value="1" />
+					Only display when screen is smaller than <input name="A2A_SHARE_SAVE_floating_horizontal_responsive_min_width" type="number" step="1" value="<?php if ( isset( $options['floating_horizontal_responsive_min_width'] ) ) echo $options['floating_horizontal_responsive_min_width']; else echo '981'; ?>" class="small-text" /> pixels wide
+				</label>
 			</fieldset></td>
 			</tr>
 			<tr valign="top">

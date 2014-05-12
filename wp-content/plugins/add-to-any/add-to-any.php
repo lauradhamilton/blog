@@ -3,7 +3,7 @@
 Plugin Name: Share Buttons by AddToAny
 Plugin URI: http://www.addtoany.com/
 Description: Share buttons for your pages including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.  [<a href="options-general.php?page=add-to-any.php">Settings</a>]
-Version: 1.3.0.1
+Version: 1.3.1
 Author: AddToAny
 Author URI: http://www.addtoany.com/
 */
@@ -867,10 +867,77 @@ add_shortcode( 'addtoany', 'A2A_SHARE_SAVE_shortcode' );
 function A2A_SHARE_SAVE_stylesheet() {
 	global $A2A_SHARE_SAVE_options, $A2A_SHARE_SAVE_plugin_url_path;
 	
+	$options = $A2A_SHARE_SAVE_options;
+	
 	// Use stylesheet?
-	if ( ! isset( $A2A_SHARE_SAVE_options['inline_css'] ) || $A2A_SHARE_SAVE_options['inline_css'] != '-1' && ! is_admin() ) {
+	if ( ! isset( $options['inline_css'] ) || $options['inline_css'] != '-1' && ! is_admin() ) {
+	
 		wp_enqueue_style( 'A2A_SHARE_SAVE', $A2A_SHARE_SAVE_plugin_url_path . '/addtoany.min.css', false, '1.6' );
+	
+		// wp_add_inline_style requires WP 3.3+
+		if ( '3.3' <= get_bloginfo( 'version' ) ) {
+		
+			// Prepare inline CSS for media queries on floating bars
+			$inline_css = '';
+			
+			$vertical_type = ( isset( $options['floating_vertical'] ) && 'none' != $options['floating_vertical'] ) ? $options['floating_vertical'] : false;
+			$horizontal_type = ( isset( $options['floating_horizontal'] ) && 'none' != $options['floating_horizontal'] ) ? $options['floating_horizontal'] : false;
+			
+			// If vertical bar is enabled
+			if ( $vertical_type && 
+				// and respsonsiveness is enabled
+				( ! isset( $options['floating_vertical_responsive'] ) || '-1' != $options['floating_vertical_responsive'] )
+			) {
+				
+				// Get min-width for media query
+				$vertical_max_width = ( 
+					isset( $options['floating_vertical_responsive_max_width'] ) && 
+					is_numeric( $options['floating_vertical_responsive_max_width'] ) 
+				) ? $options['floating_vertical_responsive_max_width'] : '980';
+				
+				// Set media query
+				$inline_css .= '@media screen and (max-width:' . $vertical_max_width . 'px){' . "\n"
+					. '.a2a_floating_style.a2a_vertical_style{display:none;}' . "\n"
+					. '}';
+				
+			}
+			
+			// If horizontal bar is enabled
+			if ( $horizontal_type && 
+				// and respsonsiveness is enabled
+				( ! isset( $options['floating_horizontal_responsive'] ) || '-1' != $options['floating_horizontal_responsive'] )
+			) {
+				
+				// Get max-width for media query
+				$horizontal_min_width = ( 
+					isset( $options['floating_horizontal_responsive_min_width'] ) && 
+					is_numeric( $options['floating_horizontal_responsive_min_width'] ) 
+				) ? $options['floating_horizontal_responsive_min_width'] : '981';
+				
+				// If there is inline CSS already
+				if ( 0 < strlen( $inline_css ) ) {
+					// Insert newline
+					$inline_css .= "\n";
+				}
+				
+				// Set media query
+				$inline_css .= '@media screen and (min-width:' . $horizontal_min_width . 'px){' . "\n"
+					. '.a2a_floating_style.a2a_default_style{display:none;}' . "\n"
+					. '}';
+				
+			}
+			
+			// If there is inline CSS
+			if ( 0 < strlen( $inline_css ) ) {
+			
+				// Insert inline CSS
+				wp_add_inline_style( 'A2A_SHARE_SAVE', $inline_css );	
+			}
+		
+		}
+		
 	}
+	
 }
 
 add_action( 'wp_print_styles', 'A2A_SHARE_SAVE_stylesheet' );

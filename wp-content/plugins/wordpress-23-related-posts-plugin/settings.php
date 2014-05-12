@@ -229,16 +229,16 @@ function wp_rp_settings_page() {
 
 		foreach(array('desktop') as $platform) {
 			if(isset($postdata['wp_rp_' . $platform . '_theme_name'])) {		// If this isn't set, maybe the AJAX didn't load...
-				$new_options[$platform]['theme_name'] = trim($postdata['wp_rp_' . $platform . '_theme_name']);
-				
-				if(isset($postdata['wp_rp_' . $platform . '_theme_custom_css'])) {
-					$new_options[$platform]['theme_custom_css'] = $postdata['wp_rp_' . $platform . '_theme_custom_css'];
-				} elseif (isset($postdata["wp_rp_${platform}_custom_theme_enabled"])) {
-					$new_options[$platform]['theme_custom_css'] = '';
-				}
+				$new_options[$platform]['theme_name'] = trim($postdata['wp_rp_' . $platform . '_theme_name']);				
 			} else {
 				$new_options[$platform]['theme_name'] = $old_options[$platform]['theme_name'];
-				$new_options[$platform]['theme_custom_css'] = $old_options[$platform]['theme_custom_css'];
+			}
+			if(isset($postdata['wp_rp_' . $platform . '_theme_custom_css'])) {
+					$new_options[$platform]['theme_custom_css'] = $postdata['wp_rp_' . $platform . '_theme_custom_css'];
+			} elseif (isset($postdata["wp_rp_${platform}_custom_theme_enabled"])) {
+				$new_options[$platform]['theme_custom_css'] = '';
+			} else {
+				$new_options[$platform]['theme_custom_css'] =  $old_options[$platform]['theme_custom_css'];
 			}
 		}
 
