@@ -1,9 +1,9 @@
 <?php
-
-define('WP_RP_STATIC_BASE_URL', 'https://wprpp.s3.amazonaws.com/static/');
+define('WP_RP_STATIC_BASE_URL', 'https://wprp.zemanta.com/static/');
+define("WP_RP_ZEMANTA_API_URL", "http://api.zemanta.com/services/rest/0.0/");
 define('WP_RP_STATIC_THEMES_PATH', 'static/themes/');
 define('WP_RP_STATIC_JSON_PATH', 'json/');
-define('WP_RP_CONTENT_BASE_URL', 'https://wprpp.s3.amazonaws.com/static/');
+define('WP_RP_CONTENT_BASE_URL', 'https://wprp.zemanta.com/static/');
 
 define("WP_RP_DEFAULT_CUSTOM_CSS",
 ".related_post_title {
@@ -27,7 +27,7 @@ define('WP_RP_THUMBNAILS_DEFAULTS_COUNT', 31);
 
 define("WP_RP_MAX_LABEL_LENGTH", 32);
 
-define("WP_RP_CTR_DASHBOARD_URL", "http://d.zemanta.com/");
+define("WP_RP_CTR_DASHBOARD_URL", "https://d.zemanta.com/");
 define("WP_RP_STATIC_LOADER_FILE", "js/loader.js");
 
 define("WP_RP_STATIC_INFINITE_RECS_JS_FILE", "js/infiniterecs.js");
@@ -43,6 +43,8 @@ define("WP_RP_RECOMMENDATIONS_CATEGORIES_SCORE", 5);
 define("WP_RP_RECOMMENDATIONS_NUM_PREGENERATED_POSTS", 50);
 
 define("WP_RP_THUMBNAILS_NUM_PREGENERATED_POSTS", 50);
+
+define("WP_RP_EXCERPT_SHORTENED_SYMBOL", " [&hellip;]");
 
 global $wp_rp_options, $wp_rp_meta, $wp_rp_global_notice_pages;
 $wp_rp_options = false;
@@ -198,6 +200,9 @@ function wp_rp_install() {
 		'show_turn_on_button' => true,
 		'name' => '',
 		'email' => '',
+		'subscribed' => false,
+		'registered' => false,
+		'zemanta_api_key' => false,
 		'remote_notifications' => array(),
 		'global_notice' => null,
 		'turn_on_button_pressed' => false,
@@ -251,6 +256,24 @@ function wp_rp_is_classic() {
 	}
 	return false;
 }
+
+function wp_rp_migrate_3_4_2() {
+	$wp_rp_meta = get_option('wp_rp_meta');
+	$wp_rp_meta['version'] = '3.4.3';
+	$wp_rp_meta['new_user'] = false;
+	$wp_rp_meta['subscribed'] = false;
+	$wp_rp_meta['registered'] = false;
+	$wp_rp_meta['zemanta_api_key'] = false;
+	update_option('wp_rp_meta', $wp_rp_meta);
+}
+
+function wp_rp_migrate_3_4_1() {
+	$wp_rp_meta = get_option('wp_rp_meta');
+	$wp_rp_meta['version'] = '3.4.2';
+	$wp_rp_meta['new_user'] = false;
+	update_option('wp_rp_meta', $wp_rp_meta);
+}
+
 
 function wp_rp_migrate_3_4() {
 	$wp_rp_meta = get_option('wp_rp_meta');

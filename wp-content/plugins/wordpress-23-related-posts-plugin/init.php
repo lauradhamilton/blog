@@ -1,5 +1,5 @@
 <?php
-define('WP_RP_VERSION', '3.4.1');
+define('WP_RP_VERSION', '3.4.3');
 
 define('WP_RP_PLUGIN_FILE', plugin_basename(__FILE__));
 
@@ -255,6 +255,17 @@ function wp_rp_get_next_post(&$related_posts, &$selected_related_posts, &$insert
 	return $post;
 }
 
+function wp_rp_text_shorten($text, $max_chars) {
+	$shortened_text = mb_substr($text, 0, $max_chars - strlen(WP_RP_EXCERPT_SHORTENED_SYMBOL));
+	$shortened_words = explode(" ", $shortened_text);
+	$shortened_size = count($shortened_words);
+	if ($shortened_size > 1) {
+		$shortened_words = array_slice($shortened_words, 0, $shortened_size - 1);
+		$shortened_text = implode(" ", $shortened_words);
+	}
+	return $shortened_text . WP_RP_EXCERPT_SHORTENED_SYMBOL; //'...';
+}
+  
 function wp_rp_generate_related_posts_list_items($related_posts, $selected_related_posts) {
 	$options = wp_rp_get_options();
 	$platform_options = wp_rp_get_platform_options();
@@ -335,7 +346,7 @@ function wp_rp_generate_related_posts_list_items($related_posts, $selected_relat
 
 			if ($excerpt) {
 				if (strlen($excerpt) > $excerpt_max_length) {
-					$excerpt = mb_substr($excerpt, 0, $excerpt_max_length - 3) . '...';
+					$excerpt = wp_rp_text_shorten($excerpt, $excerpt_max_length);
 				}
 				$output .= ' <small class="wp_rp_excerpt">' . $excerpt . '</small>';
 			}
@@ -459,10 +470,6 @@ function wp_rp_head_resources() {
 
 	$static_url = plugins_url('static/', __FILE__);
 	$theme_url = plugins_url(WP_RP_STATIC_THEMES_PATH, __FILE__);
-
-	if ($platform_options['custom_theme_enabled']) {
-		$output .= '<style type="text/css">' . "\n" . $platform_options['theme_custom_css'] . "</style>\n";
-	}
 	
 	if ($options['enable_themes']) {
 		if ($platform_options['theme_name'] !== 'plain.css' && $platform_options['theme_name'] !== 'm-plain.css') {
@@ -476,6 +483,10 @@ function wp_rp_head_resources() {
 		if ($platform_options['theme_name'] === 'pinterest.css') {
 			wp_enqueue_script('wp_rp_pinterest', $static_url . WP_RP_STATIC_PINTEREST_JS_FILE, array('jquery'), WP_RP_VERSION);
 		}
+	}
+
+	if ($platform_options['custom_theme_enabled']) {
+		$output .= '<style type="text/css">' . "\n" . $platform_options['theme_custom_css'] . "</style>\n";
 	}
 
 	if (current_user_can('edit_posts') && $statistics_enabled) {

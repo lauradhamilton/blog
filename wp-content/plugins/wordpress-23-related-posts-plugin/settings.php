@@ -165,11 +165,70 @@ function wp_rp_ajax_hide_show_statistics() {
 
 add_action('wp_ajax_rp_show_hide_statistics', 'wp_rp_ajax_hide_show_statistics');
 
+function wp_rp_get_api_key() {
+	$meta = wp_rp_get_meta();
+	if($meta['zemanta_api_key']) return $meta['zemanta_api_key'];
+
+	$zemanta_options = get_option('zemanta_options');
+	if ($zemanta_options && !empty($zemanta_options['api_key'])) {
+		$meta['zemanta_api_key'] = $zemanta_options['api_key'];
+		wp_rp_update_meta($meta);
+		return $meta['zemanta_api_key'];
+	}
+	return false;
+}
+
+function wp_rp_register() {
+	$meta = wp_rp_get_meta();
+	if ($meta['registered']) {
+		return;
+	}
+	$api_key = wp_rp_get_api_key();
+	if(! $api_key) {
+		$wprp_zemanta = new WPRPZemanta();
+		$wprp_zemanta->init(); // we have to do this manually because the admin_init hook was already triggered
+		$wprp_zemanta->register_options();
+		
+		$api_key = $wprp_zemanta->api_key;
+		$meta['zemanta_api_key'] = $api_key;
+	}
+	if (!$api_key) { return false; }
+
+	$url = urlencode(get_bloginfo('wpurl'));
+	$post = array(
+		'api_key' => $api_key,
+		'platform' => 'wordpress-wprp',
+		'post_rid' => '',
+		'post_url' => $url,
+		'current_url' => $url,
+		'format' => 'json',
+		'method' => 'zemanta.post_published_ping'
+	);
+	$response = wp_remote_post(WP_RP_ZEMANTA_API_URL, array(
+		'body' => $post,
+		'timeout' => 30
+	));
+	if (wp_remote_retrieve_response_code($response) == 200) {
+		$body = wp_remote_retrieve_body($response);
+		if ($body) {
+			$response_json = json_decode($body);
+			$meta['registered'] = $response_json->status === 'ok';
+		}
+	}
+
+	wp_rp_update_meta($meta);
+	return $meta['registered'];
+}
+
+
+
 function wp_rp_settings_page() {
 	if (!current_user_can('delete_users')) {
 		die('Sorry, you don\'t have permissions to access this page.');
 	}
 
+	wp_rp_register();
+	
 	$options = wp_rp_get_options();
 	$meta = wp_rp_get_meta();
 

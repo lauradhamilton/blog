@@ -245,26 +245,24 @@ function wp_rp_get_image_with_exact_size($image_data, $size) {
 	if (!$size[0]) { $size[0] = (int) ($image_data['data']['width'] / $image_data['data']['height'] * $size[1]); }
 	if (!$size[1]) { $size[1] = (int) ($image_data['data']['height'] / $image_data['data']['width'] * $size[0]); }
 
-	if (!$image_data['data']['sizes']) {
-		$w = $image_data['data']['width'];
-		$h = $image_data['data']['height'];
-
-		$thumb_width = $platform_options['custom_size_thumbnail_enabled'] ? $platform_options['custom_thumbnail_width'] : WP_RP_THUMBNAILS_WIDTH;
-		$thumb_height = $platform_options['custom_size_thumbnail_enabled'] ? $platform_options['custom_thumbnail_height'] : WP_RP_THUMBNAILS_HEIGHT;
-
-		if ($w == $thumb_width && $h == $thumb_height) {
-			$file = explode("/", $image_data['data']['file']);
-			$file = $file[count($file) - 1];
-			$img_url = str_replace($img_url_basename, wp_basename($file), $img_url);
-			return array(
-				'url' => $img_url,
-				'file' => $file,
-				'width' => $w,
-				'height' => $h
-			);
-		}
+	$w = $image_data['data']['width'];
+	$h = $image_data['data']['height'];
+	$thumb_width = $platform_options['custom_size_thumbnail_enabled'] ? $platform_options['custom_thumbnail_width'] : WP_RP_THUMBNAILS_WIDTH;
+	$thumb_height = $platform_options['custom_size_thumbnail_enabled'] ? $platform_options['custom_thumbnail_height'] : WP_RP_THUMBNAILS_HEIGHT;
+	$default_sizes = $w == $thumb_width && $h == $thumb_height;
+	$matches_sizes = $w == $size[0] && $h == $size[1];
+	if (!$image_data['data']['sizes'] && $default_sizes || $matches_sizes) {		
+		$file = explode("/", $image_data['data']['file']);
+		$file = $file[count($file) - 1];
+		$img_url = str_replace($img_url_basename, wp_basename($file), $img_url);
+		return array(
+			'url' => $img_url,
+			'file' => $file,
+			'width' => $w,
+			'height' => $h
+		);
 	}
-
+	
 	foreach ($image_data['data']['sizes'] as $_size => $data) {
 		// width and height can be both string and integers. WordPress..
 		if (($size[0] == $data['width']) && ($size[1] == $data['height'])) {

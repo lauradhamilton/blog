@@ -4,7 +4,7 @@ Tags: related,posts,post,related posts,plugin,seo
 License: GPLv2
 Requires at least: 3.3
 Tested up to: 3.9
-Stable tag: 3.4.1
+Stable tag: 3.4.3
 
 WordPress Related Posts generates a list of related posts with thumbnails and gives you click-through statistics.
 
@@ -89,6 +89,16 @@ New thumbnailer might break backwards compatibility for blogs with custom thumbn
 Fix for security vulnerability. Upgrade immediately.
 
 == Changelog ==
+
+= 3.4.3 =
+* Updated HTTPS urls
+* Changed registration process
+
+= 3.4.2 =
+* Responsive themes bug fix
+* Better related post summary shortening
+* Custom CSS bugfix
+* Custom default thumbnail bugfix
 
 = 3.4.1 =
 * Fixed theme bug
@@ -258,4 +268,3 @@ Fix for security vulnerability. Upgrade immediately.
 
 = 1.0 =
 * first version
-

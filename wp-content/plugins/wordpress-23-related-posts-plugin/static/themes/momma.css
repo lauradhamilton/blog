@@ -116,12 +116,11 @@ ul.related_post li small {
 
 @media screen and (max-width: 480px) {
 	ul.related_post li {
-		display: block !important;
+		display: inline-block !important;
 		width: auto !important;
 		min-height: auto !important;
 		clear: both !important;
-
-		border: 0 !important;
+        border:none !important;
 	}
 	ul.related_post li a {
 		width: auto !important;
@@ -131,12 +130,5 @@ ul.related_post li small {
 	}
 	ul.related_post li a:nth-child(2) {
 		font-size: 14px !important;
-		padding: 10px 0 10px 110px !important;
-		display: block !important;
-		height: 80px !important;
-	}
-	ul.related_post li img {
-		width: 100px !important;
-		height: 100px !important;
 	}
 }

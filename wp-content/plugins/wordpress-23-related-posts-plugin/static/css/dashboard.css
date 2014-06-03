@@ -16,8 +16,7 @@
 
 
 .settings_block {width: 700px; clear:both; }
-.settings_block.collapsed {border-bottom: 1px solid #ddd;}
-.settings_block.collapsed {border-bottom: 1px solid #ddd;}
+.settings_block.collapsed {border-bottom: 1px solid #cecece;}
 
 #wp_rp_wrap div#wp_rp_statistics_wrap ul.statistics {margin: 0; float: left; width: 600px;}
 #wp_rp_wrap.wp_rp_dashboard div#wp_rp_statistics_wrap ul.statistics {float: none; width: auto;}
