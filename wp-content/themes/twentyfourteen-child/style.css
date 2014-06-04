@@ -1,0 +1,15 @@
+/*
+Theme Name:     Twenty Fourteen Child
+Theme URI:      
+Description:    A Twenty Fourteen child theme
+Author:         
+Author URI:     
+Template:       twentyfourteen
+Version:        0.1.0
+*/
+ 
+@import url("../twentyfourteen/style.css");
+
+.thumbcaption { font-size:90%; position:absolute; padding:10px 10px 10px 10px; width:100%; background:none}
+
+.post-thumbnail {background:none}
