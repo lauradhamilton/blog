@@ -10,6 +10,14 @@ Version:        0.1.0
  
 @import url("../twentyfourteen/style.css");
 
-.thumbcaption { font-size:90%; position:absolute; padding:10px 10px 10px 10px; width:100%; background:none}
-
-.post-thumbnail {background:none}
+.thumbcaption {
+  font-size:90%;
+  position:absolute;
+  padding:10px 10px 10px 10px;
+  width:80%;
+  background-color: rgba(0, 0, 0, 0.6);
+  background: none;
+  left: 100px;
+  bottom: 40px;
+  z-index: 5
+}
