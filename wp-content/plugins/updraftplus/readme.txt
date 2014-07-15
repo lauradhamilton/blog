@@ -1,14 +1,14 @@
-=== UpdraftPlus - WordPress Backup and Restoration ===
+=== UpdraftPlus Backup and Restoration for WordPress ===
 Contributors: Backup with UpdraftPlus, DavidAnderson
-Tags: backup, backups, restore, database, rackspace, amazon, s3, amazon s3, s3 compatible, dropbox, google drive, rackspace cloud files, rackspace, cloud files, dreamhost, dreamobjects, ftp, ftp backup, webdav, google cloud storage, cloudian, cloudn, connectria, constant cloud, eucalyptus, nifty, nimbula, bitcasa, back up, multisite, restoration, sftp, ftps, scp, migrate, duplicate, copy, updraft, schedule, mysql backup, database backup, db backup, website backup, wordpress backup, full backup, openstack, swift
+Tags: backup, backups, restore, amazon, s3 backup, dropbox, google drive, rackspace cloud files, rackspace backup, cloud files, dreamhost, dreamobjects, ftp backup, webdav, google cloud storage, cloudian, cloudn, connectria, constant cloud, eucalyptus, nifty, nimbula, bitcasa, back up, multisite, restoration, sftp backup, ftps, scp, migrate, duplicate, copy, updraft, mysql backup, database backup, db backup, website backup, wordpress backup, full backup, openstack, swift
 Requires at least: 3.2
 Tested up to: 3.9.1
-Stable tag: 1.9.5
+Stable tag: 1.9.15
 Author URI: http://updraftplus.com
 Donate link: http://david.dw-perspective.org.uk/donate
 License: GPLv3 or later
 
-Easy and complete backups + restoration. Manual or automated backups (backup to S3, Dropbox, Google Drive, Rackspace, FTP, SFTP, email + others).
+Backup and restoration made easy. Complete backups; manual or scheduled (backup to S3, Dropbox, Google Drive, Rackspace, FTP, SFTP, email + others).
 
 == Description ==
 
@@ -16,7 +16,7 @@ Easy and complete backups + restoration. Manual or automated backups (backup to 
 
 <strong>Top-quality:</strong> UpdraftPlus is the <a href="http://rankwp.com/plugins/updraftplus">highest-ranking backup plugin on rankwp.com</a> (ranks in the top 50 out of 30,000 WordPress plugins for quality on rankwp.com - last checked 8th January 2014).
 
-<strong>Tens of thousands of users:</strong> widely tested and reliable (over 850,000 downloads). Ranks in the top 100 most used of all WordPress plugins on rankwp.com. Millions of backups completed!
+<strong>Tens of thousands of users:</strong> widely tested and reliable (over 925,000 downloads). Ranks in the top 100 most used of all WordPress plugins on rankwp.com. Millions of backups completed!
 
 * Supports WordPress backups to Amazon S3 (or compatible), Dropbox, Rackspace Cloud Files, Google Drive, Google Cloud Storage, DreamHost DreamObjects, FTP, OpenStack (Swift) and email. Also (via an add-on) FTP over SSL, SFTP, SCP, WebDAV (and compatible services, e.g. Yandex) and Bitcasa. (Note: Microsoft forbid OneDrive/SkyDrive to be used by backup software). Some examples of S3-compatible providers: Cloudian, Connectria, Constant, Eucalyptus, Nifty, Nimbula, Cloudn.
 * Quick restore (both file and database backups)
@@ -29,7 +29,7 @@ Easy and complete backups + restoration. Manual or automated backups (backup to 
 * Select which files to backup (plugins, themes, content, other)
 * Select which components of a backup to restore
 * Download backup archives direct from your WordPress dashboard
-* Database backups can be encrypted for security
+* Database backups can be encrypted for security (Premium)
 * Debug mode that gives full logging of the backup
 * Internationalised (translations very welcome - see below)
 * <a href="http://updraftplus.com">Premium version and support available - http://updraftplus.com</a>
@@ -41,7 +41,7 @@ Your WordPress backups are worth the same as your entire investment in your webs
 
 = UpdraftPlus Addons And Premium =
 
-UpdraftPlus is not crippled in any way - it is fully functional, with no annoying omissions. What we do have is various extra features, and guaranteed support, available <a href="http://updraftplus.com/">from our website, updraftplus.com</a>.
+UpdraftPlus Backup/Restore is not crippled in any way - it is fully functional, with no annoying omissions. What we do have is various extra features, and guaranteed support, available <a href="http://updraftplus.com/">from our website, updraftplus.com</a>.
 
 If you need WordPress multisite compatibility (you'll know if you do), <a href="http://updraftplus.com/shop/">then you need UpdraftPlus Premium</a>.
 
@@ -72,6 +72,7 @@ Many thanks to the existing translators:
 * Português / Portuguese (Brazilian) (pt_BR): Lucien Raven (lucienraven at yahoo.com.br) and Tom Fonseca (tomfonseca at gmail.com)
 * русский / Russian (ru_RU): Илья Худолей (Ilya Khudoley) - ironman_c at icloud.com and Igor Ocheretny (http://wpsells.com) - also see Igor's free training videos at: http://goodbackup.wpsells.com/
 * Swedish / Svensk (sv_SE): Steve Sandström - http://www.brandicon.se
+* Tagalog (tl): Kristen Macasero / Mads Phikamphon - http://www.findhold.dk
 
 And to these (need updating or new translators; now less than 50% translated):
 
@@ -142,6 +143,25 @@ Thanks for asking - yes, I have. Check out my profile page - http://profiles.wor
 == Changelog ==
 
 The <a href="http://updraftplus.com/news/">UpdraftPlus backup blog</a> is the best place to learn in more detail about any important changes.
+
+= 1.9.15 - 2014/09/06 =
+
+* FEATURE: New search/replace expert tool (Premium)
+* TWEAK: UI has been simplified - see: http://updraftplus.com/gentle-re-design/
+* TWEAK: "Backup Now" now avoids the WordPress scheduler - thus meaning it can work on sites where the WordPress scheduler is broken (e.g. Heart Internet)
+* TWEAK: Make sure that server HTTP-level errors are shown directly to the user at the 'Processing files...' stage of a restore
+* TWEAK: Amend SQL which prevented options/sitemeta tables backing up at full speed on large sites
+* TWEAK: Dropbox will now display some error messages more prominently, where relevant
+* TWEAK: Dropbox account user's name is stored when you authorise
+* TWEAK: Show link to FAQ if user's zip upload is corrupt
+* TWEAK: Work around annoying Google Drive issue whereby Google's end sometimes returns an incomplete list of folders
+* TWEAK: Interpret time in imported backup sets as being in destination WP install's timezone
+* TWEAK: Auto-correct Dropbox folder configuration if the user erroneously enters a full URL instead of a folder path
+* TWEAK: Bitcasa back-end now checks account quota and logs a warning if it looks like it will be exceeded
+* TWEAK: Email reports created by UpdraftPlus (free) now include the latest blog headlines from updraftplus.com
+* TWEAK: Make sure all relevant restoration options in restore dialogue are shown (works around Firefox issue upon page reload/navigation)
+* FIX: Reporting add-on could mis-display number of warnings when saying "X errors, Y warnings".
+* TRANSLATION: New Tagalog translation (thanks to Kristen Macasero)
 
 = 1.9.13 - 2014/05/19 =
 
@@ -835,4 +855,4 @@ We recognise and thank the following for code and/or libraries used and/or modif
 Furthermore, reliance upon any non-English translation is at your own risk. UpdraftPlus can give no guarantees that translations from the original English are accurate.
 
 == Upgrade Notice ==
-* 1.9.13 : Various small tweaks and fixes. More database backup options (Premium). Translations updated. Recommended update for all.
+* 1.9.15 : Various small tweaks and minor fixes. Translations updated. Recommended update for all.

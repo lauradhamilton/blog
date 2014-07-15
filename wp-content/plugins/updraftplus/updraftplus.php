@@ -4,7 +4,7 @@ Plugin Name: UpdraftPlus - Backup/Restore
 Plugin URI: http://updraftplus.com
 Description: Backup and restore: take backups locally, or backup to Amazon S3, Dropbox, Google Drive, Rackspace, (S)FTP, WebDAV & email, on automatic schedules.
 Author: UpdraftPlus.Com, DavidAnderson
-Version: 1.9.13
+Version: 1.9.15
 Donate link: http://david.dw-perspective.org.uk/donate
 License: GPLv3 or later
 Text Domain: updraftplus
@@ -14,25 +14,25 @@ Author URI: http://updraftplus.com
 
 /*
 TODO - some of these are out of date/done, needs pruning
+// If a current backup has a "next resumption" that is heavily negative, then provide a link for kick-starting it (i.e. to run the next resumption action via AJAX)
+// Deploy FUE addon
+// More complex pruning options - search archive for retain/billion/complex for ideas
+// Feature to despatch any not-yet-despatched backups to remote storage
+// Make 'more files' restorable - require them to select a directory first
+// Labels for backups
+// Bring down interval if we are already in upload time (since zip delays are no longer possible). See: options-general-11-23.txt
 // On free version, add note to restore page/to "delete-old-dirs" section
 // Make SFTP chunked (there is a new stream wrapper)
-// Store/show current Dropbox account
 // On plugins restore, don't let UD over-write itself - because this usually means a down-grade. Since upgrades are db-compatible, there's no reason to downgrade.
-// Renewal links should redirect to login and redirect to relevant page after
-// Alert user if they enter http(s):(etc) as their Dropbox path - seen one user do it
 // Schedule a task to report on failure
-// Copy.Com, Box
-// Switch 'Backup Now' to call the WP action via AJAX instead of via Cron - then test on hosts who deny all cron (e.g. Heart)
-// Get something to parse the 'Backups in progress' data, and if the 'next resumption' is far negative, and if also cron jobs appear to be not running, then call the action directly.
+// Copy.Com
 // If ionice is available, then use it to limit I/O usage
-// Check the timestamps used in filenames - they should be UTC
 // Get user to confirm if they check both the search/replace and wp-config boxes
+// Display "Migrate" instead of "Restore" for non-native backups
 // Tweak the display so that users seeing resumption messages don't think it's stuck
-// A search/replace console without needing to restore
 // On restore, check for some 'standard' PHP modules (prevents support requests related to them) -e.g. GD, Curl
 // Recognise known huge non-core tables on restore, and postpone them to the end (AJAX method?)
 // Add a cart notice if people have DBSF=quantity1
-// Pre-restore actually unpack the zips if they are not insanely big (to prevent the restore crashing at this stage if there's a problem)
 // Include in email report the list of "more" directories: http://updraftplus.com/forums/support-forum-group1/paid-support-forum-forum2/wordpress-multi-sites-thread121/
 // Integrate jstree for a nice files-chooser; use https://wordpress.org/plugins/dropbox-photo-sideloader/ to see how it's done
 // Verify that attempting to bring back a MS backup on a non-MS install warns the user
@@ -42,18 +42,14 @@ TODO - some of these are out of date/done, needs pruning
 // Post restore, do an AJAX get for the site; if this results in a 500, then auto-turn-on WP_DEBUG
 // Place in maintenance mode during restore - ?
 // Test Azure: https://blogs.technet.com/b/blainbar/archive/2013/08/07/article-create-a-wordpress-site-using-windows-azure-read-on.aspx?Redirected=true
-// Seen during autobackup on 1.8.2: Warning: Invalid argument supplied for foreach() in /home/infinite/public_html/new/wp-content/plugins/updraftplus/updraftplus.php on line 1652
 // Add some kind of automated scan for post content (e.g. images) that has the same URL base, but is not part of WP. There's an example of such a site in tmp-rich.
 // Free/premium comparison page
 // Complete the tweak to bring the delete-old-dirs within a dialog (just needed to deal wtih case of needing credentials more elegantly).
-// Add note to support page requesting that non-English be translated
 // More locking: lock the resumptions too (will need to manage keys to make sure junk data is not left behind)
 // See: ftp-logins.log - would help if we retry FTP logins after 10 second delay (not on testing), to lessen chances of 'too many users - try again later' being terminal. Also, can we log the login error?
 // Deal with missing plugins/themes/uploads directory when installing
-// Bring down interval if we are already in upload time (since zip delays are no longer possible). See: options-general-11-23.txt
 // Add FAQ - can I get it to save automatically to my computer?
 // Pruner assumes storage is same as current - ?
-// Include blog feed in basic email report
 // Detect, and show prominent error in admin area, if the slug is not updraftplus/updraftplus.php (one Mac user in the wild managed to upload as updraftplus-2).
 // Pre-schedule future resumptions that we know will be scheduled; helps deal with WP's dodgy scheduler skipping some. (Then need to un-schedule if job finishes).
 // Dates in the progress box are apparently untranslated
@@ -67,17 +63,13 @@ TODO - some of these are out of date/done, needs pruning
 // Don't perform pruning when doing auto-backup?
 // Post-migrate, notify the user if on Apache but without mod_rewrite (has been seen in the wild)
 // Pre-check the search/replace box if migration detected
-// Can some tables be omitted from the search/replace on a migrate? i.e. Special knowledge?
 // Put a 'what do I get if I upgrade?' link into the mix
-// Add to admin bar (and make it something that can be turned off)
 // If migrated database from somewhere else, then add note about revising UD settings
 // Strategy for what to do if the updraft_dir contains untracked backups. Automatically rescan?
 // MySQL manual: See Section 8.2.2.1, Speed of INSERT Statements.
 // Exempt UD itself from a plugins restore? (will options be out-of-sync? exempt options too?)
 // Post restore/migrate, check updraft_dir, and reset if non-existent
 // Auto-empty caches post-restore/post-migration (prevent support requests from people with state/wrong cacheing data)
-// Show 'Migrate' instead of 'Restore' on the button if relevant
-// Test with: http://wordpress.org/plugins/wp-db-driver/
 // Backup notes
 // Automatically re-count folder usage after doing a delete
 // Switch zip engines earlier if no progress - see log.cfd793337563_hostingfails.txt
@@ -89,7 +81,7 @@ TODO - some of these are out of date/done, needs pruning
 // On multisite, the settings should be in the network panel. Connection settings need migrating into site options.
 // On restore, raise a warning for ginormous zips
 // Detect double-compressed files when they are uploaded (need a way to detect gz compression in general)
-// Log migrations/restores, and have an option for auto-emailing the log
+// On migrations/restores, have an option for auto-emailing the log
 # Email backup method should be able to force split limit down to something manageable - or at least, should make the option display. (Put it in email class. Tweak the storage dropdown to not hide stuff also in expert class if expert is shown).
 // What happens if you restore with a database that then changes the setting for updraft_dir ? Should be safe, as the setting is cached during a run: double-check.
 // Multi-site manager at updraftplus.com
@@ -101,7 +93,6 @@ TODO - some of these are out of date/done, needs pruning
 // Detect CloudFlare output in attempts to connect - detecting cloudflare.com should be sufficient
 // Bring multisite shop page up to date
 // Re-do pricing + support packages
-// More files: back up multiple directories, not just one
 // Give a help page to go with the message: A zip error occurred - check your log for more details (reduce support requests)
 // Exclude .git and .svn by default from wpcore
 // Add option to add, not just replace entities on restore/migrate
@@ -492,9 +483,9 @@ class UpdraftPlus {
 		// Tell WordPress where to find the translations
 		load_plugin_textdomain('updraftplus', false, basename(dirname(__FILE__)).'/languages/');
 		# The Google Analyticator plugin does something horrible: loads an old version of the Google SDK on init, always - which breaks us
-		if ((defined('DOING_CRON') && DOING_CRON) || (isset($_GET['page']) && $_GET['page'] == 'updraftplus')) {
+		if ((defined('DOING_CRON') && DOING_CRON) || (defined('DOING_AJAX') && DOING_AJAX && isset($_REQUEST['subaction']) && 'backupnow' == $_REQUEST['subaction']) || (isset($_GET['page']) && $_GET['page'] == 'updraftplus')) {
 			remove_action('init', 'ganalyticator_stats_init');
-			# Appointments+ does the same; but providers a cleaner way to disable it
+			# Appointments+ does the same; but provides a cleaner way to disable it
 			define('APP_GCAL_DISABLE', true);
 		}
 	}
@@ -748,7 +739,7 @@ class UpdraftPlus {
 				$data = $err->get_error_data($code);
 				if (!empty($data)) {
 					$ll = (is_string($data)) ? $data : serialize($data);
-					$this->log("Error data: ".$ll);
+					$this->log("Error data (".$code."): ".$ll);
 				}
 			}
 		}
@@ -1588,7 +1579,7 @@ class UpdraftPlus {
 
 	}
 
-	function max_time_passed($time_passed, $upto) {
+	public function max_time_passed($time_passed, $upto) {
 		$max_time = 0;
 		$timings_string = "";
 		$run_times_known=0;
@@ -1605,25 +1596,25 @@ class UpdraftPlus {
 		return array($max_time, $timings_string, $run_times_known);
 	}
 
-	function backup_all($skip_cloud) {
+	public function backup_all($skip_cloud) {
 		$this->boot_backup(1, 1, false, false, ($skip_cloud) ? 'none' : false);
 	}
 	
-	function backup_files() {
+	public function backup_files() {
 		# Note that the "false" for database gets over-ridden automatically if they turn out to have the same schedules
 		$this->boot_backup(true, false);
 	}
 	
-	function backup_database() {
+	public function backup_database() {
 		# Note that nothing will happen if the file backup had the same schedule
 		$this->boot_backup(false, true);
 	}
 
-	function backupnow_files($skip_cloud) {
+	public function backupnow_files($skip_cloud) {
 		$this->boot_backup(1, 0, false, false, ($skip_cloud) ? 'none' : false);
 	}
 	
-	function backupnow_database($skip_cloud) {
+	public function backupnow_database($skip_cloud) {
 		$this->boot_backup(0, 1, false, false, ($skip_cloud) ? 'none' : false);
 	}
 
@@ -1738,6 +1729,7 @@ class UpdraftPlus {
 		if (!is_string($service) && !is_array($service)) $service = UpdraftPlus_Options::get_updraft_option('updraft_service');
 		$service = $this->just_one($service);
 		if (is_string($service)) $service = array($service);
+		if (is_bool($service)) $service = array();
 
 		$option_cache = array();
 		foreach ($service as $serv) {
@@ -1994,14 +1986,6 @@ class UpdraftPlus {
 			$updraftplus->record_still_alive();
 			die;
 		}
-
-		# This parameter no longer provided or used, from UD 1.9.1 onwards
-// 		if ($id) {
-// 			$ids = UpdraftPlus_Options::get_updraft_option('updraft_file_ids', array() );
-// 			$ids[$file] = $id;
-// 			UpdraftPlus_Options::update_updraft_option('updraft_file_ids', $ids, false);
-// 			$this->log("Stored file<->id correlation in database ($file <-> $id)");
-// 		}
 
 		// Delete local files immediately if the option is set
 		// Where we are only backing up locally, only the "prune" function should do deleting
@@ -2369,6 +2353,16 @@ class UpdraftPlus {
 		return $opts;
 	}
 
+	// Acts as a WordPress options filter
+	public function dropbox_checkchange($dropbox) {
+		$opts = UpdraftPlus_Options::get_updraft_option('updraft_dropbox');
+		if (!is_array($opts)) $opts = array();
+		if (!is_array($dropbox)) return $opts;
+		foreach ($dropbox as $key => $value) { $opts[$key] = $value; }
+		if (preg_match('#^https?://(www.)dropbox\.com/home/Apps/UpdraftPlus([^/]*)/(.*)$#i', $opts['folder'], $matches)) $opts['folder'] = $matches[3];
+		return $opts;
+	}
+
 	//wp-cron only has hourly, daily and twicedaily, so we need to add some of our own
 	public function modify_cron_schedules($schedules) {
 		$schedules['weekly'] = array('interval' => 604800, 'display' => 'Once Weekly');
@@ -2563,6 +2557,11 @@ class UpdraftPlus {
 
 	private function url_end($urls,$url) {
 		return ($urls) ? '</a>' : " (http://$url)";
+	}
+
+	public function get_updraftplus_rssfeed() {
+		if (!function_exists('fetch_feed')) require(ABSPATH . WPINC . '/feed.php');
+		return fetch_feed('http://feeds.feedburner.com/updraftplus/');
 	}
 
 	public function wordshell_random_advert($urls) {

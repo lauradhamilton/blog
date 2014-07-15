@@ -3,7 +3,7 @@
 Plugin Name: Share Buttons by AddToAny
 Plugin URI: http://www.addtoany.com/
 Description: Share buttons for your pages including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.  [<a href="options-general.php?page=add-to-any.php">Settings</a>]
-Version: 1.3.1
+Version: 1.3.3
 Author: AddToAny
 Author URI: http://www.addtoany.com/
 */
@@ -190,7 +190,7 @@ function ADDTOANY_SHARE_SAVE_ICONS( $args = array() ) {
 		'html_container_close' => '',
 		'html_wrap_open'       => '',
 		'html_wrap_close'      => '',
-		'no_universal_button' => false,
+		'no_universal_button'  => false,
 	);
 	
 	$args = wp_parse_args( $args, $defaults );
@@ -385,8 +385,12 @@ function ADDTOANY_SHARE_SAVE_BUTTON( $args = array() ) {
 		$button_html = '';
 	}
 	
-	// If not a feed
-	if ( ! $is_feed ) {
+	// Hook to disable script output
+	// Example: add_filter( 'addtoany_script_disabled', '__return_true' );
+	$script_disabled = apply_filters( 'addtoany_script_disabled', false );
+	
+	// If not a feed, not admin, and script is not disabled
+	if ( ! $is_feed && ! is_admin() && ! $script_disabled ) {
 		if ($use_current_page) {
 			$button_config = "\n{title:document.title,"
 				. "url:location.href}";
@@ -597,7 +601,11 @@ function ADDTOANY_SHARE_SAVE_FLOATING( $args = array() ) {
 
 
 function A2A_SHARE_SAVE_head_script() {
-	if ( is_admin() || is_feed() )
+	// Hook to disable script output
+	// Example: add_filter( 'addtoany_script_disabled', '__return_true' );
+	$script_disabled = apply_filters( 'addtoany_script_disabled', false );
+	
+	if ( is_admin() || is_feed() || $script_disabled )
 		return;
 		
 	$options = get_option( 'addtoany_options' );
@@ -673,7 +681,11 @@ add_action( 'wp_head', 'A2A_SHARE_SAVE_head_script' );
 function A2A_SHARE_SAVE_footer_script() {
 	global $_addtoany_targets;
 	
-	if ( is_admin() || is_feed() )
+	// Hook to disable script output
+	// Example: add_filter( 'addtoany_script_disabled', '__return_true' );
+	$script_disabled = apply_filters( 'addtoany_script_disabled', false );
+	
+	if ( is_admin() || is_feed() || $script_disabled )
 		return;
 		
 	$_addtoany_targets = ( isset( $_addtoany_targets ) ) ? $_addtoany_targets : array();

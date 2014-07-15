@@ -1,9 +1,9 @@
 === Share Buttons by AddToAny ===
 Contributors: micropat, addtoany
-Tags: sharing, share, share this, bookmarking, social, share button, share buttons, share links, social share, social sharing, social bookmarking, social bookmarks, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, responsive, email, e-mail, print, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook share, facebook like, like, twitter, twitter button, twitter share, tweet, +1, plus 1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, wanelo, buffer, stumbleupon, bitly, technorati, lockerz, addthis, sociable, sharedaddy, sharethis, shareaholic, icon, icons, vector, SVG, floating, floating buttons, wpmu, Add to Any, AddToAny
+Tags: sharing, share, share this, bookmarking, social, share button, share buttons, share links, social share, social sharing, social bookmarking, social bookmarks, socialize, bookmark, bookmarks, save, Post, posts, page, pages, images, image, admin, statistics, stats, links, plugin, shortcode, sidebar, widget, responsive, email, e-mail, print, seo, button, delicious, google, tumblr, linkedin, digg, reddit, facebook, facebook share, facebook like, like, twitter, twitter button, twitter share, tweet, tweet button, +1, plus 1, google +1, google plus, google plus one, plus one, pinterest, pin, pin it, pinit, wanelo, buffer, stumbleupon, bitly, technorati, lockerz, addthis, sociable, sharedaddy, sharethis, shareaholic, icon, icons, vector, SVG, floating, floating buttons, wpmu, Add to Any, AddToAny
 Requires at least: 2.8
-Tested up to: 3.9.1
-Stable tag: 1.3.1
+Tested up to: 3.9.2
+Stable tag: 1.3.3
 
 Share buttons for WordPress including AddToAny's universal sharing button, Facebook, Twitter, Google+, Pinterest, StumbleUpon and many more.
 
@@ -29,7 +29,8 @@ AddToAny's customizable platform and social share icons let you optimize your si
 = Custom Placement =
 * Before content, after content, or before & after content
 * Vertical Floating Share Bar, and Horizontal Floating Share Bar
-* As a widget within a theme, and programmatically
+* As a shortcode, or a widget within a theme's layout
+* Programmatically with template tags
 
 = Analytics Integration =
 
@@ -277,6 +278,17 @@ Upload the plugin directory (including all files and directories within) to the 
 6. Color chooser for your universal share menu
 
 == Changelog ==
+
+= 1.3.3 =
+* Append trailing slash to custom icons location as necessary
+* Point to additional placement options and information
+* Remove old placement instructions for hardcoding
+* Remove old error reporting suppression in admin
+* Ukrainian translation (by Michael Yunat, <a href="http://getvoip.com">http://getvoip.com</a>)
+
+= 1.3.2 =
+* Avoid loading button script in admin, especially for visual editor plugins
+* Add addtoany_script_disabled hook to programmatically disable JavaScript
 
 = 1.3.1 =
 * Floating share buttons are now responsive by default

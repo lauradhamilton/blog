@@ -67,6 +67,7 @@ class UpdraftPlus_BackupModule_googledrive {
 			if (!empty($this->ids_from_paths) && isset($this->ids_from_paths[$cache_key])) return $this->ids_from_paths[$cache_key];
 
 			$current_parent = $this->root_id();
+			$current_path = '/';
 
 			if (!empty($path)) {
 				foreach (explode('/', $path) as $element) {
@@ -77,6 +78,7 @@ class UpdraftPlus_BackupModule_googledrive {
 						try {
 							if ($item->getTitle() == $element) {
 								$found = true;
+								$current_path .= $element.'/';
 								$current_parent = $item->getId();
 								break;
 							}
@@ -92,10 +94,12 @@ class UpdraftPlus_BackupModule_googledrive {
 						$dir->setMimeType('application/vnd.google-apps.folder');
 						$dir->setParents(array($ref));
 						$dir->setTitle($element);
+						$updraftplus->log("Google Drive: creating path: ".$current_path.$element);
 						$dir = $this->service->files->insert(
 							$dir,
 							array('mimeType' => 'application/vnd.google-apps.folder')
 						);
+						$current_path .= $element.'/';
 						$current_parent = $dir->getId();
 					}
 				}
@@ -539,8 +543,13 @@ class UpdraftPlus_BackupModule_googledrive {
 		} elseif ('file' == $type) {
 			$q .= ' and mimeType != "application/vnd.google-apps.folder"';
 		}
+		# We used to use 'contains' in both cases, but this exposed some bug that might be in the SDK or at the Google end - a result that matched for = was not returned with contains
 		if (!empty($match)) {
-			$q .= " and title contains '$match'";
+			if ('backup_' == $match) {
+				$q .= " and title contains '$match'";
+			} else {
+				$q .= " and title = '$match'";
+			}
 		}
 		return $this->service->files->listFiles(array('q' => $q))->getItems();
     }
@@ -824,7 +833,7 @@ class UpdraftPlus_BackupModule_googledrive {
 			<th></th>
 			<td>
 			<p><a href="http://updraftplus.com/support/configuring-google-drive-api-access-in-updraftplus/"><strong><?php _e('For longer help, including screenshots, follow this link. The description below is sufficient for more expert users.','updraftplus');?></strong></a></p>
-			<p><a href="https://console.developers.google.com"><?php _e('Follow this link to your Google API Console, and there activate the Drive API and create a Client ID in the API Access section.','updraftplus');?></a> <?php _e("Select 'Web Application' as the application type.",'updraftplus');?></p><p><?php echo htmlspecialchars(__('You must add the following as the authorised redirect URI (under "More Options") when asked','updraftplus'));?>: <kbd><?php echo UpdraftPlus_Options::admin_page_url().'?action=updraftmethod-googledrive-auth'; ?></kbd> <?php _e('N.B. If you install UpdraftPlus on several WordPress sites, then you cannot re-use your client ID; you must create a new one from your Google API console for each site.','updraftplus');?>
+			<p><a href="https://console.developers.google.com"><?php _e('Follow this link to your Google API Console, and there activate the Drive API and create a Client ID in the API Access section.','updraftplus');?></a> <?php _e("Select 'Web Application' as the application type.",'updraftplus');?></p><p><?php echo htmlspecialchars(__('You must add the following as the authorised redirect URI (under "More Options") when asked','updraftplus'));?>: <kbd><?php echo UpdraftPlus_Options::admin_page_url().'?action=updraftmethod-googledrive-auth'; ?></kbd> <?php _e('N.B. If you install UpdraftPlus on several WordPress sites, then you cannot re-use your project; you must create a new one from your Google API console for each site.','updraftplus');?>
 
 			</p>
 			</td>
