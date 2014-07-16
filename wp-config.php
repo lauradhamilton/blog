@@ -35,6 +35,12 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+/** Because we're using a reverse proxy, we need to ensure that Wordpress
+handles both SSL and non-SSL properly.
+Source: http://roger.steneteg.org/128/nginx-reverse-proxy-ssl-issues/ */
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+       $_SERVER['HTTPS']='on';
+
 /** Source: http://updraftplus.com/faqs/my-scheduled-backups-and-pressing-backup-now-does-nothing-however-pressing-debug-backup-does-produce-a-backup/ */
 define('ALTERNATE_WP_CRON', true);
 
